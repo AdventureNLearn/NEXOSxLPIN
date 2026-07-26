@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#05070f"/>
+      <stop offset="100%" stop-color="#0a1628"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <!-- grid -->
+  <g stroke="#164e63" stroke-opacity="0.25" stroke-width="1">
+    <path d="M0 90 H960 M0 180 H960 M0 270 H960 M0 360 H960 M0 450 H960"/>
+    <path d="M120 0 V540 M240 0 V540 M360 0 V540 M480 0 V540 M600 0 V540 M720 0 V540 M840 0 V540"/>
+  </g>
+  <!-- robot head -->
+  <rect x="360" y="120" width="240" height="180" rx="28" fill="#0f172a" stroke="#22d3ee" stroke-width="4"/>
+  <rect x="390" y="160" width="70" height="50" rx="10" fill="#022c22" stroke="#34d399" stroke-width="3"/>
+  <rect x="500" y="160" width="70" height="50" rx="10" fill="#022c22" stroke="#34d399" stroke-width="3"/>
+  <circle cx="425" cy="185" r="12" fill="#6ee7b7"/>
+  <circle cx="535" cy="185" r="12" fill="#6ee7b7"/>
+  <rect x="420" y="240" width="120" height="24" rx="8" fill="#111827" stroke="#64748b" stroke-width="2"/>
+  <text x="480" y="257" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#94a3b8">localhost:5173</text>
+  <!-- antenna -->
+  <line x1="480" y1="120" x2="480" y2="80" stroke="#22d3ee" stroke-width="4"/>
+  <circle cx="480" cy="72" r="12" fill="#f59e0b" stroke="#fbbf24" stroke-width="2"/>
+  <!-- body -->
+  <rect x="390" y="310" width="180" height="140" rx="20" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+  <text x="480" y="360" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#e2e8f0">CLAIM STATUS</text>
+  <text x="480" y="390" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" fill="#fbbf24">0</text>
+  <text x="480" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#94a3b8">sentience · cite a source</text>
+  <!-- title -->
+  <text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#67e8f9">NEXOSxLPIN · weekend robot joke</text>
+  <text x="48" y="78" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#64748b">EXPERIMENTAL · illustrative · not a digital twin of a comedian</text>
+  <!-- caption -->
+  <rect x="48" y="470" width="864" height="44" rx="10" fill="#020617" stroke="#164e63" stroke-width="2"/>
+  <text x="480" y="498" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#cbd5e1">
+    “Port 5173 was already in use.” — “That was me. From earlier.”
+  </text>
+</svg>
