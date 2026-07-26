@@ -38,6 +38,7 @@ Prefer **relative links** from the product root.
 | [STRENGTHS_AND_SUPPORT_GAPS.md](./STRENGTHS_AND_SUPPORT_GAPS.md) | Maintainers |
 | [UI_P0_HOW_TO_USE.md](./UI_P0_HOW_TO_USE.md) | Claim status UI |
 | [NEXOSxLPIN_UI_Supercharge_Spec_v1.0.md](./NEXOSxLPIN_UI_Supercharge_Spec_v1.0.md) | Design tokens |
+| [NEXOSxLPIN_Open_Ecosystem_Development_Plan_v2.pdf](./NEXOSxLPIN_Open_Ecosystem_Development_Plan_v2.pdf) | Open Ecosystem Plan v2 (experimental) |
 | [NEXOSxLPIN_Open_Ecosystem_Overview_and_3D_Build_Plan.md](./NEXOSxLPIN_Open_Ecosystem_Overview_and_3D_Build_Plan.md) | Architecture + 3D milestones |
 | [skills-reference/INDEX.md](./skills-reference/INDEX.md) | Skill role map |
 | [../CONTRIBUTING.md](../CONTRIBUTING.md) | PR rules |
