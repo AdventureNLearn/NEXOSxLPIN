@@ -48,3 +48,9 @@ docs/_extracted_*
 # OS
 Thumbs.db
 Desktop.ini
+
+# Dogfood / QA screenshots (local only)
+dogfood-output/
+
+# Path-bound builder handoffs (not for public clone)
+docs/archive-local/
