@@ -1016,8 +1016,8 @@ export const USE_CASE_CATALOG: UseCaseProfile[] = [
 /** Fresh sessions land on general explore; trend desks activate via switcher. */
 export const DEFAULT_USE_CASE_ID = 'gen-explore'
 
-/** Alias used by UI labels */
-export const PRODUCT_VERSION = '1.6.1'
+/** Alias used by UI labels — keep in sync with maturity channel */
+export { PRODUCT_VERSION } from '../../lib/product/maturity'
 
 export function getUseCase(id: string): UseCaseProfile {
   return USE_CASE_CATALOG.find((p) => p.id === id) ?? USE_CASE_CATALOG[0]!

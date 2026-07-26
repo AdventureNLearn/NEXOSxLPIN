@@ -2,18 +2,22 @@
 
 Thanks for helping build an **evidence-first**, forkable civic verification workbench.
 
+> **Channel: experimental.** Expect UI change. Not legal/forensic software.  
+> Read [`docs/EXPERIMENTAL_STATUS.md`](docs/EXPERIMENTAL_STATUS.md) and [`docs/OPSEC_PUBLIC_RELEASE.md`](docs/OPSEC_PUBLIC_RELEASE.md).
+
 ## Before you start
 
 1. Read [`docs/OPEN_DEVELOPMENT.md`](docs/OPEN_DEVELOPMENT.md)  
 2. Read non-negotiables in the Open Ecosystem plan (`docs/NEXOSxLPIN_Open_Ecosystem_Development_Plan.pdf`)  
 3. For 3D changes, read [`docs/3D_OBJECT_CLASSIFICATION.md`](docs/3D_OBJECT_CLASSIFICATION.md)  
+4. Never commit secrets, private PII, `dogfood-output/`, or `docs/archive-local/`  
 
 ## Environment
 
 - Node.js LTS  
 - Windows: `INSTALL.bat` / `START.bat`  
 - macOS/Linux: `./install.sh` / `./start.sh`  
-- Prefer a **local disk** path (not OneDrive) for `node_modules` performance  
+- Prefer a **local disk** path (not a cloud-sync folder) for `node_modules` performance  
 
 ## Quality gates (required)
 
@@ -23,6 +27,7 @@ npm run lint
 npm run build
 node scripts/smoke-sme-congress.mjs
 ```
+
 
 All must exit 0. Manual fidelity checklist: Open Ecosystem §7 / `docs/FORKING_A_TOPIC_PACK.md`.
 

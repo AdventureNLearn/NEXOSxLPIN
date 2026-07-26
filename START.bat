@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableExtensions
-title NEXOSxLPIN 1.6.1
+title NEXOSxLPIN 2.0.0-experimental
 cd /d "%~dp0"
 
 echo.

@@ -17,12 +17,11 @@ import { resolveStory } from '../../data/useCases/stories'
 import { getSimulation } from '../../data/useCases/simulations'
 import { reasonSceneObjects } from '../../lib/forge/objectReasoning'
 import { buildScaleAccurateFeatures } from '../../lib/map/scaleAccurateFeatures'
-import { SCALE_CLASSES, type ScaleClass } from '../../lib/map/geoScale'
+import { autoScalePlain, type ScaleClass, footprintMetersForLayout } from '../../lib/map/geoScale'
 import type { BasemapId } from '../../lib/map/mapFilters'
 import { openSafeExternal } from '../../lib/security/urlSafety'
 import type { SceneHoverLink } from '../../lib/forge/sceneObjectMeta'
 import { getMeshFamily, resolveMeshFamilyId } from '../../data/forge/meshCatalog'
-import { footprintMetersForLayout } from '../../lib/map/geoScale'
 
 /** Normalize mesh parts so bounding footprint ≈ real meters (1 unit = 1 m). */
 function scalePartsToMeters(
@@ -197,8 +196,9 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
               · no decorative stage
             </div>
             <div className="text-[9px] text-slate-500">
-              Select only when zoom matches scale class. Selection auto-scales (flyTo). Circles are
-              true meters on public basemaps. {MODEL_DISCLAIMER}
+              Click a feature to inspect it. If it is too small on screen, the map gently zooms in
+              so you can work — not a random jump. Circles use true meters on public basemaps.{' '}
+              {MODEL_DISCLAIMER}
             </div>
             {status && (
               <div className="text-[10px] text-amber-400/90 border border-amber-900/40 rounded px-1.5 py-0.5">
@@ -228,13 +228,11 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
               onSelect={(f) => {
                 setSelectedFeatureId(f.id)
                 if (f.assetId) setActiveAsset(f.assetId)
-                setStatus(
-                  `Selected “${f.label}” · ${f.scale} · ⌀${f.footprintM}m · auto-scale z≥${SCALE_CLASSES[f.scale as ScaleClass].autoZoom}`,
-                )
+                setStatus(autoScalePlain(f.scale as ScaleClass, f.label))
               }}
               onBlockedSelect={(f, needZoom) => {
                 setStatus(
-                  `“${f.label}” is ${f.scale}-scale (⌀${f.footprintM}m). Auto-scaling — need zoom ≥ ${needZoom} for intentional pick.`,
+                  `${autoScalePlain(f.scale as ScaleClass, f.label)} (needs about zoom ${needZoom}+).`,
                 )
               }}
             />

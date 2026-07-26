@@ -8,20 +8,22 @@
     <meta name="theme-color" content="#05070f" />
     <meta
       name="description"
-      content="NEXOSxLPIN — verification workbench: sourced claims, SME lenses, tools not media"
+      content="NEXOSxLPIN — figure out what is true before the story runs away with itself. Evidence-first civic truth desk."
     />
-    <!-- Hardening: default-src self; scripts/styles self; connect limited; open links noopener in app -->
+    <!--
+      CSP: allow public basemap tiles + optional ambient audio.
+      Scripts stay self-only. No frames. External navigation uses noopener in-app.
+    -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.basemaps.cartocdn.com https://*.openstreetmap.org https://*.tile.openstreetmap.org blob:; font-src 'self' data:; connect-src 'self' https://*.basemaps.cartocdn.com https://*.openstreetmap.org; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.basemaps.cartocdn.com https://*.openstreetmap.org https://*.tile.openstreetmap.org https://*.tile.opentopomap.org https://server.arcgisonline.com https://*.arcgisonline.com; media-src 'self' https://*.somafm.com https://ice1.somafm.com https://ice2.somafm.com https://ice3.somafm.com https://ice4.somafm.com https://ice5.somafm.com https://ice6.somafm.com; font-src 'self' data:; connect-src 'self' https://*.basemaps.cartocdn.com https://*.openstreetmap.org https://*.tile.openstreetmap.org https://*.tile.opentopomap.org https://server.arcgisonline.com https://*.arcgisonline.com https://*.somafm.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
     />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <title>NEXOSxLPIN 1.5.0</title>
+    <title>NEXOSxLPIN 2.0</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

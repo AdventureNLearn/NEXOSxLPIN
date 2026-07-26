@@ -10,6 +10,7 @@ import {
 import { workingDocumentMarkdown, downloadText } from '../../core/workingDocument'
 import { countByScore, unresolvedNegatives } from '../../core/evidence'
 import { SAMPLE_PACK } from '../../data/packs/samplePack'
+import { DISCLAIMER_SHARE, MATURITY_BADGE } from '../../lib/product/maturity'
 
 export function ExportKitModule({ compact }: { compact?: boolean } = {}) {
   const workingDocument = usePlatformStore((s) => s.workingDocument)
@@ -217,10 +218,13 @@ export function ExportKitModule({ compact }: { compact?: boolean } = {}) {
 
   return (
     <div className="h-full grid grid-cols-1 xl:grid-cols-2 gap-3 min-h-0">
-      <Panel title="Export Kit — explicit only">
+      <Panel title="Share pack — explicit only">
+        <p className="text-xs text-amber-200/80 mb-2 border border-amber-900/40 rounded-md px-2 py-1.5 bg-amber-950/20">
+          <span className="font-bold tracking-wide">{MATURITY_BADGE}.</span> {DISCLAIMER_SHARE}
+        </p>
         <p className="text-xs text-slate-500 mb-3">
-          Packages download only when you click a download button. Preview never downloads. Nexus never
-          auto-downloads.
+          Packages download only when you click a download button. Preview never downloads. This desk
+          never auto-downloads.
         </p>
 
         <div

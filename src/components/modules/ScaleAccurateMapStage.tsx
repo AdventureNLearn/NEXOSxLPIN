@@ -140,8 +140,7 @@ export function ScaleAccurateMapStage({
           </button>
         ))}
         <span className="text-[9px] text-slate-500 ml-auto font-mono">
-          z{zoom.toFixed(0)} · {counts.selectable}/{counts.visible} selectable · {counts.total}{' '}
-          features
+          Zoom {zoom.toFixed(0)} · {counts.selectable} ready to inspect · {counts.total} on map
         </span>
       </div>
       <div className="shrink-0 flex flex-wrap gap-1 px-1.5 py-1 border-b border-slate-800/80 bg-black/40 text-[9px] text-slate-500">
@@ -156,13 +155,13 @@ export function ScaleAccurateMapStage({
                   ? 'border-emerald-800/50 text-emerald-400/90'
                   : 'border-slate-800 text-slate-600'
               }`}
-              title={`${s.label}: select ≥ z${s.minSelectZoom}, auto z${s.autoZoom}`}
+              title={`${s.label}: clickable from zoom ${s.minSelectZoom}+ (eases in if smaller)`}
             >
-              {s.label} ≥{s.minSelectZoom}
+              {s.label}
             </span>
           )
         })}
-        <span className="text-slate-600">· Circles = true meters · no decorative packing</span>
+        <span className="text-slate-600">· Circles = meters · click eases zoom if needed</span>
       </div>
       <div className="relative flex-1 min-h-0">
         <MapContainer

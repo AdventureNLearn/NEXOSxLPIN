@@ -1,6 +1,6 @@
 # NEXOSxLPIN — Open Development & Forkability
 
-**Benchmark product:** NEXOSxLPIN **1.6.1** at `C:\NEXOSxLPIN`  
+**Benchmark product:** NEXOSxLPIN **1.6.1** at `<product-root>`  
 **Skill constitution (separate repo):** https://github.com/AdventureNLearn/AOS-v3---LPIN  
 **Companion plan:** [`NEXOSxLPIN_Open_Ecosystem_Development_Plan.pdf`](./NEXOSxLPIN_Open_Ecosystem_Development_Plan.pdf)  
 **3D + overview:** [`NEXOSxLPIN_Open_Ecosystem_Overview_and_3D_Build_Plan.md`](./NEXOSxLPIN_Open_Ecosystem_Overview_and_3D_Build_Plan.md)
@@ -62,7 +62,7 @@ It is **not** a news CMS, not a surveillance product, and not a forensic 3D surv
 
 ```text
 1. Install Node.js LTS
-2. Clone or unzip → local path (prefer C:\NEXOSxLPIN, not OneDrive)
+2. Clone or unzip → local path (prefer <product-root>, not a cloud-sync folder)
 3. INSTALL.bat  (or npm install && npm run build)
 4. START.bat    → http://127.0.0.1:5173
 5. Pick a desk → Story → score claims → optional SME → Forge → Massing → Export (if clean)

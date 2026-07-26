@@ -3,15 +3,19 @@
 All operator- and agent-facing docs live under `docs/` and ship in install zips.  
 Prefer **relative links** from the product root.
 
+**Channel:** experimental · v2.0.0
+
 ## Start here
 
 | Doc | Audience |
 |-----|----------|
 | [../README.md](../README.md) | Everyone |
 | [../QUICKSTART.txt](../QUICKSTART.txt) | Cold install |
+| [EXPERIMENTAL_STATUS.md](./EXPERIMENTAL_STATUS.md) | Maturity / what is lab |
+| [OPSEC_PUBLIC_RELEASE.md](./OPSEC_PUBLIC_RELEASE.md) | Public push durability |
 | [INSTALL.md](./INSTALL.md) | Install detail |
 | [OPEN_DEVELOPMENT.md](./OPEN_DEVELOPMENT.md) | Forkability / open model |
-| [PRODUCT_REVIEW.md](./PRODUCT_REVIEW.md) | Deploy or Refine decision |
+| [COMMIT_PLAN.md](./COMMIT_PLAN.md) | Git history plan |
 
 ## Security & fidelity
 
@@ -29,20 +33,21 @@ Prefer **relative links** from the product root.
 |-----|----------|
 | [RESEARCH_PIPELINES.md](./RESEARCH_PIPELINES.md) | Investigators |
 | [FORKING_A_TOPIC_PACK.md](./FORKING_A_TOPIC_PACK.md) | Pack authors |
+| [VISUAL_ASSISTANT_INSTRUCTION_SET.md](./VISUAL_ASSISTANT_INSTRUCTION_SET.md) | Analyst IA |
+| [V2_BUILD_PLAN.md](./V2_BUILD_PLAN.md) | Roadmap |
 | [STRENGTHS_AND_SUPPORT_GAPS.md](./STRENGTHS_AND_SUPPORT_GAPS.md) | Maintainers |
-| [WORKING_DOCUMENT.md](./WORKING_DOCUMENT.md) | Durable decisions |
 | [UI_P0_HOW_TO_USE.md](./UI_P0_HOW_TO_USE.md) | Claim status UI |
 | [NEXOSxLPIN_UI_Supercharge_Spec_v1.0.md](./NEXOSxLPIN_UI_Supercharge_Spec_v1.0.md) | Design tokens |
 | [NEXOSxLPIN_Open_Ecosystem_Overview_and_3D_Build_Plan.md](./NEXOSxLPIN_Open_Ecosystem_Overview_and_3D_Build_Plan.md) | Architecture + 3D milestones |
-| [NEXOSxLPIN_Open_Ecosystem_Development_Plan.pdf](./NEXOSxLPIN_Open_Ecosystem_Development_Plan.pdf) | Intent PDF |
 | [skills-reference/INDEX.md](./skills-reference/INDEX.md) | Skill role map |
 | [../CONTRIBUTING.md](../CONTRIBUTING.md) | PR rules |
 | [../LICENSE](../LICENSE) | MIT + training disclaimer |
 
 ## In-app visibility
 
-The **Information** module embeds the operator loop, scoring rules, PII posture, and pointers to these paths so the running system stays aligned with the repo.
+Header **EXPERIMENTAL** badge, Assistant strip, Share disclaimers, Status bar channel, and the **Story / Guide** module keep the running system aligned with this tree.
 
-## Internal / optional (may exist; not required for forks)
+## Not in public clones
 
-Historical handoff PDFs, Grok build maps, and migration notes may remain for maintainers. Prefer the Start here + Security tables for public use.
+`docs/archive-local/` — maintainer path-bound handoffs (gitignored).  
+`dogfood-output/`, `releases/`, `.hermes/` — local only.

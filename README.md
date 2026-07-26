@@ -1,16 +1,20 @@
 # NEXOSxLPIN
 
+> **Status: EXPERIMENTAL public build (v2.0.0)**  
+> Local evidence desk for **training and research**.  
+> **Not** a court, clinic, newsroom CMS, crime lab, or finished production intel platform.  
+> Claim scores are **yours**. Maps and 3D are **illustrative**. UI will change.
+
 ### Figure out what is true — before the story runs away with itself.
 
-**Version 2.0.0** · Evidence-first civic truth desk  
 **For:** parents, neighbors, journalists, students, staffers — anyone who wants more **human agency**  
-**Not:** a social feed, a courtroom, or a forensic crime lab  
+**Channel:** `experimental` · MIT  
 
 ---
 
 ## What this is (plain English)
 
-The internet is full of confident claims. NEXOSxLPIN is a **desk** where you:
+The internet is full of confident claims. NEXOSxLPIN is an **experimental desk** where you:
 
 1. **Pick a story** (or a training topic)  
 2. **Break it into claims**  
@@ -23,17 +27,30 @@ That is how narratives get checked — and how solid claims get projected with r
 
 ---
 
-## Quick start (anyone with a computer)
+## Experimental honesty
+
+| Tier | Includes |
+|------|----------|
+| **Stable-ish core** | Story pick, claim scores, Share gate on open −1, Layer-0 ACK |
+| **Beta** | Map, immersive stage, Visual Assistant coach |
+| **Lab** | 3D/Forge, full SME catalog, auto-scale craft, mobile |
+| **Planned** | Claim miner, contradiction assist, SME top-3, layer→pin wiring |
+
+See [`docs/EXPERIMENTAL_STATUS.md`](./docs/EXPERIMENTAL_STATUS.md) and [`docs/OPSEC_PUBLIC_RELEASE.md`](./docs/OPSEC_PUBLIC_RELEASE.md).
+
+---
+
+## Quick start
 
 **Need:** [Node.js LTS](https://nodejs.org/) (free)
 
 ### Windows
 
-1. Unzip or clone this folder anywhere on your computer  
+1. Clone or unzip this folder  
 2. Double-click **`INSTALL.bat`**  
 3. Double-click **`START.bat`**  
-4. Browser opens to **http://127.0.0.1:5173**  
-5. Optional: run `scripts\create-desktop-shortcut.ps1` for a desktop icon  
+4. Open **http://127.0.0.1:5173**  
+5. Optional: `scripts\create-desktop-shortcut.ps1`  
 
 ### Mac / Linux
 
@@ -45,57 +62,28 @@ chmod +x install.sh start.sh
 
 ---
 
-## The five buttons that matter
+## Rules of the desk
 
-| Button | What it means |
-|--------|----------------|
-| **Story** | Read what happened and why it matters |
-| **Claims** | Score each sentence: Supported / Not proven / Disputed |
-| **Map** | See the place; flip layers (Where, Claims, Sources, Sketch) |
-| **3D** | Optional sketch models — **illustrative only** |
-| **Share** | Download a pack **only when you choose** (blocked while Disputed remains) |
-
-Experts, Rules, and Depth are optional power tools. Most people live in Story → Claims → Map → Share.
+- **+1** needs a real basis you can point at  
+- **0** is honest fog — do not inflate it  
+- **−1** blocks careless share until resolved or residual risk is explicit  
+- **No private personal data** in sample or shared packs  
+- **3D = illustrative** — never forensic  
+- **You** remain the adjudicator  
 
 ---
 
-## Map layers (spatial, human-readable)
+## Docs
 
-Inspired by layered atlases and hierarchical site maps (public patterns, civic rewrite):
-
-- **Where** — the place  
-- **Levels** — world → this place → scenes → sketch objects  
-- **Claims** — what is being said  
-- **Sources** — what can be cited  
-- **Sketch models** — drawings from scores, not court exhibits  
-
-**Before you trust a pin:** (1) what was claimed → (2) what record exists → (3) your score.
-
----
-
-## Rules we will not bend
-
-- Only three scores: **+1 / 0 / −1**  
-- No automatic downloads  
-- 3D is **never** sold as forensic truth  
-- Sample packs stay free of private personal data  
-- Training desks are **not legal advice**  
-
----
-
-## For builders & LLMs
-
-| Doc | Why |
-|-----|-----|
-| [`docs/DOC_INDEX.md`](./docs/DOC_INDEX.md) | Full doc hub |
-| [`docs/V2_BUILD_PLAN.md`](./docs/V2_BUILD_PLAN.md) | v2 plan + spatial integration notes |
-| [`docs/FORKING_A_TOPIC_PACK.md`](./docs/FORKING_A_TOPIC_PACK.md) | Add a new topic without breaking honesty |
-| [`docs/LLM_REASONING_FRAMEWORK.md`](./docs/LLM_REASONING_FRAMEWORK.md) | How any AI should use this framework |
-| [`docs/PII_AND_AGNOSTIC_POLICY.md`](./docs/PII_AND_AGNOSTIC_POLICY.md) | Privacy & public-safe content |
-| [`docs/3D_OBJECT_CLASSIFICATION.md`](./docs/3D_OBJECT_CLASSIFICATION.md) | How sketches are chosen from claims |
-| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | How to help |
-
-Skills constitution (portable companion): see `docs/skills-reference/`.
+| Doc | Topic |
+|-----|--------|
+| [`docs/DOC_INDEX.md`](./docs/DOC_INDEX.md) | Full index |
+| [`docs/EXPERIMENTAL_STATUS.md`](./docs/EXPERIMENTAL_STATUS.md) | Maturity matrix |
+| [`docs/OPSEC_PUBLIC_RELEASE.md`](./docs/OPSEC_PUBLIC_RELEASE.md) | Public OPSEC |
+| [`docs/PII_AND_AGNOSTIC_POLICY.md`](./docs/PII_AND_AGNOSTIC_POLICY.md) | PII policy |
+| [`docs/VISUAL_ASSISTANT_INSTRUCTION_SET.md`](./docs/VISUAL_ASSISTANT_INSTRUCTION_SET.md) | Analyst IA |
+| [`docs/OPEN_DEVELOPMENT.md`](./docs/OPEN_DEVELOPMENT.md) | Fork model |
+| [`docs/COMMIT_PLAN.md`](./docs/COMMIT_PLAN.md) | Release commit plan |
 
 ---
 
@@ -108,18 +96,10 @@ npm run build
 node scripts/smoke-sme-congress.mjs
 ```
 
-All must pass with **zero errors** before release commits.
-
 ---
 
 ## License
 
-MIT — see [`LICENSE`](./LICENSE).  
-Training content is educational only.
+MIT — see [`LICENSE`](./LICENSE).
 
----
-
-**America First · Truth-Seeking**  
-Primary records over posts. Instruments over headlines.  
-Never launder uncertainty into certainty.  
-Your judgment stays in the loop — that is the point.
+**America First | Truth-Seeking** · Prefer primary records · Never launder uncertainty into certainty.

@@ -1,6 +1,6 @@
 # NEXOSxLPIN — Platform Overview & Open Ecosystem Build Plan
 
-**Product root (workspace):** `C:\NEXOSxLPIN`  
+**Product root (workspace):** `<product-root>`  
 **Live version:** **1.6.1** (Immersive-forward · map-terrain Massing)  
 **Share zip:** `releases\NEXOSxLPIN-1.6.1-20260725-2249.zip`  
 **Companion doc (operator intent):** *NEXOSxLPIN Open Ecosystem Development Plan* (v1.0 · 26 Jul 2026)  
@@ -16,7 +16,7 @@ This document is the **GitHub-facing overview**: what is built, how it customize
 | Layer | What it is | Where it lives | What must never break |
 |-------|------------|----------------|------------------------|
 | **A. Governance / skill layer** | LPIN / AOS v3.0 skills: Evidence Gate, Layer-0, 4-agent, civic-intel, GIS, visual systems, working-doc | GitHub `AOS-v3---LPIN` + local Hermes skills | Tri-state scoring, Layer-0 export blocks, working-doc durability, OPSEC |
-| **B. Runnable workbench** | Vite · React · TS · Zustand app: desks, ledgers, maps, SME lenses, Forge/Massing | **`C:\NEXOSxLPIN`** (this repo / workspace) | Domain-swappable **data**, fixed **gates** |
+| **B. Runnable workbench** | Vite · React · TS · Zustand app: desks, ledgers, maps, SME lenses, Forge/Massing | **`<product-root>`** (this repo / workspace) | Domain-swappable **data**, fixed **gates** |
 
 **Rule for every GitHub commit narrative:**  
 *Domain depth lives in packs, catalogs, engines, and labels — not in new product brands or forks of the governance layer.*
@@ -29,7 +29,7 @@ This document is the **GitHub-facing overview**: what is built, how it customize
 
 | Surface | State |
 |---------|--------|
-| Root | Local disk `C:\NEXOSxLPIN` (not OneDrive) |
+| Root | Local disk `<product-root>` (not a cloud-sync folder) |
 | Launch | `START.bat` · `INSTALL.bat` · Desktop `NEXOSxLPIN.lnk` |
 | Stack | Vite 8 · React 19 · TypeScript · Zustand · Leaflet · Three / R3F |
 | UI shells | **Web / Mobile** toggle (`uiMode`); Immersive as primary investigative stage |
@@ -359,7 +359,7 @@ Manual:
 ## 7. Quality gates (anyone · any PR)
 
 ```bat
-cd /d C:\NEXOSxLPIN
+cd /d <product-root>
 npm.cmd run test
 npm.cmd run lint
 npm.cmd run build

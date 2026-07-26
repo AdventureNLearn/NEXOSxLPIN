@@ -50,7 +50,7 @@ NEXOSxLPIN is a **public high-stakes decision workbench**. Content must remain s
 | Public docs say | Not in public docs |
 |-----------------|--------------------|
 | “Product root” / “clone or unzip directory” | Mandatory `C:\Users\<name>\…` |
-| “Local disk preferred over cloud sync folders” | One operator’s OneDrive tree as the product home |
+| “Local disk preferred over cloud sync folders” | One operator’s cloud-sync folder tree as the product home |
 | `http://127.0.0.1:5173` as local dev URL | Binding identity to a hostname |
 
 Install scripts may **detect** the install directory at runtime. They must not require a fixed personal username path.

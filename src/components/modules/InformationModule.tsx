@@ -10,7 +10,8 @@ import {
 const GUIDE_SECTIONS = [
   { id: 'story', label: 'This story' },
   { id: 'how', label: 'How to work a story' },
-  { id: 'sme', label: 'SME lenses' },
+  { id: 'experimental', label: 'Experimental status' },
+  { id: 'sme', label: 'Expert check' },
   { id: 'scores', label: 'Supported · uncertain · disputed' },
   { id: 'map-model', label: 'Map & model' },
   { id: 'pii', label: 'PII & selectors' },
@@ -57,6 +58,7 @@ export function InformationModule({ embedded }: { embedded?: boolean } = {}) {
               </p>
             ))}
           {section === 'how' && <HowToWork />}
+          {section === 'experimental' && <ExperimentalHelp />}
           {section === 'sme' && <SmeHelp />}
           {section === 'scores' && <ScoresHelp />}
           {section === 'map-model' && <MapModelHelp />}
@@ -202,6 +204,41 @@ function HowToWork() {
       </ol>
       <p className="text-[11px] text-slate-500">
         Pipelines (repo): <code className="text-cyan-600/90">docs/RESEARCH_PIPELINES.md</code>
+      </p>
+    </div>
+  )
+}
+
+function ExperimentalHelp() {
+  return (
+    <div className="space-y-3">
+      <H>This build is EXPERIMENTAL</H>
+      <p className="text-slate-400">
+        NEXOSxLPIN is a <strong className="text-slate-200">public experiment</strong> — a training
+        and research desk for human judgment. It is{' '}
+        <strong className="text-slate-200">not</strong> legal, medical, or forensic software. UI and
+        assistive tools will change.
+      </p>
+      <ul className="list-disc pl-5 space-y-1.5 text-slate-400">
+        <li>
+          <strong className="text-slate-200">Stable-ish:</strong> pick a story, score claims, Share
+          gate on open disputed lines.
+        </li>
+        <li>
+          <strong className="text-slate-200">Beta:</strong> map, immersive stage, assistant coach.
+        </li>
+        <li>
+          <strong className="text-slate-200">Lab:</strong> 3D sketches, full expert catalog, mobile,
+          auto-scale craft.
+        </li>
+        <li>
+          <strong className="text-slate-200">Planned:</strong> claim miner, contradiction assist, SME
+          top-3 — not fully wired yet.
+        </li>
+      </ul>
+      <p className="text-[11px] text-slate-500">
+        Repo: <code className="text-cyan-600/90">docs/EXPERIMENTAL_STATUS.md</code> ·{' '}
+        <code className="text-cyan-600/90">docs/OPSEC_PUBLIC_RELEASE.md</code>
       </p>
     </div>
   )

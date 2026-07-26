@@ -7,7 +7,6 @@ import { UseCaseSwitcher } from './components/layout/UseCaseSwitcher'
 import { ReportPanel } from './components/layout/ReportPanel'
 import { MusicDock } from './components/layout/MusicDock'
 import { StoryStrip } from './components/layout/StoryStrip'
-import { WelcomeBanner } from './components/layout/WelcomeBanner'
 import { usePlatformStore } from './store/platformStore'
 import { getUseCase, trendingDesks } from './data/useCases/catalog'
 import { storyTabLabel } from './data/useCases/stories'
@@ -19,8 +18,14 @@ import {
   saveDensity,
   type UiDensity,
 } from './lib/ui/density'
-
-const PRODUCT = 'NEXOSxLPIN'
+import {
+  PRODUCT_NAME,
+  PRODUCT_VERSION,
+  MATURITY_BADGE,
+  MATURITY_ONE_LINER,
+  DISCLAIMER_TRAINING,
+  TAGLINE,
+} from './lib/product/maturity'
 
 export default function App() {
   const activeModule = usePlatformStore((s) => s.activeModule)
@@ -55,6 +60,7 @@ export default function App() {
   const showPick = !workspace.useCasePicked
   const immersive = workspace.viewMode === 'immersive' && uiMode !== 'mobile'
   const mobile = uiMode === 'mobile'
+  const trends = trendingDesks()
 
   return (
     <div
@@ -62,7 +68,7 @@ export default function App() {
         mobile ? 'ui-mobile' : 'ui-web'
       }`}
     >
-      {!immersive && !mobile && <Sidebar />}
+      {!showPick && !immersive && !mobile && <Sidebar />}
       <div className="flex-1 flex flex-col min-w-0 min-h-0">
         <header className="nexos-app-header shrink-0 flex flex-wrap items-center justify-between gap-1.5 px-2 border-b border-slate-800/90 bg-[#070b14]">
           <div className="min-w-0 flex-1 flex items-center gap-2">
@@ -74,148 +80,208 @@ export default function App() {
               className="shrink-0 rounded-md border border-cyan-900/40"
             />
             <div className="min-w-0">
-              <div className="text-[13px] font-semibold text-slate-100 tracking-tight">
-                {PRODUCT}
-                <span className="ml-2 text-[10px] font-normal text-cyan-600/90">
-                  {profile.trendRank != null ? `Story #${profile.trendRank}` : 'v2 · Truth desk'}
+              <div className="text-[13px] font-semibold text-slate-100 tracking-tight flex flex-wrap items-center gap-1.5">
+                <span>{PRODUCT_NAME}</span>
+                <span
+                  className="rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider border border-amber-700/70 bg-amber-950/50 text-amber-200/95"
+                  title={MATURITY_ONE_LINER}
+                >
+                  {MATURITY_BADGE}
                 </span>
-                <span className="ml-2 text-[10px] font-normal text-slate-600">
-                  · {storyName}
+                <span className="text-[10px] font-normal text-cyan-600/90">
+                  v{PRODUCT_VERSION}
+                  {showPick
+                    ? ' · Start here'
+                    : profile.trendRank != null
+                      ? ` · Story #${profile.trendRank}`
+                      : ' · Truth desk'}
                 </span>
+                {!showPick && (
+                  <span className="text-[10px] font-normal text-slate-600">· {storyName}</span>
+                )}
               </div>
               <div className="text-[10px] text-slate-500 truncate hidden sm:block">
-                {workspace.useCasePicked
-                  ? 'Map · Claims · Experts · Rules · Share when clean'
-                  : 'Pick a story · mark what is true · grow your agency'}
+                {showPick
+                  ? TAGLINE
+                  : 'Experimental desk · Map · Claims · Share when clean · your judgment'}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-1.5 flex-wrap justify-end">
-            <div
-              className="flex rounded border border-slate-700 overflow-hidden"
-              role="group"
-              aria-label="UI mode Web or Mobile"
-            >
-              {(['web', 'mobile'] as const).map((m) => (
-                <button
-                  key={m}
-                  type="button"
-                  onClick={() => setUiMode(m)}
-                  aria-pressed={uiMode === m}
-                  className={`px-2 py-1 text-[10px] min-h-[32px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 ${
-                    uiMode === m
-                      ? 'bg-cyan-950/70 text-cyan-100'
-                      : 'bg-slate-900 text-slate-500 hover:text-slate-300'
-                  }`}
+            {!showPick && (
+              <>
+                <div
+                  className="flex rounded border border-slate-700 overflow-hidden"
+                  role="group"
+                  aria-label="UI mode Web or Mobile"
                 >
-                  {m === 'web' ? 'Web' : 'Mobile'}
-                </button>
-              ))}
-            </div>
-            <div className="flex rounded border border-slate-700 overflow-hidden" title="UI density">
-              {(['dense', 'compact', 'comfortable'] as UiDensity[]).map((d) => (
+                  {(['web', 'mobile'] as const).map((m) => (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => setUiMode(m)}
+                      aria-pressed={uiMode === m}
+                      className={`px-2 py-1 text-[10px] min-h-[32px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 ${
+                        uiMode === m
+                          ? 'bg-cyan-950/70 text-cyan-100'
+                          : 'bg-slate-900 text-slate-500 hover:text-slate-300'
+                      }`}
+                    >
+                      {m === 'web' ? 'Web' : 'Mobile'}
+                    </button>
+                  ))}
+                </div>
+                <div className="hidden md:flex rounded border border-slate-700 overflow-hidden" title="UI density">
+                  {(['dense', 'compact', 'comfortable'] as UiDensity[]).map((d) => (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => setDensity(d)}
+                      className={`px-1.5 py-0.5 text-[9px] capitalize min-h-[32px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 ${
+                        density === d
+                          ? 'bg-cyan-950/70 text-cyan-100'
+                          : 'bg-slate-900 text-slate-500 hover:text-slate-300'
+                      }`}
+                    >
+                      {d === 'dense' ? 'Dense' : d === 'compact' ? 'Compact' : 'Roomy'}
+                    </button>
+                  ))}
+                </div>
+                <UseCaseSwitcher />
+                {!mobile && <MusicDock />}
                 <button
-                  key={d}
                   type="button"
-                  onClick={() => setDensity(d)}
-                  className={`px-1.5 py-0.5 text-[9px] capitalize min-h-[32px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 ${
-                    density === d
-                      ? 'bg-cyan-950/70 text-cyan-100'
-                      : 'bg-slate-900 text-slate-500 hover:text-slate-300'
-                  }`}
+                  onClick={() => setPaletteOpen(true)}
+                  className="shrink-0 rounded-md border border-slate-700 bg-slate-900/80 px-2 py-1 min-h-[32px] text-[10px] text-slate-400 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
                 >
-                  {d === 'dense' ? 'Dense' : d === 'compact' ? 'Compact' : 'Roomy'}
+                  Jump <kbd className="ml-0.5 font-mono text-slate-600">⌘K</kbd>
                 </button>
-              ))}
-            </div>
-            <UseCaseSwitcher />
-            {!mobile && <MusicDock />}
-            <button
-              type="button"
-              onClick={() => setPaletteOpen(true)}
-              className="shrink-0 rounded-md border border-slate-700 bg-slate-900/80 px-2 py-1 min-h-[32px] text-[10px] text-slate-400 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
-            >
-              Jump <kbd className="ml-0.5 font-mono text-slate-600">⌘K</kbd>
-            </button>
+              </>
+            )}
+            {showPick && (
+              <button
+                type="button"
+                onClick={() => setUseCase('trend-01-berlin-csd')}
+                className="rounded-md border border-cyan-700 bg-cyan-950/60 px-3 py-1.5 text-[11px] text-cyan-100 hover:bg-cyan-900/50"
+              >
+                Quick start — open story #1
+              </button>
+            )}
           </div>
         </header>
 
-        <WelcomeBanner />
-        {!immersive && !mobile && <StoryStrip />}
-        {!immersive && !mobile && density !== 'dense' && <ReportPanel />}
+        {showPick ? (
+          <main className="flex-1 min-h-0 overflow-auto">
+            <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-cyan-500/90">
+                Your tools. Your judgment. More human agency.
+              </p>
+              <h1 className="mt-2 text-[22px] sm:text-[26px] font-semibold text-slate-50 leading-snug">
+                Figure out what is true — before the story runs away with itself.
+              </h1>
+              <p className="mt-3 text-[14px] text-slate-400 leading-relaxed">
+                Pick <strong className="text-slate-200">one story</strong>. Then mark each claim{' '}
+                <strong className="text-emerald-400">Supported</strong>,{' '}
+                <strong className="text-amber-400">Not proven yet</strong>, or{' '}
+                <strong className="text-rose-400">Disputed</strong>. Map the place. Sketch only if it
+                helps. Share a pack only when the shaky lines are cleaned up.
+              </p>
+              <ol className="mt-4 flex flex-wrap gap-2 text-[12px] text-slate-400">
+                {[
+                  '1 · Pick a story',
+                  '2 · Score claims',
+                  '3 · See the map',
+                  '4 · Optional sketch',
+                  '5 · Share if clean',
+                ].map((t) => (
+                  <li
+                    key={t}
+                    className="rounded-full border border-slate-800 bg-slate-950/70 px-2.5 py-1"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ol>
 
-        <main className="nexos-main-pad flex-1 min-h-0 overflow-hidden relative">
-          {showPick && (
-            <div className="absolute inset-2 z-20 flex items-start justify-center pt-6 pointer-events-none">
-              <div className="pointer-events-auto w-full max-w-xl rounded-xl border border-slate-700 bg-slate-950/95 p-4 shadow-2xl max-h-[80vh] overflow-auto">
-                <h2 className="text-sm font-semibold text-slate-100">
-                  Choose a story to investigate
-                </h2>
-                <p className="mt-1 text-[11px] text-slate-500">
-                  Each story loads a map, plain-language claims, and rules for how careful you must
-                  be before publishing. Grey pins on the map are other stories — click to switch.
+              <div className="mt-8 rounded-xl border border-slate-700 bg-slate-950/90 p-4 shadow-2xl">
+                <h2 className="text-sm font-semibold text-slate-100">Choose a story</h2>
+                <p className="mt-1 text-[12px] text-slate-500">
+                  Start with a trending desk — or open a calm empty desk to explore the tools.
                 </p>
-                <ol className="mt-3 space-y-1.5">
-                  {trendingDesks().map((p) => (
+                <ol className="mt-3 space-y-1.5 max-h-[min(52vh,420px)] overflow-auto pr-1">
+                  {trends.map((p) => (
                     <li key={p.id}>
                       <button
                         type="button"
                         onClick={() => setUseCase(p.id)}
-                        className="w-full text-left rounded-md border border-slate-800 px-2.5 py-2 hover:border-cyan-800 hover:bg-cyan-950/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
+                        className="w-full text-left rounded-md border border-slate-800 px-3 py-2.5 hover:border-cyan-800 hover:bg-cyan-950/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
                       >
-                        <div className="text-[12px] text-slate-100 font-medium">{p.label}</div>
-                        <div className="text-[10px] text-slate-500 line-clamp-2">{p.tagline}</div>
+                        <div className="text-[13px] text-slate-100 font-medium">{p.label}</div>
+                        <div className="text-[11px] text-slate-500 line-clamp-2 mt-0.5">
+                          {p.tagline}
+                        </div>
                       </button>
                     </li>
                   ))}
                 </ol>
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2">
                   <Btn variant="primary" onClick={() => setUseCase('trend-01-berlin-csd')}>
-                    Open #1 Berlin CSD
+                    Open story #1
                   </Btn>
-                  <Btn onClick={() => setUseCase('gen-explore')}>General explore</Btn>
+                  <Btn onClick={() => setUseCase('gen-explore')}>Empty desk (explore tools)</Btn>
                 </div>
+                <p className="mt-3 text-[10px] text-slate-600 leading-relaxed">
+                  <span className="text-amber-600/90 font-semibold">EXPERIMENTAL.</span>{' '}
+                  {DISCLAIMER_TRAINING} Maps and 3D are illustrative only. UI will change.
+                </p>
               </div>
             </div>
-          )}
-          <div className="h-full min-h-0">
-            <Workspace />
-          </div>
-        </main>
-        {!immersive && !mobile && <StatusBar />}
-        {mobile && (
-          <nav
-            className="ui-mobile-nav shrink-0 border-t border-slate-800 bg-[#070b14] px-1 py-1 flex gap-0.5 overflow-x-auto"
-            aria-label="Primary modules"
-          >
-            {(
-              [
-                'atlas',
-                'research-hub',
-                'sme-lenses',
-                'analyst',
-                'export-kit',
-                'information',
-              ] as const
-            ).map((id) => {
-              const on = activeModule === id
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => setModule(id)}
-                  aria-current={on ? 'page' : undefined}
-                  className={`shrink-0 min-h-[44px] min-w-[64px] px-2 rounded-md text-[10px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 ${
-                    on
-                      ? 'bg-cyan-950/70 text-cyan-100 border border-cyan-800/50'
-                      : 'text-slate-400 border border-transparent'
-                  }`}
-                >
-                  {MODULE_META[id].short}
-                </button>
-              )
-            })}
-          </nav>
+          </main>
+        ) : (
+          <>
+            {!immersive && !mobile && <StoryStrip />}
+            {!immersive && !mobile && density !== 'dense' && <ReportPanel />}
+            <main className="nexos-main-pad flex-1 min-h-0 overflow-hidden relative">
+              <div className="h-full min-h-0">
+                <Workspace />
+              </div>
+            </main>
+            {!immersive && !mobile && <StatusBar />}
+            {mobile && (
+              <nav
+                className="ui-mobile-nav shrink-0 border-t border-slate-800 bg-[#070b14] px-1 py-1 flex gap-0.5 overflow-x-auto"
+                aria-label="Primary modules"
+              >
+                {(
+                  [
+                    'information',
+                    'atlas',
+                    'research-hub',
+                    'sme-lenses',
+                    'massing-viewer',
+                    'export-kit',
+                  ] as const
+                ).map((id) => {
+                  const on = activeModule === id
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => setModule(id)}
+                      aria-current={on ? 'page' : undefined}
+                      className={`shrink-0 min-h-[44px] min-w-[64px] px-2 rounded-md text-[10px] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 ${
+                        on
+                          ? 'bg-cyan-950/70 text-cyan-100 border border-cyan-800/50'
+                          : 'text-slate-400 border border-transparent'
+                      }`}
+                    >
+                      {MODULE_META[id].short}
+                    </button>
+                  )
+                })}
+              </nav>
+            )}
+          </>
         )}
       </div>
       <CommandPalette open={paletteOpen} onClose={closePalette} />

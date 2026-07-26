@@ -33,54 +33,54 @@ export interface ScaleClassSpec {
   label: string
 }
 
-/** Zoom / footprint policy — tighter than decorative “stage” packing. */
+/** Zoom / footprint policy — analyst-friendly (less clunky than ultra-strict CAD zooms). */
 export const SCALE_CLASSES: Record<ScaleClass, ScaleClassSpec> = {
   region: {
     id: 'region',
-    minSelectZoom: 4,
-    autoZoom: 7,
+    minSelectZoom: 3,
+    autoZoom: 6,
     defaultFootprintM: 40_000,
     minVisibleZoom: 2,
     label: 'Region',
   },
   corridor: {
     id: 'corridor',
-    minSelectZoom: 9,
-    autoZoom: 12,
+    minSelectZoom: 7,
+    autoZoom: 11,
     defaultFootprintM: 2_500,
-    minVisibleZoom: 7,
+    minVisibleZoom: 5,
     label: 'Corridor',
   },
   site: {
     id: 'site',
-    minSelectZoom: 13,
-    autoZoom: 16,
+    minSelectZoom: 10,
+    autoZoom: 14,
     defaultFootprintM: 180,
-    minVisibleZoom: 11,
+    minVisibleZoom: 8,
     label: 'Site',
   },
   structure: {
     id: 'structure',
-    minSelectZoom: 15,
-    autoZoom: 18,
+    minSelectZoom: 12,
+    autoZoom: 16,
     defaultFootprintM: 45,
-    minVisibleZoom: 13,
+    minVisibleZoom: 10,
     label: 'Structure',
   },
   vehicle: {
     id: 'vehicle',
-    minSelectZoom: 17,
-    autoZoom: 19,
+    minSelectZoom: 14,
+    autoZoom: 17,
     defaultFootprintM: 6,
-    minVisibleZoom: 15,
+    minVisibleZoom: 12,
     label: 'Vehicle',
   },
   detail: {
     id: 'detail',
-    minSelectZoom: 18,
-    autoZoom: 20,
+    minSelectZoom: 15,
+    autoZoom: 18,
     defaultFootprintM: 1.5,
-    minVisibleZoom: 17,
+    minVisibleZoom: 13,
     label: 'Detail',
   },
 }
@@ -163,12 +163,19 @@ export function isScaleSelectable(
   zoom: number,
   latDeg: number,
   footprintM?: number,
-  minPx = 14,
+  /** Softer default so site pins stay clickable without frantic zoom thrash */
+  minPx = 8,
 ): boolean {
   const spec = SCALE_CLASSES[scale]
   if (zoom < spec.minSelectZoom) return false
   const fp = footprintM ?? spec.defaultFootprintM
   return footprintScreenPx(fp, latDeg, zoom) >= minPx
+}
+
+/** Plain-language coach line when auto-scale engages */
+export function autoScalePlain(scale: ScaleClass, featureLabel: string): string {
+  const s = SCALE_CLASSES[scale]
+  return `Zooming to “${featureLabel}” (${s.label}) so it is large enough to inspect — not a decorative jump.`
 }
 
 export function isScaleVisible(scale: ScaleClass, zoom: number): boolean {

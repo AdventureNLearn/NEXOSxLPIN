@@ -184,8 +184,8 @@ function defaultConditions(pack: DataPack): ActiveConditions | null {
 export const usePlatformStore = create<PlatformState>()(
   persist(
     (set, get) => ({
-      version: '1.6.1',
-      activeModule: 'research-hub',
+      version: '2.0.0',
+      activeModule: 'information',
       sessionMode: 'explore',
       uiMode: 'web',
       layer0: createIdleLayer0(),
@@ -200,11 +200,11 @@ export const usePlatformStore = create<PlatformState>()(
       activeAssetId: null,
       compareMode: false,
       lastAction: null,
-      statusMessage: 'NEXOSxLPIN 1.6.1 · Immersive HUD · pick an investigation',
+      statusMessage: 'NEXOSxLPIN 2.0.0 · Pick a story to begin',
       analystLog: [
-        'Analyst online. Pick an investigation (header or map pin).',
-        'Open SME Lenses for regulatory/governance expert analysis.',
-        'Type help for commands.',
+        'Welcome. Pick a story to load the map and claims.',
+        'Mark claims Supported / Not proven / Disputed before sharing.',
+        'Type help for optional power commands.',
       ],
       activeSources: [],
       activeSmeLensId: DEFAULT_SME_LENS_ID,

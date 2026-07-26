@@ -4,6 +4,7 @@ import { unresolvedNegatives } from '../../core/evidence'
 import { getUseCase } from '../../data/useCases/catalog'
 import { getSimulation } from '../../data/useCases/simulations'
 import { Btn } from '../ui/primitives'
+import { DISCLAIMER_STATUS_BAR, MATURITY_BADGE, PRODUCT_VERSION } from '../../lib/product/maturity'
 
 export function StatusBar() {
   const layer0 = usePlatformStore((s) => s.layer0)
@@ -106,6 +107,9 @@ export function StatusBar() {
       </div>
 
       <div className="flex-1 min-w-[8rem] text-right truncate text-slate-500" title={statusMessage}>
+        <span className="text-amber-700/90 font-semibold">{MATURITY_BADGE}</span>
+        <span className="text-slate-600"> · v{PRODUCT_VERSION} · </span>
+        <span className="text-slate-600 hidden lg:inline">{DISCLAIMER_STATUS_BAR} · </span>
         <span className="text-slate-600">{activeModule}</span>
         {' · '}
         {statusMessage}

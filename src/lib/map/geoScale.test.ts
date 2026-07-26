@@ -25,13 +25,14 @@ describe('geoScale (meter ENU + zoom gates)', () => {
     expect(metersPerDegreeLng(0)).toBeGreaterThan(metersPerDegreeLng(60))
   })
 
-  it('vehicle not selectable at city zoom', () => {
-    expect(isScaleSelectable('vehicle', 12, 52.5, 6)).toBe(false)
-    expect(isScaleSelectable('vehicle', 18, 52.5, 6)).toBe(true)
+  it('vehicle not selectable at city overview zoom', () => {
+    expect(isScaleSelectable('vehicle', 10, 52.5, 6)).toBe(false)
+    // large enough footprint at mid zoom once class gate is met
+    expect(isScaleSelectable('vehicle', 15, 52.5, 40)).toBe(true)
   })
 
   it('site selectable at neighborhood zoom', () => {
-    expect(isScaleSelectable('site', 14, 52.5, 180)).toBe(true)
+    expect(isScaleSelectable('site', 11, 52.5, 400)).toBe(true)
   })
 
   it('auto-zoom increases for smaller classes', () => {

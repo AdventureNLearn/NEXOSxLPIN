@@ -151,10 +151,10 @@ export function UseCaseSwitcher() {
       </div>
 
       <span
-        className="shrink-0 rounded-md border border-cyan-800/60 bg-cyan-950/50 px-2 py-1 text-[10px] text-cyan-200"
-        title="Immersive is the investigative workspace mode"
+        className="shrink-0 rounded-md border border-slate-800 bg-slate-950/80 px-2 py-1 text-[10px] text-slate-500"
+        title="Immersive analysis stage is the default workspace"
       >
-        Immersive
+        Stage
       </span>
 
       <button
@@ -177,11 +177,11 @@ export function UseCaseSwitcher() {
 
       <button
         type="button"
-        onClick={() => setModule('information')}
+        onClick={() => setModule('export-kit')}
         className="shrink-0 rounded-md border border-slate-700 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-300 hover:text-slate-100 hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
-        title="Plain-language guide"
+        title="Share pack when clean"
       >
-        Help
+        Share
       </button>
     </div>
   )
