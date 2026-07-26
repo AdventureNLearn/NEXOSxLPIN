@@ -33,7 +33,7 @@ That is how narratives get checked — and how solid claims get projected with r
 |------|----------|
 | **Stable-ish core** | Story pick, claim scores, Share gate on open −1, Layer-0 ACK |
 | **Beta** | Map, immersive stage, Visual Assistant coach |
-| **Lab** | 3D/Forge, full SME catalog, auto-scale craft, mobile |
+| **Lab** | 3D/Forge, Potentials layers, Dan per-item seed, full SME catalog, auto-scale, mobile |
 | **Planned** | Claim miner, contradiction assist, SME top-3, layer→pin wiring |
 
 See [`docs/EXPERIMENTAL_STATUS.md`](./docs/EXPERIMENTAL_STATUS.md) and [`docs/OPSEC_PUBLIC_RELEASE.md`](./docs/OPSEC_PUBLIC_RELEASE.md).
