@@ -24,6 +24,8 @@ Prefer **relative links** from the product root.
 | [PII_AND_AGNOSTIC_POLICY.md](./PII_AND_AGNOSTIC_POLICY.md) | Pack authors, UI, agents |
 | [LLM_REASONING_FRAMEWORK.md](./LLM_REASONING_FRAMEWORK.md) | Any LLM adopting the framework |
 | [FIDELITY_AUDIT.md](./FIDELITY_AUDIT.md) | Release auditors |
+| [LAYER_SEPARATION_AND_POTENTIALS.md](./LAYER_SEPARATION_AND_POTENTIALS.md) | Mapping vs Rendering + Potentials |
+| [PROCEDURAL_ITEM_OPTIMIZATION.md](./PROCEDURAL_ITEM_OPTIMIZATION.md) | Dan-style per-item optimize |
 | [3D_ILLUSTRATIVE_CONTRACT.md](./3D_ILLUSTRATIVE_CONTRACT.md) | 3D contributors |
 | [3D_OBJECT_CLASSIFICATION.md](./3D_OBJECT_CLASSIFICATION.md) | Forge / Massing logic |
 

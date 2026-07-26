@@ -1,13 +1,26 @@
 # 3D Object Classification Logic
 
-**Code truth:** `src/lib/forge/objectReasoning.ts`  
+**Code truth:** `src/lib/forge/objectReasoning.ts` · `src/lib/forge/potentials.ts`  
 **Catalog:** `src/data/forge/meshCatalog.ts` (~105 families)  
 **Curated packs:** `src/data/useCases/storyModels.ts`  
-**Layout / terrain:** `spatialSceneLayout.ts`, `terrainFromMap.ts`  
-**Render:** `MassingCanvas.tsx`, `MassingViewerModule.tsx`, `generators.ts`  
+**Layout / terrain:** `spatialSceneLayout.ts`, `terrainFromMap.ts` (**Mapping Layer**)  
+**Render:** `MassingCanvas.tsx`, `MassingViewerModule.tsx`, `generators.ts` (**Rendering Layer**)  
+**Design:** `docs/LAYER_SEPARATION_AND_POTENTIALS.md`
 
 **Law:** 3D objects are **illustrative stand-ins derived from scored claims**.  
 They are **never** forensic reconstructions, certified surveys, or proof of fact.
+
+### Layers
+
+| Layer | Contents |
+|-------|----------|
+| Mapping | basemap, terrain, origin / scene pins — location only |
+| Rendering | PotentialObject candidates → refined meshes from ledger |
+
+### Potential statuses
+
+`potential` · `refined-supported` · `refined-disputed` · `speculative` · `resolved`  
+Open statuses use **ghost/wireframe** materials until refined or operator-resolved.
 
 Disclaimer string (code):
 

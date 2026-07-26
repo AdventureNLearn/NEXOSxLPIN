@@ -62,7 +62,9 @@ import { resolveStory } from '../data/useCases/stories'
 import {
   meshAccentColor,
   reasonSceneObjects,
+  reasonScenePotentials,
 } from '../lib/forge/objectReasoning'
+import { assembleSceneFromPotentials } from '../lib/forge/itemOptimize'
 
 export interface PlatformState {
   version: string
@@ -1436,47 +1438,28 @@ export const usePlatformStore = create<PlatformState>()(
       seedEvidentiaryModels: () => {
         const s = get()
         const story = resolveStory(s.activeUseCaseId)
-        const report = reasonSceneObjects({
+        // Dan-style: PotentialObjects → per-item coarse → optimize → assemble (never monolith)
+        const pots = reasonScenePotentials({
           deskId: s.activeUseCaseId,
           claims: story?.claims,
           evidence: s.evidence,
         })
-        const critical = report.objects.filter(
-          (o) => o.importance === 'critical' || report.selectedIds.includes(o.id),
-        )
-        // Full scene: critical first, then supporting — up to 12 models on terrain
-        const pick = (critical.length ? critical : report.objects).slice(0, 12)
-        if (!pick.length) {
+        if (!pots.length) {
           set({
             lastAction: 'forge:seed:empty',
-            statusMessage: 'No modelable objects in claims/evidence for this desk',
+            statusMessage: 'No modelable potentials in claims/evidence for this desk',
           })
           return 0
         }
-        const generated = pick.map((o) =>
-          generateAsset({
-            name: o.name,
-            assetType: o.assetType,
-            description: [
-              o.description,
-              `Verifiability: ${o.verifiability}`,
-              o.relatedClaimHint ? `Claim: ${o.relatedClaimHint}` : '',
-              `Flags: ${o.flags.join(', ')}`,
-              ...o.reasoning.slice(0, 2),
-            ]
-              .filter(Boolean)
-              .join('\n'),
-            conditions: s.conditions,
-            score: o.score,
-            verifiability: o.verifiability,
-            reasoning: o.reasoning,
-            flags: o.flags,
-            relatedClaimHint: o.relatedClaimHint,
-            sourceIds: o.sourceIds,
-            importance: o.importance,
-            accentColor: meshAccentColor(o.verifiability),
-          }),
-        )
+        const assembled = assembleSceneFromPotentials(pots, s.conditions, { maxItems: 12 })
+        const generated = assembled.assets
+        if (!generated.length) {
+          set({
+            lastAction: 'forge:seed:empty',
+            statusMessage: 'Assemble produced no items',
+          })
+          return 0
+        }
         const profile = getUseCase(s.activeUseCaseId)
         const openPanes = openPaneInWorkspace(
           openPaneInWorkspace(s.workspace.openPanes, 'procedural-forge', profile.paneWeights),
@@ -1496,13 +1479,15 @@ export const usePlatformStore = create<PlatformState>()(
           },
           workingDocument: logGeneration(
             s.workingDocument,
-            `Seeded ${generated.length} evidentiary models`,
-            report.summary +
+            `Seeded ${generated.length} per-item models (Dan pipeline)`,
+            assembled.methodNote +
               '\n' +
-              generated.map((a) => `- ${a.name} (${a.verifiability ?? 'n/a'})`).join('\n'),
+              assembled.items
+                .map((i) => `- ${i.name} · ${i.stage} · ${i.asset.verifiability ?? 'n/a'}`)
+                .join('\n'),
           ),
-          lastAction: `forge:seed:${generated.length}`,
-          statusMessage: `Seeded ${generated.length} models · ${report.summary}`,
+          lastAction: `forge:seed:dan:${generated.length}`,
+          statusMessage: `Seeded ${generated.length} items (per-item optimize) · ${assembled.methodNote.slice(0, 80)}…`,
         })
         return generated.length
       },

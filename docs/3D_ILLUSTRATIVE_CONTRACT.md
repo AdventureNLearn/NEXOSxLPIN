@@ -20,8 +20,19 @@ Define what 3D **is allowed to mean** so forks, exports, and marketing cannot ac
 4. **−1 never looks settled +1.** Disputed objects use distinct treatment (`disputed_unverifiable`).  
 5. **+1 without source = plausible/unverified**, not verified.  
 6. **Disclaimer is mandatory chrome** in Full and Solo, and on any still/Unity export path.  
-7. **Geometry follows the ledger.** When evidence changes, scene regenerates (confirm if operator dirtied placement).  
+7. **Geometry follows the ledger.** When evidence changes, **Rendering Layer** regenerates (confirm if operator dirtied placement). Mapping Layer (basemap/terrain/origin) does **not** change with claims.  
 8. **Curated storyModels outrank weak keyword hits.**  
+9. **Potentials stay open** until refined by ledger or operator resolve — no forced closed loops on speculative detail.  
+10. **Ghost/dashed materials** mark `potential` and `speculative` statuses only.
+
+### Layers (M3.5)
+
+| Layer | Driven by | Mutates on claim change? |
+|-------|-----------|---------------------------|
+| **Mapping** | Location / basemap / terrain / origin pins | **No** |
+| **Rendering** | Story context + claim ledger + potentials | **Yes** |
+
+See `docs/LAYER_SEPARATION_AND_POTENTIALS.md`.
 
 ### Required disclaimer (minimum)
 

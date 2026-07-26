@@ -17,10 +17,12 @@ function PartMesh({
   part,
   highlighted,
   dimmed,
+  ghost,
 }: {
   part: MeshPartSpec
   highlighted?: boolean
   dimmed?: boolean
+  ghost?: boolean
 }) {
   const geo = useMemo(() => {
     if (part.primitive === 'box') return <boxGeometry args={part.size} />
@@ -32,36 +34,44 @@ function PartMesh({
   const isZone = part.id.startsWith('zone-') || part.id.startsWith('rel:')
   const isTerrain = part.id.startsWith('terrain-')
   const isWater = part.id === 'terrain-water'
+  const ghosted = Boolean(ghost) && !isTerrain
   return (
     <mesh position={part.position} rotation={part.rotation} receiveShadow={isTerrain}>
       {geo}
       <meshStandardMaterial
-        color={part.color}
-        metalness={part.primitive === 'plane' || isZone || isTerrain ? 0 : 0.25}
-        roughness={part.primitive === 'plane' || isZone || isTerrain ? 0.95 : 0.55}
-        transparent={isZone || isWater || dimmed}
-        opacity={isZone ? 0.55 : isWater ? 0.82 : dimmed ? 0.45 : 1}
+        color={ghosted ? '#94a3b8' : part.color}
+        metalness={part.primitive === 'plane' || isZone || isTerrain ? 0 : ghosted ? 0.05 : 0.25}
+        roughness={part.primitive === 'plane' || isZone || isTerrain ? 0.95 : ghosted ? 0.9 : 0.55}
+        transparent={isZone || isWater || dimmed || ghosted}
+        opacity={
+          isZone ? 0.55 : isWater ? 0.82 : ghosted ? 0.38 : dimmed ? 0.45 : 1
+        }
+        wireframe={ghosted && part.primitive !== 'plane'}
         emissive={
           highlighted
             ? '#22d3ee'
-            : part.color === '#22d3ee' || part.id.startsWith('rel:')
-              ? part.id.includes('standoff')
-                ? '#9f1239'
-                : '#0891b2'
-              : isWater
-                ? '#0369a1'
-                : '#000000'
+            : ghosted
+              ? '#64748b'
+              : part.color === '#22d3ee' || part.id.startsWith('rel:')
+                ? part.id.includes('standoff')
+                  ? '#9f1239'
+                  : '#0891b2'
+                : isWater
+                  ? '#0369a1'
+                  : '#000000'
         }
         emissiveIntensity={
           highlighted
             ? 0.55
-            : part.id.startsWith('rel:')
-              ? 0.25
-              : part.color === '#22d3ee'
-                ? 0.35
-                : isWater
-                  ? 0.12
-                  : 0
+            : ghosted
+              ? 0.15
+              : part.id.startsWith('rel:')
+                ? 0.25
+                : part.color === '#22d3ee'
+                  ? 0.35
+                  : isWater
+                    ? 0.12
+                    : 0
         }
       />
     </mesh>
@@ -138,6 +148,7 @@ function ObjectGroupMesh({
           part={p}
           highlighted={hovered || active}
           dimmed={dimmed}
+          ghost={meta.ghost}
         />
       ))}
       {/* Always-visible mini status pin above object */}

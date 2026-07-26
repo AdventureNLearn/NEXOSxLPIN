@@ -33,6 +33,8 @@
 ### Lab (expect rough edges)
 
 - 3D / Massing / Procedural Forge sketches  
+- **Potentials + Mapping/Rendering layer toggle** (experimental)  
+- **Dan-style per-item seed pipeline** (coarse → optimize → assemble)  
 - Full 252 SME lens catalog (no top-3 recommender yet)  
 - Scale-accurate auto-zoom inspection  
 - Mobile / narrow layouts  
