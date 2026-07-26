@@ -1,0 +1,29 @@
+NEXOSxLPIN 2.0.0 — Quick start (for everyone)
+==============================================
+Goal: figure out what is true before the story runs away with itself.
+
+Need: Node.js LTS from https://nodejs.org/
+
+Windows
+-------
+1) Put this folder on your computer (local disk is fastest)
+2) Double-click INSTALL.bat
+3) Double-click START.bat  →  http://127.0.0.1:5173
+4) Optional desktop icon:
+   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\create-desktop-shortcut.ps1
+
+Mac / Linux
+-----------
+chmod +x install.sh start.sh && ./install.sh && ./start.sh
+
+What to click
+-------------
+Story  → read it
+Claims → Supported / Not proven / Disputed
+Map    → place + layers
+3D     → optional sketch (not proof)
+Share  → only when disputed lines are cleaned up
+
+Docs: docs/DOC_INDEX.md · docs/V2_BUILD_PLAN.md
+PII: no private personal data in sample packs
+3D: illustrative only

@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  /* Base (Spec §3.1 + product dark shell) */
+  --bg: #070b14;
+  --bg-base: #070b14;
+  --bg-elevated: #0d1320;
+  --bg-glass: rgba(13, 19, 32, 0.72);
+  --surface: #0d1320;
+  --border-subtle: rgba(148, 163, 184, 0.12);
+  --border-focus: rgba(34, 211, 238, 0.45);
+  --accent: #22d3ee;
+  --accent-muted: rgba(34, 211, 238, 0.15);
+  --text: #e2e8f0;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --muted: #64748b;
+  --danger: #f43f5e;
+  --success: #22c55e;
+
+  /* Claim status (Spec §3.2) — core language; not decoration */
+  --status-supported: #22c55e;
+  --status-hold: #f59e0b;
+  --status-disputed: #f43f5e;
+  --status-plausible: #a78bfa;
+
+  /* Motion (Spec §3.6) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-scene: 360ms;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Enterprise UI · Mobile shell (forced via toggle or narrow viewport helpers) */
+.ui-mobile .nexos-main-pad {
+  padding: 0.35rem;
+}
+.ui-mobile .ui-mobile-nav {
+  padding-bottom: max(0.35rem, env(safe-area-inset-bottom));
+}
+.ui-mobile button,
+.ui-mobile [role='button'] {
+  min-height: 2.5rem;
+}
+@media (max-width: 480px) {
+  .ui-web .nexos-app-header {
+    gap: 0.35rem;
+  }
+}
+
+/* Leaflet dark theme */
+.leaflet-container {
+  background: #05070f;
+  font: inherit;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #121826;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+}
+.leaflet-control-attribution {
+  background: rgba(5, 7, 15, 0.8) !important;
+  color: #64748b !important;
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.55);
+  outline-offset: 2px;
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b transparent;
+}
+
+/* —— Density scales (maximize usable stage on laptops) —— */
+.nexos-density-comfortable {
+  --nexos-tab-py: 0.35rem;
+  --nexos-tab-px: 0.65rem;
+  --nexos-tab-fs: 11px;
+  --nexos-chrome-py: 0.5rem;
+  --nexos-story-max: 42vh;
+  --nexos-pane-title: 11px;
+  --nexos-immersive-top: 2.75rem;
+  --nexos-immersive-bot: 2.25rem;
+  --nexos-ui-scale: 1;
+}
+.nexos-density-compact {
+  --nexos-tab-py: 0.2rem;
+  --nexos-tab-px: 0.45rem;
+  --nexos-tab-fs: 10px;
+  --nexos-chrome-py: 0.35rem;
+  --nexos-story-max: 28vh;
+  --nexos-pane-title: 10px;
+  --nexos-immersive-top: 2.1rem;
+  --nexos-immersive-bot: 1.75rem;
+  --nexos-ui-scale: 0.94;
+}
+.nexos-density-dense {
+  --nexos-tab-py: 0.12rem;
+  --nexos-tab-px: 0.35rem;
+  --nexos-tab-fs: 10px;
+  --nexos-chrome-py: 0.25rem;
+  --nexos-story-max: 22vh;
+  --nexos-pane-title: 10px;
+  --nexos-immersive-top: 1.85rem;
+  --nexos-immersive-bot: 1.5rem;
+  --nexos-ui-scale: 0.9;
+}
+
+.nexos-shell {
+  font-size: calc(13px * var(--nexos-ui-scale, 1));
+}
+
+.nexos-tab-btn {
+  padding: var(--nexos-tab-py) var(--nexos-tab-px);
+  font-size: var(--nexos-tab-fs);
+  line-height: 1.2;
+}
+
+.nexos-story-strip {
+  max-height: var(--nexos-story-max);
+  overflow: auto;
+}
+
+.nexos-pane-title {
+  font-size: var(--nexos-pane-title);
+}
+
+.nexos-density-dense .nexos-story-claims {
+  display: none;
+}
+.nexos-density-compact .nexos-story-claims {
+  max-width: 240px;
+}
+.nexos-density-dense header.nexos-app-header {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.nexos-density-dense .nexos-main-pad {
+  padding: 0.25rem;
+}
+.nexos-density-compact .nexos-main-pad {
+  padding: 0.35rem;
+}

@@ -1,0 +1,287 @@
+  'sme-claim-chain-of-custody': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Chain Custody', ["custody","hash","provenance","exhibit","chain"]),
+  'sme-conflict-calendar': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Conflict Cal', ["timeline","chronology","date","sequence","docket"]),
+  'sme-attribution-hygiene': (ctx, base) => {
+    let r = requirePrimaryForPlusOne(ctx, base, 'Attribution', ["attribution","quote","speaker","paraphrase","social"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && isSocialOnly(text, ctx.material)) {
+      r = demoteToZero(r, 'Attribution: social/rumor cannot carry +1', 36)
+    }
+    return r
+  },
+  'sme-redaction-gap': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Redaction', ["redaction","withhold","exemption","foia","production"]),
+  'sme-multi-source-corroboration': (ctx, base) => {
+    let r = requirePrimaryForPlusOne(ctx, base, 'Corroborate', ["corroborat","independent","echo","circular","wire"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && isSocialOnly(text, ctx.material)) {
+      r = demoteToZero(r, 'Corroborate: social/rumor cannot carry +1', 36)
+    }
+    return r
+  },
+  'sme-harm-escalation-gate': (ctx, base) => {
+    let r = requirePrimaryForPlusOne(ctx, base, 'Harm Gate', ["harm","defamation","export","publish","layer-0"])
+    const text = hay(ctx)
+    if (ctx.original === -1 && (text.includes('export') || text.includes('publish') || text.includes('harm'))) {
+      r.confidence = Math.max(r.confidence, 88)
+      r.gaps.push('Harm Gate: high-stakes −1 — Layer-0 before export')
+    }
+    return r
+  },
+  'sme-decision-lock-auditor': (ctx, base) => {
+    let r = requirePrimaryForPlusOne(ctx, base, 'Decision Lock', ["decision","lock","working","owner","wd"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['decision', 'lock', 'working', 'wd', 'owner', 'timestamp', 'log'])) {
+      if (isWeakMaterial(ctx.material)) r = demoteToZero(r, 'Decision Lock: decision lock claim lacks WD anchors', 40)
+    }
+    return r
+  },
+  'sme-docket-navigator': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Docket Nav', ["docket","filing","comment","rulemaking","notice"]),
+  'sme-budget-line-forensics': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Budget Line', ["budget","appropriation","obligation","outlay","fiscal"]),
+  'sme-hearing-transcript': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Hearing TX', ["hearing","transcript","testimony","witness","committee"]),
+  'sme-license-registry': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'License Reg', ["license","credential","registry","suspension","scope"]),
+  'sme-property-title-chain': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Title Chain', ["title","deed","lien","parcel","ownership"]),
+  'sme-inspection-history': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Inspect Hist', ["inspection","violation","citation","code","reinspect"]),
+  'sme-procurement-tabulation': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Bid Tabs', ["bid","tabulation","award","rfp","procurement"]),
+  'sme-preemption-map': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["preemption","savings","supremacy","conflict","field"], 'Preemption')
+    r = requirePrimaryForPlusOne(ctx, r, 'Preemption', ["preemption","savings","supremacy","conflict","field"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Preemption: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-special-district': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["special district","authority","levy","charter","board"], 'Spec District')
+    r = requirePrimaryForPlusOne(ctx, r, 'Spec District', ["special district","authority","levy","charter","board"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Spec District: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-interlocal-agreement': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["interlocal","mou","mutual aid","agreement","duty"], 'Interlocal')
+    r = requirePrimaryForPlusOne(ctx, r, 'Interlocal', ["interlocal","mou","mutual aid","agreement","duty"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Interlocal: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-venue-standing': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["venue","standing","court","forum","complaint"], 'Venue')
+    r = requirePrimaryForPlusOne(ctx, r, 'Venue', ["venue","standing","court","forum","complaint"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Venue: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-tribal-federal': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["tribal","treaty","trust","sovereign","compact"], 'Tribal Fed')
+    r = requirePrimaryForPlusOne(ctx, r, 'Tribal Fed', ["tribal","treaty","trust","sovereign","compact"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Tribal Fed: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-extraterritorial': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["extraterritorial","foreign","reach","export control","sanctions"], 'Extraterr.')
+    r = requirePrimaryForPlusOne(ctx, r, 'Extraterr.', ["extraterritorial","foreign","reach","export control","sanctions"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Extraterr.: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-delegation-doctrine': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["delegation","enabling","agency power","ultra vires","apa"], 'Delegation')
+    r = requirePrimaryForPlusOne(ctx, r, 'Delegation', ["delegation","enabling","agency power","ultra vires","apa"])
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['statute', 'code', 'section', 'clause', 'docket', 'order', 'treaty', 'charter', 'rule']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Delegation: jurisdiction claim lacks instrument anchors', 38)
+    }
+    return r
+  },
+  'sme-inspector-general': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'IG Desk', ["ig","inspector general","finding","recommendation","audit"]),
+  'sme-lobby-disclosure': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Lobby LD', ["lobby","lda","registrant","disclosure","influence"]),
+  'sme-campaign-finance-edge': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Camp Fin', ["campaign","contribution","fec","pac","donor"]),
+  'sme-revolving-door': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Rev Door', ["revolving door","cooling-off","ethics","post-employment"]),
+  'sme-performance-audit': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Perf Audit', ["performance audit","efficiency","criteria","condition","gao"]),
+  'sme-open-meetings': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Open Meet', ["open meetings","sunshine","notice","quorum","executive session"]),
+  'sme-settlement-transparency': (ctx, base) => requirePrimaryForPlusOne(ctx, base, 'Settlement', ["settlement","nda","judgment","payout","docket"]),
+  'sme-telecom-spectrum': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["spectrum","fcc","license","auction","wireless"], 'Spectrum')
+    r = requirePrimaryForPlusOne(ctx, r, 'Spectrum', ["spectrum","fcc","license","auction","wireless"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Spectrum: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-food-safety-reg': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["food","fda","recall","fsma","usda"], 'Food Safety')
+    r = requirePrimaryForPlusOne(ctx, r, 'Food Safety', ["food","fda","recall","fsma","usda"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Food Safety: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-aviation-ops-reg': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["aviation","faa","airworthiness","ad","ntsb"], 'Aviation Ops')
+    r = requirePrimaryForPlusOne(ctx, r, 'Aviation Ops', ["aviation","faa","airworthiness","ad","ntsb"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Aviation Ops: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-banking-prudential': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["banking","capital","liquidity","fdic","supervisory"], 'Bank Super')
+    r = requirePrimaryForPlusOne(ctx, r, 'Bank Super', ["banking","capital","liquidity","fdic","supervisory"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Bank Super: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-labor-wage-hour': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["wage","overtime","flsa","dol","classification"], 'Wage Hour')
+    r = requirePrimaryForPlusOne(ctx, r, 'Wage Hour', ["wage","overtime","flsa","dol","classification"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Wage Hour: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-cyber-incident-reg': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["cyber","incident","cisa","notification","breach"], 'Cyber Inc')
+    r = requirePrimaryForPlusOne(ctx, r, 'Cyber Inc', ["cyber","incident","cisa","notification","breach"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Cyber Inc: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-export-controls-reg': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["export","ear","bis","entity list","itar"], 'Export Ctrl')
+    r = requirePrimaryForPlusOne(ctx, r, 'Export Ctrl', ["export","ear","bis","entity list","itar"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Export Ctrl: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-antitrust-remedy': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["antitrust","remedy","consent","divestiture","injunction"], 'AT Remedy')
+    r = requirePrimaryForPlusOne(ctx, r, 'AT Remedy', ["antitrust","remedy","consent","divestiture","injunction"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'AT Remedy: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-uncertainty-budget': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["uncertainty","error","confidence","interval","estimate"], 'Uncert Budg')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Uncert Budg: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-reproducibility-gate': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["reproducib","protocol","replication","verify","method"], 'Repro Gate')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Repro Gate: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-adversarial-review': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["adversarial","falsif","red team","counter","critique"], 'Red Team')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Red Team: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-metric-definition': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["metric","kpi","definition","population","dashboard"], 'Metric Def')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Metric Def: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-mech-fatigue-fracture': engineeringRule('Fatigue/Frac', ["fatigue","fracture","crack","s-n","inspection"], { highStakesDefault: true }),
+  'sme-mech-tribology': engineeringRule('Tribology', ["tribology","friction","wear","lubrication","bearing"], { highStakesDefault: false }),
+  'sme-mech-heat-transfer': withDimensionlessRegime(engineeringRule('Heat Xfer', ["heat","convection","nusselt","thermal","conduction"], { highStakesDefault: false }), 'Heat Xfer'),
+  'sme-mech-pressure-vessels': engineeringRule('Pressure V', ["pressure","vessel","asme","mawp","relief"], { highStakesDefault: true }),
+  'sme-mech-cfd-vnv': withDimensionlessRegime(engineeringRule('CFD V&V', ["cfd","validation","mesh","turbulence","reynolds"], { highStakesDefault: false }), 'CFD V&V'),
+  'sme-mech-seals-gaskets': engineeringRule('Seals', ["seal","gasket","leak","torque","compatibility"], { highStakesDefault: true }),
+  'sme-civil-seismic': engineeringRule('Seismic', ["seismic","earthquake","ductility","asce","drift"], { highStakesDefault: true }),
+  'sme-civil-bridge': engineeringRule('Bridge', ["bridge","load rating","scour","inspection","fatigue"], { highStakesDefault: true }),
+  'sme-civil-hydraulics': withDimensionlessRegime(engineeringRule('Hydraulics', ["hydraulic","flood","storm","manning","culvert"], { highStakesDefault: true }), 'Hydraulics'),
+  'sme-civil-geohazard': engineeringRule('Geohazard', ["slope","liquefaction","fos","geohazard","stability"], { highStakesDefault: true }),
+  'sme-ee-emc': engineeringRule('EMC/EMI', ["emc","emi","emissions","immunity","fcc"], { highStakesDefault: false }),
+  'sme-ee-power-electronics': engineeringRule('Power Elec', ["converter","inverter","switching","efficiency","thermal"], { highStakesDefault: true }),
+  'sme-ee-protection': engineeringRule('Protection', ["protection","relay","coordination","fault","arc flash"], { highStakesDefault: true }),
+  'sme-ee-embedded': engineeringRule('Embedded', ["embedded","firmware","watchdog","timing","rtos"], { highStakesDefault: true }),
+  'sme-ee-battery-systems': engineeringRule('Battery Sys', ["battery","bms","thermal","soc","cell"], { highStakesDefault: true }),
+  'sme-chem-mass-energy': engineeringRule('Mass/Energy', ["mass balance","energy balance","yield","closure","inventory"], { highStakesDefault: false }),
+  'sme-chem-separation': engineeringRule('Separation', ["distillation","membrane","separation","selectivity","fouling"], { highStakesDefault: false }),
+  'sme-chem-corrosion': engineeringRule('Corrosion', ["corrosion","pitting","mpy","coating","compatibility"], { highStakesDefault: true }),
+  'sme-aero-structures': engineeringRule('Aero Struct', ["airframe","loads","allowable","damage tolerance","margin"], { highStakesDefault: true }),
+  'sme-aero-gnc': engineeringRule('GNC', ["gnc","navigation","kalman","control","stability"], { highStakesDefault: true }),
+  'sme-aero-space-systems': withDimensionlessRegime(engineeringRule('Space Sys', ["orbit","link budget","spacecraft","launch","radiation"], { highStakesDefault: true }), 'Space Sys'),
+  'sme-mat-additive': engineeringRule('Additive Mfg', ["additive","anisotropy","porosity","qualification","powder"], { highStakesDefault: true }),
+  'sme-mat-welding': engineeringRule('Welding', ["weld","wps","pqr","nde","haz"], { highStakesDefault: true }),
+  'sme-mat-polymers': engineeringRule('Polymers', ["polymer","elastomer","tg","aging","compatibility"], { highStakesDefault: false }),
+  'sme-mfg-lean-sixsigma': engineeringRule('Lean/SS', ["cpk","msa","spc","yield","six sigma"], { highStakesDefault: false }),
+  'sme-energy-storage-grid': engineeringRule('Grid Storage', ["storage","battery","rte","interconnection","grid"], { highStakesDefault: false }),
+  'sme-energy-renewables': engineeringRule('Renewables', ["capacity factor","solar","wind","resource","curtailment"], { highStakesDefault: false }),
+  'sme-nuclear-safety-case': engineeringRule('Nuc Safety', ["nuclear","design basis","safety case","dose","pra"], { highStakesDefault: true }),
+  'sme-bio-imaging': engineeringRule('Med Imaging', ["imaging","mri","ct","dose","reconstruction"], { highStakesDefault: true }),
+  'sme-bio-regulatory-device': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["fda","device","510k","pma","labeling"], 'Device Reg')
+    r = requirePrimaryForPlusOne(ctx, r, 'Device Reg', ["fda","device","510k","pma","labeling"])
+    if (ctx.original === 1 && isSocialOnly(hay(ctx), ctx.material)) {
+      r = demoteToZero(r, 'Device Reg: social-only sector claim held at 0', 36)
+    }
+    return r
+  },
+  'sme-bio-human-factors': engineeringRule('Human Fact', ["human factors","usability","use error","ifu","workflow"], { highStakesDefault: true }),
+  'sme-cps-security': engineeringRule('CPS Sec', ["security","threat model","ot","ics","sbom"], { highStakesDefault: true }),
+  'sme-cps-realtime': engineeringRule('Realtime', ["realtime","wcet","deadline","latency","scheduling"], { highStakesDefault: true }),
+  'sme-cps-data-lineage': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["lineage","provenance","dataset","etl","leakage"], 'Data Lineage')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Data Lineage: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-cps-formal-methods': theoryRule('Formal Meth', ["formal","proof","model checking","specification","invariant"]),
+  'sme-cps-ml-systems': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["ml","metric","drift","evaluation","calibration"], 'ML Systems')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'ML Systems: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-math-linear-algebra': theoryRule('Lin Alg', ["matrix","conditioning","rank","svd","numerical"]),
+  'sme-math-dynamical-systems': theoryRule('Dyn Sys', ["stability","bifurcation","lyapunov","dynamical","chaos"]),
+  'sme-math-bayesian': theoryRule('Bayesian', ["bayesian","prior","posterior","mcmc","likelihood"]),
+  'sme-math-causal': theoryRule('Causal Inf', ["causal","identification","confound","dag","treatment"]),
+  'sme-math-time-series': theoryRule('Time Series', ["time series","forecast","stationarity","backtest","seasonality"]),
+  'sme-math-graph-theory': theoryRule('Graph Thry', ["graph","network","centrality","path","adjacency"]),
+  'sme-math-numerical-pde': theoryRule('Num PDE', ["pde","cfl","convergence","stability","mesh"]),
+  'sme-phys-particle': theoryRule('Particle', ["particle","significance","detector","cross section","background"]),
+  'sme-phys-cosmo': theoryRule('Cosmology', ["cosmology","cmb","hubble","survey","redshift"]),
+  'sme-phys-atomic': theoryRule('Atomic/Mol', ["spectrum","linewidth","atomic","calibration","laser"]),
+  'sme-phys-soft-matter': withDimensionlessRegime(theoryRule('Soft Matter', ["rheology","colloid","viscoelastic","deborah","soft matter"]), 'Soft Matter'),
+  'sme-phys-nonlinear': withDimensionlessRegime(theoryRule('Nonlinear', ["nonlinear","turbulence","wave","dispersion","shock"]), 'Nonlinear'),
+  'sme-applied-metrology': (ctx, base) => {
+    let r = sectorTagMatch(ctx, base, ["metrology","calibration","traceability","uncertainty","standard"], 'Metrology')
+    const text = hay(ctx)
+    if (ctx.original === 1 && !hasAny(text, ['method', 'protocol', 'definition', 'measurement', 'metric', 'test', 'replicate', 'uncertainty', 'lineage']) && isWeakMaterial(ctx.material)) {
+      r = demoteToZero(r, 'Metrology: method claim lacks operational definition/protocol', 37)
+    }
+    return r
+  },
+  'sme-applied-acoustics-env': engineeringRule('Env Acoust', ["acoustics","spl","dba","noise","measurement"], { highStakesDefault: false }),

@@ -1,0 +1,16 @@
+NEXOSxLPIN — Grok Build product
+================================
+Root: C:\NEXOSxLPIN
+Version: 1.4.1
+Owner: Grok Build (final — do not auto-return to Hermes)
+
+Launch: START.bat
+Status: docs\GROK_BUILD_OWNERSHIP.md
+Blueprint PDF: docs\NEXOSxLPIN_1.4.0_Platform_Blueprint.pdf
+Zip: releases\NEXOSxLPIN-1.4.1-*.zip
+
+Gates:
+  npm.cmd run test
+  npm.cmd run lint
+  npm.cmd run build
+  node scripts\smoke-sme-congress.mjs

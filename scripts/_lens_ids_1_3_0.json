@@ -1,0 +1,452 @@
+[
+  {
+    "id": "sme-claim-chain-of-custody",
+    "domain": "core-governance",
+    "short": "Chain Custody"
+  },
+  {
+    "id": "sme-conflict-calendar",
+    "domain": "core-governance",
+    "short": "Conflict Cal"
+  },
+  {
+    "id": "sme-attribution-hygiene",
+    "domain": "core-governance",
+    "short": "Attribution"
+  },
+  {
+    "id": "sme-redaction-gap",
+    "domain": "core-governance",
+    "short": "Redaction"
+  },
+  {
+    "id": "sme-multi-source-corroboration",
+    "domain": "core-governance",
+    "short": "Corroborate"
+  },
+  {
+    "id": "sme-harm-escalation-gate",
+    "domain": "core-governance",
+    "short": "Harm Gate"
+  },
+  {
+    "id": "sme-decision-lock-auditor",
+    "domain": "core-governance",
+    "short": "Decision Lock"
+  },
+  {
+    "id": "sme-docket-navigator",
+    "domain": "public-records",
+    "short": "Docket Nav"
+  },
+  {
+    "id": "sme-budget-line-forensics",
+    "domain": "public-records",
+    "short": "Budget Line"
+  },
+  {
+    "id": "sme-hearing-transcript",
+    "domain": "public-records",
+    "short": "Hearing TX"
+  },
+  {
+    "id": "sme-license-registry",
+    "domain": "public-records",
+    "short": "License Reg"
+  },
+  {
+    "id": "sme-property-title-chain",
+    "domain": "public-records",
+    "short": "Title Chain"
+  },
+  {
+    "id": "sme-inspection-history",
+    "domain": "public-records",
+    "short": "Inspect Hist"
+  },
+  {
+    "id": "sme-procurement-tabulation",
+    "domain": "public-records",
+    "short": "Bid Tabs"
+  },
+  {
+    "id": "sme-preemption-map",
+    "domain": "jurisdiction",
+    "short": "Preemption"
+  },
+  {
+    "id": "sme-special-district",
+    "domain": "jurisdiction",
+    "short": "Spec District"
+  },
+  {
+    "id": "sme-interlocal-agreement",
+    "domain": "jurisdiction",
+    "short": "Interlocal"
+  },
+  {
+    "id": "sme-venue-standing",
+    "domain": "jurisdiction",
+    "short": "Venue"
+  },
+  {
+    "id": "sme-tribal-federal",
+    "domain": "jurisdiction",
+    "short": "Tribal Fed"
+  },
+  {
+    "id": "sme-extraterritorial",
+    "domain": "jurisdiction",
+    "short": "Extraterr."
+  },
+  {
+    "id": "sme-delegation-doctrine",
+    "domain": "jurisdiction",
+    "short": "Delegation"
+  },
+  {
+    "id": "sme-inspector-general",
+    "domain": "oversight",
+    "short": "IG Desk"
+  },
+  {
+    "id": "sme-lobby-disclosure",
+    "domain": "oversight",
+    "short": "Lobby LD"
+  },
+  {
+    "id": "sme-campaign-finance-edge",
+    "domain": "oversight",
+    "short": "Camp Fin"
+  },
+  {
+    "id": "sme-revolving-door",
+    "domain": "oversight",
+    "short": "Rev Door"
+  },
+  {
+    "id": "sme-performance-audit",
+    "domain": "oversight",
+    "short": "Perf Audit"
+  },
+  {
+    "id": "sme-open-meetings",
+    "domain": "oversight",
+    "short": "Open Meet"
+  },
+  {
+    "id": "sme-settlement-transparency",
+    "domain": "oversight",
+    "short": "Settlement"
+  },
+  {
+    "id": "sme-telecom-spectrum",
+    "domain": "sector-regulatory",
+    "short": "Spectrum"
+  },
+  {
+    "id": "sme-food-safety-reg",
+    "domain": "sector-regulatory",
+    "short": "Food Safety"
+  },
+  {
+    "id": "sme-aviation-ops-reg",
+    "domain": "sector-regulatory",
+    "short": "Aviation Ops"
+  },
+  {
+    "id": "sme-banking-prudential",
+    "domain": "sector-regulatory",
+    "short": "Bank Super"
+  },
+  {
+    "id": "sme-labor-wage-hour",
+    "domain": "sector-regulatory",
+    "short": "Wage Hour"
+  },
+  {
+    "id": "sme-cyber-incident-reg",
+    "domain": "sector-regulatory",
+    "short": "Cyber Inc"
+  },
+  {
+    "id": "sme-export-controls-reg",
+    "domain": "sector-regulatory",
+    "short": "Export Ctrl"
+  },
+  {
+    "id": "sme-antitrust-remedy",
+    "domain": "sector-regulatory",
+    "short": "AT Remedy"
+  },
+  {
+    "id": "sme-uncertainty-budget",
+    "domain": "method-process",
+    "short": "Uncert Budg"
+  },
+  {
+    "id": "sme-reproducibility-gate",
+    "domain": "method-process",
+    "short": "Repro Gate"
+  },
+  {
+    "id": "sme-adversarial-review",
+    "domain": "method-process",
+    "short": "Red Team"
+  },
+  {
+    "id": "sme-metric-definition",
+    "domain": "method-process",
+    "short": "Metric Def"
+  },
+  {
+    "id": "sme-mech-fatigue-fracture",
+    "domain": "mechanical-engineering",
+    "short": "Fatigue/Frac"
+  },
+  {
+    "id": "sme-mech-tribology",
+    "domain": "mechanical-engineering",
+    "short": "Tribology"
+  },
+  {
+    "id": "sme-mech-heat-transfer",
+    "domain": "mechanical-engineering",
+    "short": "Heat Xfer"
+  },
+  {
+    "id": "sme-mech-pressure-vessels",
+    "domain": "mechanical-engineering",
+    "short": "Pressure V"
+  },
+  {
+    "id": "sme-mech-cfd-vnv",
+    "domain": "mechanical-engineering",
+    "short": "CFD V&V"
+  },
+  {
+    "id": "sme-mech-seals-gaskets",
+    "domain": "mechanical-engineering",
+    "short": "Seals"
+  },
+  {
+    "id": "sme-civil-seismic",
+    "domain": "civil-structural",
+    "short": "Seismic"
+  },
+  {
+    "id": "sme-civil-bridge",
+    "domain": "civil-structural",
+    "short": "Bridge"
+  },
+  {
+    "id": "sme-civil-hydraulics",
+    "domain": "civil-structural",
+    "short": "Hydraulics"
+  },
+  {
+    "id": "sme-civil-geohazard",
+    "domain": "civil-structural",
+    "short": "Geohazard"
+  },
+  {
+    "id": "sme-ee-emc",
+    "domain": "electrical-electronics",
+    "short": "EMC/EMI"
+  },
+  {
+    "id": "sme-ee-power-electronics",
+    "domain": "electrical-electronics",
+    "short": "Power Elec"
+  },
+  {
+    "id": "sme-ee-protection",
+    "domain": "electrical-electronics",
+    "short": "Protection"
+  },
+  {
+    "id": "sme-ee-embedded",
+    "domain": "electrical-electronics",
+    "short": "Embedded"
+  },
+  {
+    "id": "sme-ee-battery-systems",
+    "domain": "electrical-electronics",
+    "short": "Battery Sys"
+  },
+  {
+    "id": "sme-chem-mass-energy",
+    "domain": "chemical-process",
+    "short": "Mass/Energy"
+  },
+  {
+    "id": "sme-chem-separation",
+    "domain": "chemical-process",
+    "short": "Separation"
+  },
+  {
+    "id": "sme-chem-corrosion",
+    "domain": "chemical-process",
+    "short": "Corrosion"
+  },
+  {
+    "id": "sme-aero-structures",
+    "domain": "aerospace-defense-tech",
+    "short": "Aero Struct"
+  },
+  {
+    "id": "sme-aero-gnc",
+    "domain": "aerospace-defense-tech",
+    "short": "GNC"
+  },
+  {
+    "id": "sme-aero-space-systems",
+    "domain": "aerospace-defense-tech",
+    "short": "Space Sys"
+  },
+  {
+    "id": "sme-mat-additive",
+    "domain": "materials-manufacturing",
+    "short": "Additive Mfg"
+  },
+  {
+    "id": "sme-mat-welding",
+    "domain": "materials-manufacturing",
+    "short": "Welding"
+  },
+  {
+    "id": "sme-mat-polymers",
+    "domain": "materials-manufacturing",
+    "short": "Polymers"
+  },
+  {
+    "id": "sme-mfg-lean-sixsigma",
+    "domain": "materials-manufacturing",
+    "short": "Lean/SS"
+  },
+  {
+    "id": "sme-energy-storage-grid",
+    "domain": "energy-nuclear",
+    "short": "Grid Storage"
+  },
+  {
+    "id": "sme-energy-renewables",
+    "domain": "energy-nuclear",
+    "short": "Renewables"
+  },
+  {
+    "id": "sme-nuclear-safety-case",
+    "domain": "energy-nuclear",
+    "short": "Nuc Safety"
+  },
+  {
+    "id": "sme-bio-imaging",
+    "domain": "biomedical-systems",
+    "short": "Med Imaging"
+  },
+  {
+    "id": "sme-bio-regulatory-device",
+    "domain": "biomedical-systems",
+    "short": "Device Reg"
+  },
+  {
+    "id": "sme-bio-human-factors",
+    "domain": "biomedical-systems",
+    "short": "Human Fact"
+  },
+  {
+    "id": "sme-cps-security",
+    "domain": "computing-cyberphysical",
+    "short": "CPS Sec"
+  },
+  {
+    "id": "sme-cps-realtime",
+    "domain": "computing-cyberphysical",
+    "short": "Realtime"
+  },
+  {
+    "id": "sme-cps-data-lineage",
+    "domain": "computing-cyberphysical",
+    "short": "Data Lineage"
+  },
+  {
+    "id": "sme-cps-formal-methods",
+    "domain": "computing-cyberphysical",
+    "short": "Formal Meth"
+  },
+  {
+    "id": "sme-cps-ml-systems",
+    "domain": "computing-cyberphysical",
+    "short": "ML Systems"
+  },
+  {
+    "id": "sme-math-linear-algebra",
+    "domain": "mathematics-statistics",
+    "short": "Lin Alg"
+  },
+  {
+    "id": "sme-math-dynamical-systems",
+    "domain": "mathematics-statistics",
+    "short": "Dyn Sys"
+  },
+  {
+    "id": "sme-math-bayesian",
+    "domain": "mathematics-statistics",
+    "short": "Bayesian"
+  },
+  {
+    "id": "sme-math-causal",
+    "domain": "mathematics-statistics",
+    "short": "Causal Inf"
+  },
+  {
+    "id": "sme-math-time-series",
+    "domain": "mathematics-statistics",
+    "short": "Time Series"
+  },
+  {
+    "id": "sme-math-graph-theory",
+    "domain": "mathematics-statistics",
+    "short": "Graph Thry"
+  },
+  {
+    "id": "sme-math-numerical-pde",
+    "domain": "mathematics-statistics",
+    "short": "Num PDE"
+  },
+  {
+    "id": "sme-phys-particle",
+    "domain": "theoretical-physics",
+    "short": "Particle"
+  },
+  {
+    "id": "sme-phys-cosmo",
+    "domain": "theoretical-physics",
+    "short": "Cosmology"
+  },
+  {
+    "id": "sme-phys-atomic",
+    "domain": "theoretical-physics",
+    "short": "Atomic/Mol"
+  },
+  {
+    "id": "sme-phys-soft-matter",
+    "domain": "theoretical-physics",
+    "short": "Soft Matter"
+  },
+  {
+    "id": "sme-phys-nonlinear",
+    "domain": "theoretical-physics",
+    "short": "Nonlinear"
+  },
+  {
+    "id": "sme-applied-metrology",
+    "domain": "applied-physical-sciences",
+    "short": "Metrology"
+  },
+  {
+    "id": "sme-applied-acoustics-env",
+    "domain": "applied-physical-sciences",
+    "short": "Env Acoust"
+  }
+]

@@ -1,0 +1,281 @@
+/**
+ * NEXOSxLPIN — Claim Status Visual System (P0)
+ * Patterns aligned with NEXOSxLPIN_UI_Supercharge_Spec_v1.0.md
+ *
+ * Drop these into the existing Claims module / shared UI layer.
+ * Tokens match the Spec. Adapt import paths to the real tree.
+ */
+
+import React from "react";
+import { motion } from "framer-motion";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+// ---------- utilities ----------
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// ---------- types ----------
+export type ClaimScore = 1 | 0 | -1;
+
+export type ClaimStatus =
+  | { kind: "scored"; score: ClaimScore }
+  | { kind: "plausible" }; // honesty rule — not a fourth score
+
+export interface ClaimRowData {
+  id: string;
+  text: string;
+  status: ClaimStatus;
+  hasBoundPrimarySource?: boolean;
+  sourceLabel?: string;
+  meta?: string; // timestamp, desk, etc.
+}
+
+// ---------- status tokens (match Spec) ----------
+export const STATUS = {
+  supported: {
+    rail: "bg-emerald-500",
+    badge: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+    text: "text-slate-100",
+    pin: "#22c55e",
+  },
+  hold: {
+    rail: "bg-amber-500",
+    badge: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+    text: "text-slate-300",
+    pin: "#f59e0b",
+  },
+  disputed: {
+    rail: "bg-rose-500",
+    badge: "bg-rose-500/15 text-rose-400 border-rose-500/30",
+    text: "text-slate-400",
+    pin: "#f43f5e",
+  },
+  plausible: {
+    rail: "bg-violet-400",
+    badge: "bg-violet-500/15 text-violet-300 border-violet-500/30",
+    text: "text-slate-300",
+    pin: "#a78bfa",
+  },
+} as const;
+
+export function resolveStatusVisual(status: ClaimStatus) {
+  if (status.kind === "plausible") return STATUS.plausible;
+  if (status.score === 1) return STATUS.supported;
+  if (status.score === 0) return STATUS.hold;
+  return STATUS.disputed;
+}
+
+export function scoreLabel(status: ClaimStatus): string {
+  if (status.kind === "plausible") return "plausible";
+  if (status.score === 1) return "+1";
+  if (status.score === 0) return "0";
+  return "−1";
+}
+
+// ---------- Score Badge ----------
+export function ScoreBadge({
+  status,
+  className,
+}: {
+  status: ClaimStatus;
+  className?: string;
+}) {
+  const visual = resolveStatusVisual(status);
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center justify-center min-w-[2.25rem] h-5 px-1.5 rounded border text-[11px] font-medium tracking-tight tabular-nums",
+        visual.badge,
+        className
+      )}
+    >
+      {scoreLabel(status)}
+    </span>
+  );
+}
+
+// ---------- Left Status Rail ----------
+export function StatusRail({
+  status,
+  className,
+}: {
+  status: ClaimStatus;
+  className?: string;
+}) {
+  const visual = resolveStatusVisual(status);
+  return (
+    <div
+      className={cn("w-[4px] self-stretch rounded-full shrink-0", visual.rail, className)}
+      aria-hidden
+    />
+  );
+}
+
+// ---------- Claim Row (core pattern) ----------
+export interface ClaimRowProps {
+  claim: ClaimRowData;
+  selected?: boolean;
+  onSelect?: (id: string) => void;
+  onScoreChange?: (id: string, next: ClaimStatus) => void;
+  className?: string;
+}
+
+export function ClaimRow({
+  claim,
+  selected,
+  onSelect,
+  onScoreChange,
+  className,
+}: ClaimRowProps) {
+  const visual = resolveStatusVisual(claim.status);
+  const isPlusOneMissingSource =
+    claim.status.kind === "scored" &&
+    claim.status.score === 1 &&
+    !claim.hasBoundPrimarySource;
+
+  return (
+    <motion.div
+      layout
+      initial={false}
+      animate={{ opacity: 1 }}
+      className={cn(
+        "group flex items-stretch gap-3 px-3 py-2.5 rounded-lg border transition-colors cursor-default",
+        "bg-slate-900/40 border-slate-800/80 hover:border-slate-700/80",
+        selected && "border-cyan-500/40 bg-slate-900/70",
+        className
+      )}
+      onClick={() => onSelect?.(claim.id)}
+    >
+      {/* Status rail */}
+      <StatusRail status={claim.status} />
+
+      {/* Main content */}
+      <div className="flex-1 min-w-0 flex flex-col gap-1">
+        <div className="flex items-start gap-2">
+          <ScoreBadge status={claim.status} />
+          <p className={cn("text-[13px] leading-snug flex-1", visual.text)}>
+            {claim.text}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 text-[11px] text-slate-500">
+          {claim.meta && <span>{claim.meta}</span>}
+
+          {/* Source binding indicator */}
+          {claim.status.kind === "scored" && claim.status.score === 1 && (
+            <span
+              className={cn(
+                "inline-flex items-center gap-1",
+                claim.hasBoundPrimarySource
+                  ? "text-emerald-500/80"
+                  : "text-amber-400/90"
+              )}
+            >
+              {claim.hasBoundPrimarySource ? (
+                <>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  {claim.sourceLabel ?? "source bound"}
+                </>
+              ) : (
+                <>
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  primary source required
+                </>
+              )}
+            </span>
+          )}
+
+          {claim.status.kind === "plausible" && (
+            <span className="text-violet-300/90 font-medium">
+              plausible / unverified
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Optional quick score controls (can be removed if scoring lives elsewhere) */}
+      {onScoreChange && (
+        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <ScoreButton
+            label="+1"
+            active={claim.status.kind === "scored" && claim.status.score === 1}
+            onClick={() =>
+              onScoreChange(claim.id, { kind: "scored", score: 1 })
+            }
+          />
+          <ScoreButton
+            label="0"
+            active={claim.status.kind === "scored" && claim.status.score === 0}
+            onClick={() =>
+              onScoreChange(claim.id, { kind: "scored", score: 0 })
+            }
+          />
+          <ScoreButton
+            label="−1"
+            active={claim.status.kind === "scored" && claim.status.score === -1}
+            onClick={() =>
+              onScoreChange(claim.id, { kind: "scored", score: -1 })
+            }
+          />
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+// ---------- Score Button with micro-interaction ----------
+function ScoreButton({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <motion.button
+      type="button"
+      whileTap={{ scale: 0.92 }}
+      transition={{ duration: 0.12 }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      className={cn(
+        "h-6 min-w-[1.75rem] px-1.5 rounded text-[11px] font-medium border transition-colors",
+        active
+          ? "bg-cyan-500/20 border-cyan-500/40 text-cyan-300"
+          : "bg-slate-800/60 border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600"
+      )}
+    >
+      {label}
+    </motion.button>
+  );
+}
+
+// ---------- Map Pin color helper ----------
+/** Returns the hex color to use for a desk / map pin given its primary claim status */
+export function pinColorForStatus(status: ClaimStatus): string {
+  return resolveStatusVisual(status).pin;
+}
+
+// ---------- Example usage (remove in production) ----------
+/*
+const example: ClaimRowData = {
+  id: "c-1042",
+  text: "Primary sensor record places the vehicle at the intersection at 14:22 local.",
+  status: { kind: "scored", score: 1 },
+  hasBoundPrimarySource: true,
+  sourceLabel: "DOT camera log",
+  meta: "Desk 12 · 2m ago",
+};
+
+<ClaimRow
+  claim={example}
+  selected={false}
+  onScoreChange={(id, next) => console.log(id, next)}
+/>
+*/

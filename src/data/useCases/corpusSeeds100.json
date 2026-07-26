@@ -1,0 +1,2480 @@
+[
+  {
+    "id": "geo-01-scs-collision",
+    "topic": "geopolitical",
+    "subtopic": "maritime-asia",
+    "rank": 101,
+    "short": "SCS collision",
+    "title": "South China Sea — vessel collision claims and primary-record hygiene",
+    "where": "Spratly approaches / contested EEZ lanes",
+    "lat": 10.72,
+    "lng": 115.82,
+    "lede": "Viral clips allege deliberate ramming between a coast-guard cutter and a resupply craft in contested South China Sea waters. Multi-language accounts disagree on who initiated contact, whether water cannon preceded impact, and whether anyone was injured. Train operators to separate AIS tracks, official statements, and geolocated stills from nationalist dubbing and recycled footage.",
+    "stakes": "Mis-attributed collision narratives can escalate patrol postures, insurance premiums for commercial traffic, and domestic pressure for force-protection ROE changes.",
+    "known": [
+      "Competing coast-guard and fishing-militia narratives appear within hours of hard contact in the Spratlys.",
+      "Open AIS can place hull classes near a scene even when flags are spoofed or AIS is dark.",
+      "Primary hierarchy: maritime authority releases, wire with named officers, geolocated original video, then commentary."
+    ],
+    "open": [
+      "Exact lat/long of impact and AIS status of hulls?",
+      "Is circulating video continuous or cut from two incidents?",
+      "Any independent third-flag witness?"
+    ],
+    "claims": [
+      {
+        "plain": "Hard-contact incidents between state-linked vessels and resupply craft have occurred repeatedly in SCS patrol zones in recent years.",
+        "score": 1,
+        "why": "Multi-year open reporting pattern; specific new incident still needs primary lock."
+      },
+      {
+        "plain": "A single social video alone proves intentional ramming and legal fault under UNCLOS.",
+        "score": -1,
+        "why": "Intent and legal fault require investigation."
+      },
+      {
+        "plain": "Water-cannon use immediately before contact is established for this specific event.",
+        "score": 0,
+        "why": "Often alleged; needs continuous footage or official log."
+      },
+      {
+        "plain": "Casualty counts on messenger apps should default to 0 until named medical or SAR sources appear.",
+        "score": 1,
+        "why": "Method hygiene for conflict fog."
+      },
+      {
+        "plain": "Commercial shipping risk premia can move on credible corridor disruption claims before fault is settled.",
+        "score": 1,
+        "why": "Insurance is forward-looking; not proof of fault."
+      }
+    ],
+    "sources": [
+      {
+        "title": "IMO",
+        "url": "https://www.imo.org/",
+        "why": "Maritime safety frameworks",
+        "publisher": "IMO"
+      },
+      {
+        "title": "MarineTraffic",
+        "url": "https://www.marinetraffic.com/",
+        "why": "AIS placement starting point",
+        "publisher": "MarineTraffic"
+      },
+      {
+        "title": "UNCLOS text",
+        "url": "https://www.un.org/depts/los/convention_agreements/texts/unclos/unclos_e.pdf",
+        "why": "Treaty text",
+        "publisher": "UN"
+      },
+      {
+        "title": "USNI News",
+        "url": "https://news.usni.org/",
+        "why": "Naval open reporting",
+        "publisher": "USNI"
+      }
+    ],
+    "agency": "Maritime authority releases",
+    "agencyUrl": "https://www.imo.org/",
+    "tags": [
+      "scs",
+      "maritime",
+      "collision",
+      "ais",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-02-sahel-junta",
+    "topic": "geopolitical",
+    "subtopic": "west-africa-security",
+    "rank": 102,
+    "short": "Sahel junta",
+    "title": "Sahel security realignment — junta statements vs independent casualty claims",
+    "where": "Central Sahel corridor (multi-state)",
+    "lat": 13.51,
+    "lng": 2.11,
+    "lede": "After successive coups, Sahel juntas issue victory and partnership statements while NGOs and local reporters publish conflicting civilian-harm tallies. Separate decree text, AU/ECOWAS communiques, and named-field reporting from influencer war maps that invent unit designations.",
+    "stakes": "False victory or atrocity claims can freeze humanitarian access negotiations and misdirect diaspora fundraising.",
+    "known": [
+      "Junta media systems tightly control official combat narratives.",
+      "Independent tallies lag and use different civilian definitions.",
+      "Foreign partner presence claims need MoU or basing evidence."
+    ],
+    "open": [
+      "Which casualty methodology is cited?",
+      "Are place names consistent with road networks?",
+      "Dual-sourced continuous video?"
+    ],
+    "claims": [
+      {
+        "plain": "Multiple Sahel states experienced unconstitutional changes of government in the early-mid 2020s, altering security partnerships.",
+        "score": 1,
+        "why": "Documented political fact pattern."
+      },
+      {
+        "plain": "A single Telegram map proves control of a named district today.",
+        "score": -1,
+        "why": "Maps without methodology are narrative products."
+      },
+      {
+        "plain": "Civilian harm claims require named organization methodology and date range before +1.",
+        "score": 1,
+        "why": "Method gate for atrocity tallies."
+      },
+      {
+        "plain": "Foreign trainer presence is confirmed for every junta statement naming a partner.",
+        "score": 0,
+        "why": "Needs basing or contract primary."
+      }
+    ],
+    "sources": [
+      {
+        "title": "AU Peace & Security",
+        "url": "https://www.peaceau.org/",
+        "why": "Regional communiques",
+        "publisher": "AU"
+      },
+      {
+        "title": "UN OCHA",
+        "url": "https://www.unocha.org/",
+        "why": "Humanitarian reporting",
+        "publisher": "OCHA"
+      },
+      {
+        "title": "ACLED",
+        "url": "https://acleddata.com/",
+        "why": "Event data methods",
+        "publisher": "ACLED"
+      },
+      {
+        "title": "ECOWAS",
+        "url": "https://www.ecowas.int/",
+        "why": "Regional statements",
+        "publisher": "ECOWAS"
+      }
+    ],
+    "agency": "AU / OCHA",
+    "agencyUrl": "https://www.unocha.org/",
+    "tags": [
+      "sahel",
+      "junta",
+      "civilian-harm",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-03-red-sea-shipping",
+    "topic": "geopolitical",
+    "subtopic": "maritime-mideast",
+    "rank": 103,
+    "short": "Red Sea shipping",
+    "title": "Red Sea corridor risk — attack claims, AIS dark, and insurer notices",
+    "where": "Bab el-Mandeb / southern Red Sea",
+    "lat": 12.58,
+    "lng": 43.34,
+    "lede": "Ship attack and diversion claims move markets overnight. Force primary hierarchy: company and flag-state notices, navy incident releases, AIS gaps — not anonymous missile cams with wrong coastlines.",
+    "stakes": "False attack reports divert fleets, spike freight rates, and pressure escort coalitions.",
+    "known": [
+      "Commercial operators publish advisories when risk thresholds change.",
+      "AIS gaps have multiple causes.",
+      "Kinetic claims need time-place-hull consistency."
+    ],
+    "open": [
+      "Named hull and flag?",
+      "Which navy acknowledged?",
+      "Clip geolocated to stated basin?"
+    ],
+    "claims": [
+      {
+        "plain": "Southern Red Sea / Bab el-Mandeb has been a high-risk commercial corridor during regional conflict spikes.",
+        "score": 1,
+        "why": "Industry and government advisories converge."
+      },
+      {
+        "plain": "Every viral explosion video over water is a confirmed anti-ship missile strike on a named tanker today.",
+        "score": -1,
+        "why": "Provenance and identification required."
+      },
+      {
+        "plain": "Freight and war-risk premium moves evidence market perception, not legal attribution of a specific actor.",
+        "score": 1,
+        "why": "Separate market reaction from fault."
+      },
+      {
+        "plain": "Coalition escort presence for a given week is established by official task-force releases only.",
+        "score": 0,
+        "why": "Presence varies; cite the release."
+      }
+    ],
+    "sources": [
+      {
+        "title": "UKMTO",
+        "url": "https://www.ukmto.org/",
+        "why": "Maritime trade reporting",
+        "publisher": "UKMTO"
+      },
+      {
+        "title": "US MARAD",
+        "url": "https://www.maritime.dot.gov/",
+        "why": "Advisory channel",
+        "publisher": "MARAD"
+      },
+      {
+        "title": "IMO",
+        "url": "https://www.imo.org/",
+        "why": "Maritime security",
+        "publisher": "IMO"
+      },
+      {
+        "title": "Reuters markets",
+        "url": "https://www.reuters.com/markets/",
+        "why": "Wire routing coverage",
+        "publisher": "Reuters"
+      }
+    ],
+    "agency": "UKMTO / MARAD",
+    "agencyUrl": "https://www.ukmto.org/",
+    "tags": [
+      "red-sea",
+      "shipping",
+      "ais",
+      "war-risk",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-04-taiwan-strait",
+    "topic": "geopolitical",
+    "subtopic": "indo-pacific",
+    "rank": 104,
+    "short": "Taiwan Strait",
+    "title": "Taiwan Strait — drill notices, ADIZ tracks, and invasion-meme hygiene",
+    "where": "Taiwan Strait median approaches",
+    "lat": 24.5,
+    "lng": 119.5,
+    "lede": "PLA drill announcements and Taiwan MoD track reports create screenshot fog. Separate NOTAMs, MoD daily updates, and reputable defense open-source from D-Day-tomorrow meme calendars.",
+    "stakes": "False invasion clocks move markets, fuel hate targeting, and degrade civil-defense readiness messaging.",
+    "known": [
+      "Taiwan MoD publishes activity summaries during tension spikes.",
+      "NOTAMs and maritime danger areas are primary for exercise boxes.",
+      "Amphibious invasion logistics claims need force-structure literacy."
+    ],
+    "open": [
+      "Which NOTAM numbers apply?",
+      "Is the track screenshot from a different day?",
+      "Commercial satellite tasking notes?"
+    ],
+    "claims": [
+      {
+        "plain": "Cross-strait military activity spikes are publicly reported by Taiwan authorities during major PLA exercises.",
+        "score": 1,
+        "why": "Recurring MoD reporting pattern."
+      },
+      {
+        "plain": "A viral countdown graphic is evidence of an imminent full-scale invasion date.",
+        "score": -1,
+        "why": "Memes are not operational orders."
+      },
+      {
+        "plain": "Exercise danger areas can be cross-checked via aviation/maritime notices when published.",
+        "score": 1,
+        "why": "NOTAM method."
+      },
+      {
+        "plain": "Sortie counts on social cards match official tallies without citation.",
+        "score": 0,
+        "why": "Hold until MoD table cited."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Taiwan MND",
+        "url": "https://www.mnd.gov.tw/",
+        "why": "Official activity releases",
+        "publisher": "MND"
+      },
+      {
+        "title": "FAA (NOTAM literacy)",
+        "url": "https://www.faa.gov/",
+        "why": "Aviation notice literacy",
+        "publisher": "FAA"
+      },
+      {
+        "title": "CSIS China Power",
+        "url": "https://chinapower.csis.org/",
+        "why": "Structured open analysis",
+        "publisher": "CSIS"
+      },
+      {
+        "title": "IISS",
+        "url": "https://www.iiss.org/",
+        "why": "Defense analysis standards",
+        "publisher": "IISS"
+      }
+    ],
+    "agency": "Taiwan MoD / NOTAMs",
+    "agencyUrl": "https://www.mnd.gov.tw/",
+    "tags": [
+      "taiwan",
+      "strait",
+      "drills",
+      "adiz",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-05-arctic-dual-use",
+    "topic": "geopolitical",
+    "subtopic": "arctic-routes",
+    "rank": 105,
+    "short": "Arctic dual-use",
+    "title": "Arctic sea lanes — dual-use basing claims and commercial ice data",
+    "where": "Northern Sea Route approaches",
+    "lat": 71.2,
+    "lng": 72.5,
+    "lede": "Arctic militarization posts mix commercial ice charts, dual-use port investments, and genuine military infrastructure. Bind basing claims to ministry primary or satellite-derived analysis with stated methods.",
+    "stakes": "Overstated basing distorts alliance debates; understated basing misses dual-use logistics realities.",
+    "known": [
+      "Sea-ice extent products are scientific primary for navigability seasons.",
+      "Port dual-use is a policy judgment needing facility-level evidence.",
+      "National Arctic strategies state intent, not completed basing."
+    ],
+    "open": [
+      "Named facility and coordinates?",
+      "Civilian vs military berth evidence?",
+      "Ice-season product vintage?"
+    ],
+    "claims": [
+      {
+        "plain": "Arctic navigability windows are constrained by seasonal ice; open products track multi-year change.",
+        "score": 1,
+        "why": "NSIDC-class products."
+      },
+      {
+        "plain": "Every new Arctic port photo is a secret naval base.",
+        "score": -1,
+        "why": "Dual-use needs facility evidence."
+      },
+      {
+        "plain": "Declared national Arctic strategies should be cited when claiming strategy shifts.",
+        "score": 1,
+        "why": "Strategy documents are primary for intent."
+      },
+      {
+        "plain": "Year-round container service on the NSR is routine for all vessel classes.",
+        "score": 0,
+        "why": "Seasonal and class-dependent."
+      }
+    ],
+    "sources": [
+      {
+        "title": "NSIDC",
+        "url": "https://nsidc.org/",
+        "why": "Ice extent science",
+        "publisher": "NSIDC"
+      },
+      {
+        "title": "Arctic Council",
+        "url": "https://arctic-council.org/",
+        "why": "Governance forum",
+        "publisher": "Arctic Council"
+      },
+      {
+        "title": "IMO polar",
+        "url": "https://www.imo.org/",
+        "why": "Polar shipping rules",
+        "publisher": "IMO"
+      },
+      {
+        "title": "USGS",
+        "url": "https://www.usgs.gov/",
+        "why": "Geoscience context",
+        "publisher": "USGS"
+      }
+    ],
+    "agency": "NSIDC / Arctic Council",
+    "agencyUrl": "https://nsidc.org/",
+    "tags": [
+      "arctic",
+      "dual-use",
+      "shipping",
+      "ice",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-06-balkans-border",
+    "topic": "geopolitical",
+    "subtopic": "europe-balkans",
+    "rank": 106,
+    "short": "Balkans flashpoint",
+    "title": "Western Balkans border flashpoint — municipal decrees vs clash videos",
+    "where": "Northern Kosovo / border municipalities (training geo)",
+    "lat": 42.89,
+    "lng": 20.87,
+    "lede": "Local decree fights, license-plate rules, and roadblock videos reheat faster than diplomatic statements. Lock municipal and KFOR/EULEX statements before scoring war-restart claims.",
+    "stakes": "Inflated clash narratives trigger diaspora mobilization and mis-rank civilian risk.",
+    "known": [
+      "License-plate and municipal disputes have multi-year history.",
+      "International mission statements are primary for force posture.",
+      "Roadblock videos need continuous capture and location locks."
+    ],
+    "open": [
+      "Which decree is operative today?",
+      "Injuries confirmed by medical sources?",
+      "Is the video from this week?"
+    ],
+    "claims": [
+      {
+        "plain": "Northern border municipalities have seen recurring disputes over administrative control and symbols.",
+        "score": 1,
+        "why": "Multi-year open record."
+      },
+      {
+        "plain": "A single clash clip proves general war has restarted across the Balkans.",
+        "score": -1,
+        "why": "Scope inflation."
+      },
+      {
+        "plain": "KFOR/EULEX posture changes should be taken from mission releases.",
+        "score": 1,
+        "why": "Mission primary."
+      },
+      {
+        "plain": "Casualty figures on partisan channels match hospital logs.",
+        "score": 0,
+        "why": "Hold for medical primary."
+      }
+    ],
+    "sources": [
+      {
+        "title": "KFOR",
+        "url": "https://jfcnaples.nato.int/kfor",
+        "why": "Mission posture",
+        "publisher": "NATO KFOR"
+      },
+      {
+        "title": "EULEX",
+        "url": "https://www.eulex-kosovo.eu/",
+        "why": "Rule-of-law mission",
+        "publisher": "EULEX"
+      },
+      {
+        "title": "UNMIK",
+        "url": "https://unmik.unmissions.org/",
+        "why": "UN mission context",
+        "publisher": "UN"
+      },
+      {
+        "title": "EEAS",
+        "url": "https://www.eeas.europa.eu/",
+        "why": "EU diplomatic statements",
+        "publisher": "EEAS"
+      }
+    ],
+    "agency": "KFOR / EULEX",
+    "agencyUrl": "https://jfcnaples.nato.int/kfor",
+    "tags": [
+      "balkans",
+      "border",
+      "kfor",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-07-caucasus-corridor",
+    "topic": "geopolitical",
+    "subtopic": "caucasus",
+    "rank": 107,
+    "short": "Caucasus corridor",
+    "title": "South Caucasus corridor deals — treaty text vs victory broadcasts",
+    "where": "South Caucasus transit corridors",
+    "lat": 40.18,
+    "lng": 44.51,
+    "lede": "Corridor access deals are announced with maximalist language. Enforce treaty/MOU text over parade rhetoric; check whether open corridor means customs regime, peacekeeping, or road repair.",
+    "stakes": "Misread corridor status misprices logistics bets and inflames displacement fears.",
+    "known": [
+      "Ceasefire and delimitation texts are primary for territorial claims.",
+      "Road opening can mean temporary humanitarian access only.",
+      "Third-party monitoring language matters for enforcement claims."
+    ],
+    "open": [
+      "Signed vs initialed instrument?",
+      "Customs sovereignty terms?",
+      "Monitoring mechanism named?"
+    ],
+    "claims": [
+      {
+        "plain": "Corridor and transit arrangements are defined by specific instruments, not slogans.",
+        "score": 1,
+        "why": "Legal-text method gate."
+      },
+      {
+        "plain": "A parade speech rewrites an international boundary.",
+        "score": -1,
+        "why": "Speech is not a treaty."
+      },
+      {
+        "plain": "Humanitarian access windows may be time-limited even when roads are physically open.",
+        "score": 1,
+        "why": "Access vs sovereignty."
+      },
+      {
+        "plain": "All displaced persons have returned under the latest announcement.",
+        "score": 0,
+        "why": "Needs UNHCR-class data."
+      }
+    ],
+    "sources": [
+      {
+        "title": "UN Peacemaker",
+        "url": "https://peacemaker.un.org/",
+        "why": "Agreement patterns",
+        "publisher": "UN"
+      },
+      {
+        "title": "OSCE",
+        "url": "https://www.osce.org/",
+        "why": "Regional security forum",
+        "publisher": "OSCE"
+      },
+      {
+        "title": "UNHCR",
+        "url": "https://www.unhcr.org/",
+        "why": "Displacement data",
+        "publisher": "UNHCR"
+      },
+      {
+        "title": "World Bank",
+        "url": "https://www.worldbank.org/",
+        "why": "Corridor economics",
+        "publisher": "World Bank"
+      }
+    ],
+    "agency": "OSCE / UNHCR",
+    "agencyUrl": "https://www.osce.org/",
+    "tags": [
+      "caucasus",
+      "corridor",
+      "treaty",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-08-dprk-launch",
+    "topic": "geopolitical",
+    "subtopic": "northeast-asia",
+    "rank": 108,
+    "short": "DPRK launch",
+    "title": "Korean peninsula — launch notices, debris claims, and early-warning hygiene",
+    "where": "Sea of Japan / East Sea ranges",
+    "lat": 39.0,
+    "lng": 128.0,
+    "lede": "Missile claims arrive as alerts, ministry posts, and crater photos of uncertain provenance. Prioritize Japanese, ROK, and US Indo-Pacific releases before scoring range, warhead, or failure narratives.",
+    "stakes": "False warhead claims panic publics; missed real launches undermine warning literacy.",
+    "known": [
+      "ROK JCS and Japan MoD often issue rapid launch notices.",
+      "Apogee/range numbers on social cards invent precision.",
+      "Debris photos need geolocation and time-of-day checks."
+    ],
+    "open": [
+      "Which ministry first acknowledged?",
+      "Trajectory parameters cited from where?",
+      "Debris photos original?"
+    ],
+    "claims": [
+      {
+        "plain": "ROK and Japanese authorities publicly report many DPRK projectile launches in near-real time.",
+        "score": 1,
+        "why": "Recurring official notice pattern."
+      },
+      {
+        "plain": "A social graphic with exact MIRV count is authoritative without ministry sourcing.",
+        "score": -1,
+        "why": "Invented precision."
+      },
+      {
+        "plain": "Civil alert systems firing is evidence of official risk communication, not of city impact.",
+        "score": 1,
+        "why": "Separate alert from impact."
+      },
+      {
+        "plain": "Failure vs success is settled within minutes on messenger channels.",
+        "score": 0,
+        "why": "Needs technical assessment primary."
+      }
+    ],
+    "sources": [
+      {
+        "title": "ROK MND",
+        "url": "https://www.mnd.go.kr/",
+        "why": "Launch notices",
+        "publisher": "ROK MND"
+      },
+      {
+        "title": "Japan MoD",
+        "url": "https://www.mod.go.jp/",
+        "why": "Japan official releases",
+        "publisher": "Japan MoD"
+      },
+      {
+        "title": "US INDOPACOM",
+        "url": "https://www.pacom.mil/",
+        "why": "US theater statements",
+        "publisher": "INDOPACOM"
+      },
+      {
+        "title": "UN Security Council",
+        "url": "https://www.un.org/securitycouncil/",
+        "why": "Resolutions context",
+        "publisher": "UNSC"
+      }
+    ],
+    "agency": "ROK JCS / Japan MoD",
+    "agencyUrl": "https://www.mod.go.jp/",
+    "tags": [
+      "dprk",
+      "missile",
+      "early-warning",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-09-gl-minerals",
+    "topic": "geopolitical",
+    "subtopic": "great-lakes-africa",
+    "rank": 109,
+    "short": "Conflict minerals",
+    "title": "Great Lakes conflict minerals — supply-chain claims vs mine-site verification",
+    "where": "Eastern DRC mineral corridors (training geo)",
+    "lat": -1.68,
+    "lng": 29.22,
+    "lede": "Armed-group tax and blood mineral claims move ESG and sanctions debates. Require mine-to-export chain evidence, OECD due-diligence language, and named smelter audits — not map aesthetics.",
+    "stakes": "False linkage can destroy legitimate artisanal livelihoods; missed linkage can fund armed actors.",
+    "known": [
+      "OECD due-diligence guidance is the method spine.",
+      "Tagging schemes are partial, not perfect.",
+      "Armed control of roads can matter as much as pit ownership."
+    ],
+    "open": [
+      "Which 3TG mineral and site?",
+      "Audit date and auditor?",
+      "Transport route control evidence?"
+    ],
+    "claims": [
+      {
+        "plain": "Eastern DRC mineral supply chains have documented conflict-finance risks requiring enhanced due diligence.",
+        "score": 1,
+        "why": "UN Group of Experts / OECD framing."
+      },
+      {
+        "plain": "A single phone brand is uniquely guilty based on one undated pit photo.",
+        "score": -1,
+        "why": "Chain-of-custody missing."
+      },
+      {
+        "plain": "Smelter audit status is a relevant control point for refiners.",
+        "score": 1,
+        "why": "RMAP-class audits."
+      },
+      {
+        "plain": "All artisanal production is illegally taxed this month in every territory.",
+        "score": 0,
+        "why": "Territory-time specific evidence required."
+      }
+    ],
+    "sources": [
+      {
+        "title": "OECD minerals",
+        "url": "https://www.oecd.org/corporate/mne/mining.htm",
+        "why": "Due-diligence standard",
+        "publisher": "OECD"
+      },
+      {
+        "title": "UN GoE DRC",
+        "url": "https://www.un.org/securitycouncil/sanctions/1533/panel-experts",
+        "why": "UN investigative reports",
+        "publisher": "UN"
+      },
+      {
+        "title": "RMI",
+        "url": "https://www.responsiblemineralsinitiative.org/",
+        "why": "Smelter audit programs",
+        "publisher": "RMI"
+      },
+      {
+        "title": "IPIS",
+        "url": "https://ipisresearch.be/",
+        "why": "Mine mapping research",
+        "publisher": "IPIS"
+      }
+    ],
+    "agency": "OECD / UN GoE",
+    "agencyUrl": "https://www.oecd.org/corporate/mne/mining.htm",
+    "tags": [
+      "minerals",
+      "drc",
+      "supply-chain",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "geo-10-caribbean-intercept",
+    "topic": "geopolitical",
+    "subtopic": "americas-migration",
+    "rank": 110,
+    "short": "Caribbean intercept",
+    "title": "Caribbean maritime migration — intercept claims, capacity, and due-process flags",
+    "where": "Windward Passage / Mona Passage corridors",
+    "lat": 19.8,
+    "lng": -73.9,
+    "lede": "Intercept videos and mass expulsion claims outrun official Coast Guard and migration-agency stats. Separate operational releases, asylum-process rules, and hospital reports from influencer boat counts.",
+    "stakes": "Inflated numbers harden policy; suppressed numbers hide capacity crises and rights violations.",
+    "known": [
+      "Coast guards publish interdiction statistics with definitions.",
+      "Individual boat videos do not equal monthly totals.",
+      "Due-process claims need legal instrument and case-level primary."
+    ],
+    "open": [
+      "Which agency statistical table?",
+      "Medical outcomes primary?",
+      "Legal status of persons aboard?"
+    ],
+    "claims": [
+      {
+        "plain": "Caribbean maritime interdictions are regularly reported in official statistical releases.",
+        "score": 1,
+        "why": "Recurring official stats pattern."
+      },
+      {
+        "plain": "One viral boat video proves a record-breaking monthly total.",
+        "score": -1,
+        "why": "Anecdote is not aggregate."
+      },
+      {
+        "plain": "Asylum and protection claims require legal-process primary, not comment-section consensus.",
+        "score": 1,
+        "why": "Legal method gate."
+      },
+      {
+        "plain": "All intercepted persons were economic migrants with no protection needs.",
+        "score": 0,
+        "why": "Status is individualized."
+      }
+    ],
+    "sources": [
+      {
+        "title": "US Coast Guard newsroom",
+        "url": "https://www.news.uscg.mil/",
+        "why": "Operational releases",
+        "publisher": "USCG"
+      },
+      {
+        "title": "IOM",
+        "url": "https://www.iom.int/",
+        "why": "Migration data methods",
+        "publisher": "IOM"
+      },
+      {
+        "title": "UNHCR",
+        "url": "https://www.unhcr.org/",
+        "why": "Protection framework",
+        "publisher": "UNHCR"
+      },
+      {
+        "title": "DHS",
+        "url": "https://www.dhs.gov/",
+        "why": "US aggregate stats channels",
+        "publisher": "DHS"
+      }
+    ],
+    "agency": "USCG / IOM",
+    "agencyUrl": "https://www.news.uscg.mil/",
+    "tags": [
+      "caribbean",
+      "migration",
+      "intercept",
+      "geopolitical"
+    ]
+  },
+  {
+    "id": "top-01-grid-cascade",
+    "topic": "infrastructure",
+    "subtopic": "electric-grid",
+    "rank": 111,
+    "short": "Grid cascade",
+    "title": "Regional grid disturbance — operator reports vs blackout memes",
+    "where": "Eastern Interconnection (training)",
+    "lat": 39.0,
+    "lng": -77.5,
+    "lede": "A multi-state voltage event sparks blackout maps and cyber-attack claims within minutes. Force utility and reliability-coordinator primaries before scoring cause.",
+    "stakes": "False cyber attribution triggers overreaction; missed physical faults delay mutual aid.",
+    "known": [
+      "Balancing authorities publish disturbance reports.",
+      "Social outage maps invent polygons.",
+      "Cyber cause needs ICS evidence."
+    ],
+    "open": [
+      "Which RC acknowledged?",
+      "Load lost MW band?",
+      "Physical vs cyber indicators?"
+    ],
+    "claims": [
+      {
+        "plain": "Bulk-power disturbances are documented through reliability reporting when thresholds are met.",
+        "score": 1,
+        "why": "NERC/EIA-class patterns."
+      },
+      {
+        "plain": "A dark city TikTok proves nation-state cyber sabotage.",
+        "score": -1,
+        "why": "No ICS primary."
+      },
+      {
+        "plain": "Mutual-aid crew movements can fit weather-driven faults without proving root cause.",
+        "score": 0,
+        "why": "Corroborating not conclusive."
+      }
+    ],
+    "sources": [
+      {
+        "title": "EIA",
+        "url": "https://www.eia.gov/",
+        "why": "Energy statistics",
+        "publisher": "EIA"
+      },
+      {
+        "title": "NERC",
+        "url": "https://www.nerc.com/",
+        "why": "Reliability standards",
+        "publisher": "NERC"
+      },
+      {
+        "title": "CISA ICS",
+        "url": "https://www.cisa.gov/",
+        "why": "ICS advisories",
+        "publisher": "CISA"
+      },
+      {
+        "title": "FERC",
+        "url": "https://www.ferc.gov/",
+        "why": "Regulatory context",
+        "publisher": "FERC"
+      }
+    ],
+    "agency": "NERC/EIA",
+    "agencyUrl": "https://www.eia.gov/",
+    "tags": [
+      "grid",
+      "outage",
+      "nerc"
+    ]
+  },
+  {
+    "id": "top-02-bridge-closure",
+    "topic": "infrastructure",
+    "subtopic": "transport-infra",
+    "rank": 112,
+    "short": "Bridge closure",
+    "title": "Major bridge emergency closure — inspection orders vs collapse rumors",
+    "where": "Interstate river crossing (training)",
+    "lat": 38.63,
+    "lng": -90.2,
+    "lede": "Emergency bridge closure after inspection races ahead of structural detail. Separate DOT orders from influencer collapse physics.",
+    "stakes": "Panic diversions overload detours; delayed closures risk lives.",
+    "known": [
+      "Closure orders are primary.",
+      "Fracture-critical language is technical.",
+      "Collapse rumors recycle other bridges."
+    ],
+    "open": [
+      "Inspection report date?",
+      "Official detour?",
+      "Cracking photos geolocated?"
+    ],
+    "claims": [
+      {
+        "plain": "Emergency closure authority rests on the asset owner/DOT order text.",
+        "score": 1,
+        "why": "Order is primary."
+      },
+      {
+        "plain": "A photo of rust alone proves immediate collapse tonight.",
+        "score": -1,
+        "why": "Needs engineer of record."
+      },
+      {
+        "plain": "Detour travel-time claims should cite DOT or probe data.",
+        "score": 0,
+        "why": "Hold for measurement."
+      }
+    ],
+    "sources": [
+      {
+        "title": "FHWA",
+        "url": "https://www.fhwa.dot.gov/",
+        "why": "Bridge programs",
+        "publisher": "FHWA"
+      },
+      {
+        "title": "NTSB",
+        "url": "https://www.ntsb.gov/",
+        "why": "Accident investigations",
+        "publisher": "NTSB"
+      },
+      {
+        "title": "State DOT patterns",
+        "url": "https://www.transportation.gov/",
+        "why": "Owner orders",
+        "publisher": "USDOT"
+      },
+      {
+        "title": "USGS water",
+        "url": "https://waterdata.usgs.gov/",
+        "why": "River stage context",
+        "publisher": "USGS"
+      }
+    ],
+    "agency": "State DOT/FHWA",
+    "agencyUrl": "https://www.fhwa.dot.gov/",
+    "tags": [
+      "bridge",
+      "inspection",
+      "dot"
+    ]
+  },
+  {
+    "id": "top-03-port-congestion",
+    "topic": "infrastructure",
+    "subtopic": "ports-logistics",
+    "rank": 113,
+    "short": "Port congestion",
+    "title": "Container port congestion — AIS dwell vs supply-chain collapse rhetoric",
+    "where": "Major US container complex (training)",
+    "lat": 33.74,
+    "lng": -118.27,
+    "lede": "Anchorage counts and dwell charts are real metrics often misused as civilizational collapse proof.",
+    "stakes": "Misread congestion distorts inventory policy and labor narratives.",
+    "known": [
+      "Ports publish monthly stats.",
+      "AIS anchorage counts need definition.",
+      "Labor actions have separate notices."
+    ],
+    "open": [
+      "Which terminal?",
+      "Import vs export dwell?",
+      "Weather vs labor vs chassis?"
+    ],
+    "claims": [
+      {
+        "plain": "Port authorities publish throughput and dwell statistics as operational evidence.",
+        "score": 1,
+        "why": "Port statistics primary."
+      },
+      {
+        "plain": "Anchorage photos prove permanent national supply-chain failure.",
+        "score": -1,
+        "why": "Scope inflation."
+      },
+      {
+        "plain": "Chassis shortages can raise dwell without a single root cause.",
+        "score": 0,
+        "why": "Multi-factor."
+      }
+    ],
+    "sources": [
+      {
+        "title": "MARAD",
+        "url": "https://www.maritime.dot.gov/",
+        "why": "Maritime admin",
+        "publisher": "MARAD"
+      },
+      {
+        "title": "BTS",
+        "url": "https://www.bts.gov/",
+        "why": "Transport statistics",
+        "publisher": "BTS"
+      },
+      {
+        "title": "FMC",
+        "url": "https://www.fmc.gov/",
+        "why": "Ocean shipping regulation",
+        "publisher": "FMC"
+      },
+      {
+        "title": "Port authority portals",
+        "url": "https://www.portoflosangeles.org/",
+        "why": "Example port stats",
+        "publisher": "Ports"
+      }
+    ],
+    "agency": "MARAD/Port authority",
+    "agencyUrl": "https://www.maritime.dot.gov/",
+    "tags": [
+      "port",
+      "congestion",
+      "ais"
+    ]
+  },
+  {
+    "id": "top-04-rail-hazmat",
+    "topic": "infrastructure",
+    "subtopic": "rail-safety",
+    "rank": 114,
+    "short": "Rail hazmat",
+    "title": "Rail hazmat derailment — NTSB/PHMSA vs plume apps",
+    "where": "Midwest mainline (training)",
+    "lat": 40.44,
+    "lng": -80.0,
+    "lede": "Derailment videos spawn chemical plume claims. Prioritize NTSB prelim, PHMSA commodity data, and local EMA orders.",
+    "stakes": "Wrong chemical ID drives wrong shelter-in-place behavior.",
+    "known": [
+      "Consist and placard evidence matters.",
+      "Evacuation orders are primary.",
+      "Plume apps are models not measurements."
+    ],
+    "open": [
+      "UN number confirmed?",
+      "EMA order text?",
+      "Air monitoring data?"
+    ],
+    "claims": [
+      {
+        "plain": "NTSB preliminary notices are primary for early accident framing.",
+        "score": 1,
+        "why": "NTSB primary."
+      },
+      {
+        "plain": "A color-of-smoke guess identifies the exact chemical with certainty.",
+        "score": -1,
+        "why": "Not analytical chemistry."
+      },
+      {
+        "plain": "Shelter-in-place orders should be followed from EMA channels.",
+        "score": 1,
+        "why": "Public safety primary."
+      }
+    ],
+    "sources": [
+      {
+        "title": "NTSB",
+        "url": "https://www.ntsb.gov/",
+        "why": "Accident primary",
+        "publisher": "NTSB"
+      },
+      {
+        "title": "PHMSA",
+        "url": "https://www.phmsa.dot.gov/",
+        "why": "Hazmat regulation",
+        "publisher": "PHMSA"
+      },
+      {
+        "title": "EPA air",
+        "url": "https://www.epa.gov/",
+        "why": "Air monitoring context",
+        "publisher": "EPA"
+      },
+      {
+        "title": "FEMA",
+        "url": "https://www.fema.gov/",
+        "why": "Emergency management",
+        "publisher": "FEMA"
+      }
+    ],
+    "agency": "NTSB/PHMSA",
+    "agencyUrl": "https://www.ntsb.gov/",
+    "tags": [
+      "rail",
+      "hazmat",
+      "ntsb"
+    ]
+  },
+  {
+    "id": "top-05-h5n1-dairy",
+    "topic": "public-health",
+    "subtopic": "zoonosis",
+    "rank": 115,
+    "short": "H5N1 dairy",
+    "title": "H5N1 in dairy cattle — USDA/CDC updates vs farm rumor mills",
+    "where": "US dairy belt (training)",
+    "lat": 42.0,
+    "lng": -93.6,
+    "lede": "Animal health detections and sporadic human cases generate pasteurization myths. Bind claims to USDA APHIS and CDC updates.",
+    "stakes": "False food-safety panic vs under-prepared occupational risk.",
+    "known": [
+      "Pasteurization science is settled for milk safety claims.",
+      "Farm worker PPE guidance is occupational primary.",
+      "Sequence claims need lab primary."
+    ],
+    "open": [
+      "State detection table?",
+      "Human case confirmation?",
+      "Raw milk exposure pathway?"
+    ],
+    "claims": [
+      {
+        "plain": "USDA/CDC situation updates are primary for detection counts when specifically cited.",
+        "score": 1,
+        "why": "Agency primary."
+      },
+      {
+        "plain": "Grocery milk is unsafe nationwide because of a single herd detection.",
+        "score": -1,
+        "why": "Pasteurization and overgeneralization."
+      },
+      {
+        "plain": "Occupational exposure risk for dairy workers is distinct from retail food risk.",
+        "score": 1,
+        "why": "Pathway separation."
+      }
+    ],
+    "sources": [
+      {
+        "title": "CDC",
+        "url": "https://www.cdc.gov/",
+        "why": "Human health updates",
+        "publisher": "CDC"
+      },
+      {
+        "title": "USDA APHIS",
+        "url": "https://www.aphis.usda.gov/",
+        "why": "Animal health",
+        "publisher": "USDA"
+      },
+      {
+        "title": "FDA food",
+        "url": "https://www.fda.gov/food",
+        "why": "Food safety",
+        "publisher": "FDA"
+      },
+      {
+        "title": "WHO",
+        "url": "https://www.who.int/",
+        "why": "International health context",
+        "publisher": "WHO"
+      }
+    ],
+    "agency": "USDA/CDC",
+    "agencyUrl": "https://www.cdc.gov/",
+    "tags": [
+      "h5n1",
+      "dairy",
+      "zoonosis"
+    ]
+  },
+  {
+    "id": "top-06-hospital-cyber",
+    "topic": "public-health",
+    "subtopic": "health-cyber",
+    "rank": 116,
+    "short": "Hospital ransomware",
+    "title": "Hospital ransomware diversion — HHS notices vs ER chaos clips",
+    "where": "Regional health system (training)",
+    "lat": 41.88,
+    "lng": -87.63,
+    "lede": "Diversion status and downtime procedures are operational facts often replaced by hallway panic videos of unknown hospitals.",
+    "stakes": "Wrong diversion claims misroute ambulances; denialism delays mutual aid IT.",
+    "known": [
+      "Hospital can declare diversion.",
+      "HHS HC3 tracks health-sector cyber threats.",
+      "Clips need facility ID."
+    ],
+    "open": [
+      "Named hospital?",
+      "Diversion board?",
+      "Ransom note authenticity?"
+    ],
+    "claims": [
+      {
+        "plain": "Diversion status is an operational declaration by the facility/EMS system.",
+        "score": 1,
+        "why": "Operational primary."
+      },
+      {
+        "plain": "A hallway video from an unknown hospital proves national hospital cyber collapse.",
+        "score": -1,
+        "why": "Identification missing."
+      },
+      {
+        "plain": "Downtime paper procedures can maintain emergency care at reduced efficiency.",
+        "score": 0,
+        "why": "Context-specific."
+      }
+    ],
+    "sources": [
+      {
+        "title": "HHS",
+        "url": "https://www.hhs.gov/",
+        "why": "Health sector",
+        "publisher": "HHS"
+      },
+      {
+        "title": "CISA",
+        "url": "https://www.cisa.gov/",
+        "why": "Cyber advisories",
+        "publisher": "CISA"
+      },
+      {
+        "title": "HC3 patterns",
+        "url": "https://www.hhs.gov/about/agencies/asa/ocr/index.html",
+        "why": "Health cyber context",
+        "publisher": "HHS"
+      },
+      {
+        "title": "AHA",
+        "url": "https://www.aha.org/",
+        "why": "Hospital association context",
+        "publisher": "AHA"
+      }
+    ],
+    "agency": "HHS/CISA",
+    "agencyUrl": "https://www.hhs.gov/",
+    "tags": [
+      "ransomware",
+      "hospital",
+      "hc3"
+    ]
+  },
+  {
+    "id": "top-07-drug-shortage",
+    "topic": "public-health",
+    "subtopic": "pharma-supply",
+    "rank": 117,
+    "short": "Drug shortage",
+    "title": "Critical drug shortage — FDA list vs compounding rumors",
+    "where": "US national (training)",
+    "lat": 39.0,
+    "lng": -77.0,
+    "lede": "Shortage lists are primary; forever-shortage memes and unsafe compounding advice are not.",
+    "stakes": "Patients ration meds; unsafe workarounds harm.",
+    "known": [
+      "FDA shortage database is primary.",
+      "Reason codes matter.",
+      "Compounding has legal limits."
+    ],
+    "open": [
+      "NDC-level status?",
+      "Estimated recovery?",
+      "Therapeutic alternative guidance?"
+    ],
+    "claims": [
+      {
+        "plain": "FDA drug shortage listings are primary for US shortage status of listed products.",
+        "score": 1,
+        "why": "FDA primary."
+      },
+      {
+        "plain": "Social advice to import unlabeled product is medically and legally sound.",
+        "score": -1,
+        "why": "Unsafe and often unlawful."
+      },
+      {
+        "plain": "Manufacturer discontinuation notices explain some shortages.",
+        "score": 1,
+        "why": "When cited."
+      }
+    ],
+    "sources": [
+      {
+        "title": "FDA shortages",
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-shortages",
+        "why": "Shortage database",
+        "publisher": "FDA"
+      },
+      {
+        "title": "ASHP",
+        "url": "https://www.ashp.org/",
+        "why": "Pharmacy shortage resources",
+        "publisher": "ASHP"
+      },
+      {
+        "title": "CDC",
+        "url": "https://www.cdc.gov/",
+        "why": "Public health context",
+        "publisher": "CDC"
+      },
+      {
+        "title": "CMS",
+        "url": "https://www.cms.gov/",
+        "why": "Coverage context",
+        "publisher": "CMS"
+      }
+    ],
+    "agency": "FDA",
+    "agencyUrl": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-shortages",
+    "tags": [
+      "shortage",
+      "fda",
+      "pharmacy"
+    ]
+  },
+  {
+    "id": "top-08-municipal-ransomware",
+    "topic": "cyber-security",
+    "subtopic": "local-gov-cyber",
+    "rank": 118,
+    "short": "City ransomware",
+    "title": "Municipal ransomware — payment claims and public-record outages",
+    "where": "Mid-size US city (training)",
+    "lat": 39.1,
+    "lng": -84.5,
+    "lede": "City services offline claims need CIO/incident notices; Bitcoin paid rumors need appropriation or disclosure primary.",
+    "stakes": "Rumor can move bond chatter; silence can hide resident service gaps.",
+    "known": [
+      "MS-ISAC/CISA advisories are sector primary.",
+      "Payment claims are high-bar.",
+      "911 impacts need EMA confirmation."
+    ],
+    "open": [
+      "Which systems?",
+      "Ransom demand primary?",
+      "FOIA status of incident report?"
+    ],
+    "claims": [
+      {
+        "plain": "Municipal incident notices are primary for service outage scope.",
+        "score": 1,
+        "why": "City primary."
+      },
+      {
+        "plain": "Anonymous leak site PDF proves payment completed.",
+        "score": -1,
+        "why": "Unverified extortion channel."
+      },
+      {
+        "plain": "911 impacts require public-safety confirmation, not app downtime alone.",
+        "score": 0,
+        "why": "Corroborate."
+      }
+    ],
+    "sources": [
+      {
+        "title": "CISA",
+        "url": "https://www.cisa.gov/",
+        "why": "Cyber advisories",
+        "publisher": "CISA"
+      },
+      {
+        "title": "MS-ISAC",
+        "url": "https://www.cisecurity.org/ms-isac",
+        "why": "State local cyber",
+        "publisher": "CIS"
+      },
+      {
+        "title": "FBI IC3",
+        "url": "https://www.ic3.gov/",
+        "why": "Cyber crime reporting",
+        "publisher": "FBI"
+      },
+      {
+        "title": "NACCHO",
+        "url": "https://www.naccho.org/",
+        "why": "Local public health IT context",
+        "publisher": "NACCHO"
+      }
+    ],
+    "agency": "CISA/MS-ISAC",
+    "agencyUrl": "https://www.cisa.gov/",
+    "tags": [
+      "ransomware",
+      "municipal",
+      "cisa"
+    ]
+  },
+  {
+    "id": "top-09-telecom-outage",
+    "topic": "cyber-security",
+    "subtopic": "telecom",
+    "rank": 119,
+    "short": "Telecom outage",
+    "title": "Nationwide telecom outage claims — FCC reporting vs map screenshots",
+    "where": "US national (training)",
+    "lat": 38.9,
+    "lng": -77.0,
+    "lede": "Carrier outage maps and complaint spikes are not interchangeable with FCC outage thresholds.",
+    "stakes": "Emergency calling failures are high-stakes; exaggeration erodes warning trust.",
+    "known": [
+      "Carriers issue status pages.",
+      "FCC has outage reporting rules.",
+      "Third-party apps measure complaint volume."
+    ],
+    "open": [
+      "911 impact confirmed?",
+      "Which MSA?",
+      "Maintenance window?"
+    ],
+    "claims": [
+      {
+        "plain": "Carrier status pages are primary for acknowledged incidents.",
+        "score": 1,
+        "why": "Carrier primary."
+      },
+      {
+        "plain": "Complaint-volume charts equal network failure percentage.",
+        "score": -1,
+        "why": "Different metric."
+      },
+      {
+        "plain": "911 special procedures may be invoked during major outages.",
+        "score": 1,
+        "why": "When PSAPs confirm."
+      }
+    ],
+    "sources": [
+      {
+        "title": "FCC",
+        "url": "https://www.fcc.gov/",
+        "why": "Outage and 911 rules",
+        "publisher": "FCC"
+      },
+      {
+        "title": "CISA",
+        "url": "https://www.cisa.gov/",
+        "why": "Critical infrastructure",
+        "publisher": "CISA"
+      },
+      {
+        "title": "CTIA",
+        "url": "https://www.ctia.org/",
+        "why": "Industry context",
+        "publisher": "CTIA"
+      },
+      {
+        "title": "NENA",
+        "url": "https://www.nena.org/",
+        "why": "911 standards context",
+        "publisher": "NENA"
+      }
+    ],
+    "agency": "FCC",
+    "agencyUrl": "https://www.fcc.gov/",
+    "tags": [
+      "telecom",
+      "outage",
+      "fcc"
+    ]
+  },
+  {
+    "id": "top-10-deepfake-official",
+    "topic": "cyber-security",
+    "subtopic": "synthetic-media",
+    "rank": 120,
+    "short": "Deepfake official",
+    "title": "Synthetic official video — platform labels vs authentication",
+    "where": "Global digital (training)",
+    "lat": 37.4,
+    "lng": -122.1,
+    "lede": "A viral minister announces clip lacks chain-of-custody. Use reverse search, original channel, and forensic notes — not vibes.",
+    "stakes": "Synthetic orders can move markets and crowds.",
+    "known": [
+      "Official channels are authentication hubs.",
+      "Labels help but lag.",
+      "AV artifacts are hints not proof alone."
+    ],
+    "open": [
+      "Original upload account?",
+      "Matching official transcript?",
+      "Forensic report?"
+    ],
+    "claims": [
+      {
+        "plain": "Authentication starts at the official channel and contemporaneous transcript.",
+        "score": 1,
+        "why": "Auth method."
+      },
+      {
+        "plain": "Any facial artifact proves state-sponsored deepfake.",
+        "score": -1,
+        "why": "Artifacts have many causes."
+      },
+      {
+        "plain": "Platform labels are secondary risk signals, not forensic conclusions.",
+        "score": 0,
+        "why": "Useful but incomplete."
+      }
+    ],
+    "sources": [
+      {
+        "title": "CISA",
+        "url": "https://www.cisa.gov/",
+        "why": "Synthetic media guidance",
+        "publisher": "CISA"
+      },
+      {
+        "title": "NIST",
+        "url": "https://www.nist.gov/",
+        "why": "Measurement science",
+        "publisher": "NIST"
+      },
+      {
+        "title": "FTC",
+        "url": "https://www.ftc.gov/",
+        "why": "Consumer deception",
+        "publisher": "FTC"
+      },
+      {
+        "title": "First Draft archives patterns",
+        "url": "https://firstdraftnews.org/",
+        "why": "Verification methods heritage",
+        "publisher": "First Draft"
+      }
+    ],
+    "agency": "CISA",
+    "agencyUrl": "https://www.cisa.gov/",
+    "tags": [
+      "deepfake",
+      "synthetic",
+      "auth"
+    ]
+  },
+  {
+    "id": "top-11-heat-dome",
+    "topic": "climate-extreme",
+    "subtopic": "extreme-heat",
+    "rank": 121,
+    "short": "Heat dome",
+    "title": "Extreme heat emergency — NWS products vs mortality guess posts",
+    "where": "US South/Southwest (training)",
+    "lat": 33.4,
+    "lng": -112.0,
+    "lede": "Heat advisories are primary for risk communication; death tolls need vital-statistics methods.",
+    "stakes": "Under-warning kills; fake tolls polarize aid.",
+    "known": [
+      "NWS issues heat products.",
+      "Excess mortality is statistical.",
+      "Cooling-center lists are local primary."
+    ],
+    "open": [
+      "Which WFO product?",
+      "ER surge confirmed?",
+      "Power load shedding?"
+    ],
+    "claims": [
+      {
+        "plain": "NWS heat products are primary for meteorological risk messaging.",
+        "score": 1,
+        "why": "NWS primary."
+      },
+      {
+        "plain": "A social death count without vital records is authoritative.",
+        "score": -1,
+        "why": "No methodology."
+      },
+      {
+        "plain": "Cooling centers listed by city/utility are mitigations to verify.",
+        "score": 1,
+        "why": "When officially listed."
+      }
+    ],
+    "sources": [
+      {
+        "title": "NWS",
+        "url": "https://www.weather.gov/",
+        "why": "Heat products",
+        "publisher": "NWS"
+      },
+      {
+        "title": "CDC heat",
+        "url": "https://www.cdc.gov/disasters/extremeheat/",
+        "why": "Health guidance",
+        "publisher": "CDC"
+      },
+      {
+        "title": "EPA",
+        "url": "https://www.epa.gov/",
+        "why": "Environmental context",
+        "publisher": "EPA"
+      },
+      {
+        "title": "FEMA",
+        "url": "https://www.fema.gov/",
+        "why": "Emergency support",
+        "publisher": "FEMA"
+      }
+    ],
+    "agency": "NWS/CDC",
+    "agencyUrl": "https://www.weather.gov/",
+    "tags": [
+      "heat",
+      "nws",
+      "mortality"
+    ]
+  },
+  {
+    "id": "top-12-flood-urban",
+    "topic": "climate-extreme",
+    "subtopic": "flooding",
+    "rank": 122,
+    "short": "Urban flood",
+    "title": "Flash flood emergency — USGS gauges vs basement videos",
+    "where": "Urban watershed (training)",
+    "lat": 39.95,
+    "lng": -75.16,
+    "lede": "Gauge height and flood stages are measurable; undated basement clips are not hydrographs.",
+    "stakes": "Wrong flood stage confuses rescue priorities.",
+    "known": [
+      "USGS gauges are primary for stage.",
+      "NWS flood warnings name river points.",
+      "Clips need time/place."
+    ],
+    "open": [
+      "Gauge ID?",
+      "Crest forecast?",
+      "Dam release notices?"
+    ],
+    "claims": [
+      {
+        "plain": "USGS gauge height is primary for stage at a station.",
+        "score": 1,
+        "why": "USGS primary."
+      },
+      {
+        "plain": "Any wet street video proves a 500-year flood.",
+        "score": -1,
+        "why": "No return-period math."
+      },
+      {
+        "plain": "Road closure lists from DOT/EMA are primary for motorist action.",
+        "score": 1,
+        "why": "Operational primary."
+      }
+    ],
+    "sources": [
+      {
+        "title": "USGS water",
+        "url": "https://waterdata.usgs.gov/",
+        "why": "Gauge primary",
+        "publisher": "USGS"
+      },
+      {
+        "title": "NWS",
+        "url": "https://www.weather.gov/",
+        "why": "Flood warnings",
+        "publisher": "NWS"
+      },
+      {
+        "title": "USACE",
+        "url": "https://www.usace.army.mil/",
+        "why": "Dam/river context",
+        "publisher": "USACE"
+      },
+      {
+        "title": "FEMA flood maps",
+        "url": "https://www.fema.gov/flood-maps",
+        "why": "Flood hazard maps",
+        "publisher": "FEMA"
+      }
+    ],
+    "agency": "NWS/USGS",
+    "agencyUrl": "https://waterdata.usgs.gov/",
+    "tags": [
+      "flood",
+      "usgs",
+      "nws"
+    ]
+  },
+  {
+    "id": "top-13-smoke-aqi",
+    "topic": "climate-extreme",
+    "subtopic": "air-quality",
+    "rank": 123,
+    "short": "Smoke AQI",
+    "title": "Wildfire smoke transport — AirNow vs toxic cloud memes",
+    "where": "Downwind metro (training)",
+    "lat": 44.98,
+    "lng": -93.27,
+    "lede": "AQI methods differ between regulatory monitors and low-cost sensors; both beat uncalibrated sunset photos.",
+    "stakes": "Sensitive groups need accurate guidance; hype causes unnecessary flight.",
+    "known": [
+      "AirNow blends official monitors.",
+      "PurpleAir needs correction factors.",
+      "School outdoor policies reference AQI bands."
+    ],
+    "open": [
+      "Monitor vs sensor?",
+      "Forecast plume model?",
+      "School policy trigger?"
+    ],
+    "claims": [
+      {
+        "plain": "AirNow AQI is the public-facing regulatory-oriented index for US messaging.",
+        "score": 1,
+        "why": "AirNow primary."
+      },
+      {
+        "plain": "Orange sky photo equals hazardous AQI without a monitor.",
+        "score": -1,
+        "why": "Not a measurement."
+      },
+      {
+        "plain": "Low-cost sensors can inform hyperlocal patterns when corrected and sited well.",
+        "score": 0,
+        "why": "Method-dependent."
+      }
+    ],
+    "sources": [
+      {
+        "title": "AirNow",
+        "url": "https://www.airnow.gov/",
+        "why": "AQI primary",
+        "publisher": "EPA AirNow"
+      },
+      {
+        "title": "EPA air",
+        "url": "https://www.epa.gov/air-quality",
+        "why": "Air quality",
+        "publisher": "EPA"
+      },
+      {
+        "title": "NWS fire weather",
+        "url": "https://www.weather.gov/",
+        "why": "Fire weather",
+        "publisher": "NWS"
+      },
+      {
+        "title": "CDC smoke",
+        "url": "https://www.cdc.gov/air/wildfire-smoke/",
+        "why": "Health guidance",
+        "publisher": "CDC"
+      }
+    ],
+    "agency": "AirNow/EPA",
+    "agencyUrl": "https://www.airnow.gov/",
+    "tags": [
+      "aqi",
+      "smoke",
+      "airnow"
+    ]
+  },
+  {
+    "id": "top-14-bank-run-rumor",
+    "topic": "markets-finance",
+    "subtopic": "banking",
+    "rank": 124,
+    "short": "Bank rumor",
+    "title": "Regional bank stress rumor — 8-K/FDIC vs screenshot ledgers",
+    "where": "US regional banking (training)",
+    "lat": 40.7,
+    "lng": -74.0,
+    "lede": "Deposit-flight claims need call reports, 8-Ks, and FDIC notices — not cropped mobile-bank screenshots.",
+    "stakes": "Rumor can create the run it claims to report.",
+    "known": [
+      "Material events may be 8-K.",
+      "FDIC insurance limits are primary.",
+      "Screenshots forge easily."
+    ],
+    "open": [
+      "Filer CIK?",
+      "Liquidity facility drawn?",
+      "Regulator statement?"
+    ],
+    "claims": [
+      {
+        "plain": "SEC filings and FDIC notices are primary for material US bank events.",
+        "score": 1,
+        "why": "Filing primary."
+      },
+      {
+        "plain": "A cropped balance screenshot proves insolvency.",
+        "score": -1,
+        "why": "Easily fabricated."
+      },
+      {
+        "plain": "Social deposit-flight anecdotes can be early warning but remain 0 until filings.",
+        "score": 0,
+        "why": "Signal only."
+      }
+    ],
+    "sources": [
+      {
+        "title": "FDIC",
+        "url": "https://www.fdic.gov/",
+        "why": "Deposit insurance",
+        "publisher": "FDIC"
+      },
+      {
+        "title": "SEC EDGAR",
+        "url": "https://www.sec.gov/edgar",
+        "why": "Filings",
+        "publisher": "SEC"
+      },
+      {
+        "title": "Federal Reserve",
+        "url": "https://www.federalreserve.gov/",
+        "why": "Supervision context",
+        "publisher": "Fed"
+      },
+      {
+        "title": "OCC",
+        "url": "https://www.occ.gov/",
+        "why": "National bank supervision",
+        "publisher": "OCC"
+      }
+    ],
+    "agency": "FDIC/SEC",
+    "agencyUrl": "https://www.fdic.gov/",
+    "tags": [
+      "bank",
+      "fdic",
+      "8k"
+    ]
+  },
+  {
+    "id": "top-15-sanctions-evasion",
+    "topic": "markets-finance",
+    "subtopic": "sanctions",
+    "rank": 125,
+    "short": "Sanctions evasion",
+    "title": "Sanctions evasion shipping — OFAC lists vs AIS dark lore",
+    "where": "Global maritime (training)",
+    "lat": 25.2,
+    "lng": 55.3,
+    "lede": "Dark fleet narratives mix real OFAC designations with undated AIS tracks. Bind vessel IDs to designation lists.",
+    "stakes": "Wrong hull naming creates legal risk; missed evasion undermines policy.",
+    "known": [
+      "OFAC SDN is primary for US designations.",
+      "AIS dark is not automatic violation.",
+      "Ownership chains are multi-hop."
+    ],
+    "open": [
+      "IMO number?",
+      "Designation date?",
+      "STS transfer evidence?"
+    ],
+    "claims": [
+      {
+        "plain": "OFAC designation lists are primary for US sanctions status of listed parties.",
+        "score": 1,
+        "why": "OFAC primary."
+      },
+      {
+        "plain": "Any AIS gap proves sanctions evasion.",
+        "score": -1,
+        "why": "Many benign causes."
+      },
+      {
+        "plain": "Ship-to-ship transfer patterns can be investigative leads requiring multi-source lock.",
+        "score": 0,
+        "why": "Lead not proof."
+      }
+    ],
+    "sources": [
+      {
+        "title": "OFAC",
+        "url": "https://ofac.treasury.gov/",
+        "why": "Sanctions lists",
+        "publisher": "OFAC"
+      },
+      {
+        "title": "BIS",
+        "url": "https://www.bis.doc.gov/",
+        "why": "Export controls",
+        "publisher": "BIS"
+      },
+      {
+        "title": "IMO",
+        "url": "https://www.imo.org/",
+        "why": "Maritime identity",
+        "publisher": "IMO"
+      },
+      {
+        "title": "UN sanctions",
+        "url": "https://www.un.org/securitycouncil/sanctions",
+        "why": "UN sanctions",
+        "publisher": "UN"
+      }
+    ],
+    "agency": "OFAC",
+    "agencyUrl": "https://ofac.treasury.gov/",
+    "tags": [
+      "sanctions",
+      "ofac",
+      "ais"
+    ]
+  },
+  {
+    "id": "top-16-commodity-squeeze",
+    "topic": "markets-finance",
+    "subtopic": "commodities",
+    "rank": 126,
+    "short": "Commodity squeeze",
+    "title": "Commodity squeeze claims — exchange notices vs influencer price targets",
+    "where": "Global futures (training)",
+    "lat": 41.88,
+    "lng": -87.63,
+    "lede": "Margin changes and delivery notices are primary; to-the-moon threads are not inventory audits.",
+    "stakes": "Retail FOMO vs commercial hedger risk.",
+    "known": [
+      "Exchanges publish margin alerts.",
+      "Warehouse stock reports vary by commodity.",
+      "CFTC commitments data is structured."
+    ],
+    "open": [
+      "Which contract month?",
+      "Exchange notice?",
+      "Physical stock primary?"
+    ],
+    "claims": [
+      {
+        "plain": "Exchange margin and delivery notices are primary market-structure facts.",
+        "score": 1,
+        "why": "Exchange primary."
+      },
+      {
+        "plain": "An anonymous inventory photo proves global shortage.",
+        "score": -1,
+        "why": "No chain of custody."
+      },
+      {
+        "plain": "COT positioning is public data useful for context, not price destiny.",
+        "score": 1,
+        "why": "When cited correctly."
+      }
+    ],
+    "sources": [
+      {
+        "title": "CFTC",
+        "url": "https://www.cftc.gov/",
+        "why": "Futures regulation",
+        "publisher": "CFTC"
+      },
+      {
+        "title": "CME Group",
+        "url": "https://www.cmegroup.com/",
+        "why": "Exchange notices example",
+        "publisher": "CME"
+      },
+      {
+        "title": "EIA",
+        "url": "https://www.eia.gov/",
+        "why": "Energy inventories",
+        "publisher": "EIA"
+      },
+      {
+        "title": "USDA",
+        "url": "https://www.usda.gov/",
+        "why": "Ag inventories",
+        "publisher": "USDA"
+      }
+    ],
+    "agency": "CFTC/exchanges",
+    "agencyUrl": "https://www.cftc.gov/",
+    "tags": [
+      "commodity",
+      "futures",
+      "cftc"
+    ]
+  },
+  {
+    "id": "top-17-ballot-cure",
+    "topic": "elections-process",
+    "subtopic": "election-admin",
+    "rank": 127,
+    "short": "Ballot cure",
+    "title": "Ballot cure process — state code vs viral rejection piles",
+    "where": "US county (training)",
+    "lat": 42.33,
+    "lng": -83.05,
+    "lede": "Cure windows and rejection codes are statutory. Viral trays of ballots without chain-of-custody are narrative fuel.",
+    "stakes": "Undermining lawful cure or hiding real admin failures both harm trust.",
+    "known": [
+      "State code defines cure.",
+      "County canvass is primary for counts.",
+      "Photos need context."
+    ],
+    "open": [
+      "Statute cite?",
+      "County notice?",
+      "Observer rules?"
+    ],
+    "claims": [
+      {
+        "plain": "Ballot cure procedures are defined in state election code and county instructions.",
+        "score": 1,
+        "why": "Legal primary."
+      },
+      {
+        "plain": "A photo of ballots in a mailroom proves systemic fraud.",
+        "score": -1,
+        "why": "No chain of custody."
+      },
+      {
+        "plain": "Provisional ballot rates can be audited via canvass documents.",
+        "score": 1,
+        "why": "When published."
+      }
+    ],
+    "sources": [
+      {
+        "title": "EAC",
+        "url": "https://www.eac.gov/",
+        "why": "Election administration",
+        "publisher": "EAC"
+      },
+      {
+        "title": "NASS",
+        "url": "https://www.nass.org/",
+        "why": "Secretaries of state",
+        "publisher": "NASS"
+      },
+      {
+        "title": "NCSL elections",
+        "url": "https://www.ncsl.org/elections-and-campaigns",
+        "why": "State law trackers",
+        "publisher": "NCSL"
+      },
+      {
+        "title": "DOJ Civil Rights voting",
+        "url": "https://www.justice.gov/crt",
+        "why": "Federal voting rights",
+        "publisher": "DOJ"
+      }
+    ],
+    "agency": "State SOS/EAC",
+    "agencyUrl": "https://www.eac.gov/",
+    "tags": [
+      "ballot",
+      "cure",
+      "election"
+    ]
+  },
+  {
+    "id": "top-18-pollbook-outage",
+    "topic": "elections-process",
+    "subtopic": "election-tech",
+    "rank": 128,
+    "short": "Pollbook outage",
+    "title": "Electronic pollbook outage — contingency paper process",
+    "where": "US metro county (training)",
+    "lat": 33.75,
+    "lng": -84.39,
+    "lede": "EPB downtime triggers paper pollbook contingencies. Separate official incident tickets from stolen election livestreams.",
+    "stakes": "Lines and provisional ballots rise; rumor weaponizes normal contingency.",
+    "known": [
+      "Contingency procedures exist.",
+      "Incident duration should come from election office.",
+      "Video of a line is not a turnout model."
+    ],
+    "open": [
+      "Vendor ticket?",
+      "Paper activated countywide?",
+      "Court orders?"
+    ],
+    "claims": [
+      {
+        "plain": "Election offices can lawfully switch to paper pollbooks under contingency plans.",
+        "score": 1,
+        "why": "Admin primary."
+      },
+      {
+        "plain": "Any EPB glitch proves intentional disenfranchisement of a named group without evidence.",
+        "score": -1,
+        "why": "Intent not shown."
+      },
+      {
+        "plain": "Wait-time estimates need systematic measurement, not one camera angle.",
+        "score": 0,
+        "why": "Method needed."
+      }
+    ],
+    "sources": [
+      {
+        "title": "EAC",
+        "url": "https://www.eac.gov/",
+        "why": "Voting system context",
+        "publisher": "EAC"
+      },
+      {
+        "title": "CISA election security",
+        "url": "https://www.cisa.gov/election-security",
+        "why": "Election cyber",
+        "publisher": "CISA"
+      },
+      {
+        "title": "NASS",
+        "url": "https://www.nass.org/",
+        "why": "State election officials",
+        "publisher": "NASS"
+      },
+      {
+        "title": "NIST voting",
+        "url": "https://www.nist.gov/itl/voting",
+        "why": "Standards context",
+        "publisher": "NIST"
+      }
+    ],
+    "agency": "EAC/State SOS",
+    "agencyUrl": "https://www.eac.gov/",
+    "tags": [
+      "pollbook",
+      "election",
+      "outage"
+    ]
+  },
+  {
+    "id": "top-19-ai-robocall",
+    "topic": "elections-process",
+    "subtopic": "election-comms",
+    "rank": 129,
+    "short": "AI robocall",
+    "title": "AI robocall suppression claims — FCC/state AG actions",
+    "where": "US multi-state (training)",
+    "lat": 38.9,
+    "lng": -77.0,
+    "lede": "Synthetic voice robocalls targeting voters generate enforcement actions. Bind claims to FCC citations and state AG complaints.",
+    "stakes": "Real suppression harms turnout; false alarms dull response.",
+    "known": [
+      "TCPA/FCC rules apply.",
+      "Audio forensics need originals.",
+      "Campaign disavowals are secondary."
+    ],
+    "open": [
+      "Complaint docket?",
+      "Caller ID traceback?",
+      "Script authentication?"
+    ],
+    "claims": [
+      {
+        "plain": "FCC and state AG enforcement actions are primary for regulatory findings when issued.",
+        "score": 1,
+        "why": "Enforcement primary."
+      },
+      {
+        "plain": "Any odd-sounding call is proven AI without analysis.",
+        "score": -1,
+        "why": "Insufficient."
+      },
+      {
+        "plain": "Traceback notes can support attribution leads.",
+        "score": 0,
+        "why": "Lead quality varies."
+      }
+    ],
+    "sources": [
+      {
+        "title": "FCC",
+        "url": "https://www.fcc.gov/",
+        "why": "Robocall enforcement",
+        "publisher": "FCC"
+      },
+      {
+        "title": "FTC",
+        "url": "https://www.ftc.gov/",
+        "why": "Consumer protection",
+        "publisher": "FTC"
+      },
+      {
+        "title": "NAG",
+        "url": "https://www.naag.org/",
+        "why": "State AGs",
+        "publisher": "NAAG"
+      },
+      {
+        "title": "CISA",
+        "url": "https://www.cisa.gov/",
+        "why": "Synthetic media",
+        "publisher": "CISA"
+      }
+    ],
+    "agency": "FCC",
+    "agencyUrl": "https://www.fcc.gov/",
+    "tags": [
+      "robocall",
+      "ai",
+      "fcc"
+    ]
+  },
+  {
+    "id": "top-20-app-store-remedy",
+    "topic": "tech-governance",
+    "subtopic": "platform-competition",
+    "rank": 130,
+    "short": "App store remedy",
+    "title": "App store remedy orders — court docket vs founder threads",
+    "where": "US federal courts (training)",
+    "lat": 37.77,
+    "lng": -122.42,
+    "lede": "Injunctive remedy language lives in orders, not podcasts. Score compliance claims from docket entries.",
+    "stakes": "Developers misread duties; platforms overclaim compliance.",
+    "known": [
+      "Orders are primary.",
+      "Compliance plans may be filed.",
+      "Timelines slip — check docket."
+    ],
+    "open": [
+      "Order date and judge?",
+      "Stay pending appeal?",
+      "Fee schedule exhibit?"
+    ],
+    "claims": [
+      {
+        "plain": "Operative injunctive language is in the court order text.",
+        "score": 1,
+        "why": "Order primary."
+      },
+      {
+        "plain": "A CEO thread rewrites the injunction.",
+        "score": -1,
+        "why": "Speech is not an order."
+      },
+      {
+        "plain": "Appeals can stay remedies; check appellate docket.",
+        "score": 1,
+        "why": "Procedure."
+      }
+    ],
+    "sources": [
+      {
+        "title": "CourtListener",
+        "url": "https://www.courtlistener.com/",
+        "why": "Dockets",
+        "publisher": "CourtListener"
+      },
+      {
+        "title": "PACER info",
+        "url": "https://pacer.uscourts.gov/",
+        "why": "Federal dockets",
+        "publisher": "US Courts"
+      },
+      {
+        "title": "DOJ ATR",
+        "url": "https://www.justice.gov/atr",
+        "why": "Antitrust",
+        "publisher": "DOJ"
+      },
+      {
+        "title": "FTC competition",
+        "url": "https://www.ftc.gov/",
+        "why": "Competition",
+        "publisher": "FTC"
+      }
+    ],
+    "agency": "Courts/DOJ",
+    "agencyUrl": "https://www.courtlistener.com/",
+    "tags": [
+      "antitrust",
+      "app-store",
+      "docket"
+    ]
+  },
+  {
+    "id": "top-21-model-eval-leak",
+    "topic": "tech-governance",
+    "subtopic": "ai-safety",
+    "rank": 131,
+    "short": "Model eval leak",
+    "title": "Frontier model eval leak — lab cards vs screenshot science",
+    "where": "AI lab ecosystem (training)",
+    "lat": 37.48,
+    "lng": -122.16,
+    "lede": "Purported eval tables circulate without methodology. Prefer lab system cards and replicable harness notes.",
+    "stakes": "Fake evals move policy and investor narratives.",
+    "known": [
+      "System cards are lab primary when published.",
+      "Evals need harness details.",
+      "Screenshots forge easily."
+    ],
+    "open": [
+      "Harness repo?",
+      "Date of run?",
+      "Contamination notes?"
+    ],
+    "claims": [
+      {
+        "plain": "Published system cards are primary lab disclosures when authentic.",
+        "score": 1,
+        "why": "Lab primary."
+      },
+      {
+        "plain": "An anonymous leaderboard screenshot is definitive science.",
+        "score": -1,
+        "why": "No method."
+      },
+      {
+        "plain": "NIST AI RMF is a voluntary risk framework often cited in policy, not a statute.",
+        "score": 1,
+        "why": "Framework literacy."
+      }
+    ],
+    "sources": [
+      {
+        "title": "NIST AI",
+        "url": "https://www.nist.gov/artificial-intelligence",
+        "why": "AI RMF",
+        "publisher": "NIST"
+      },
+      {
+        "title": "NTIA",
+        "url": "https://www.ntia.gov/",
+        "why": "AI policy context",
+        "publisher": "NTIA"
+      },
+      {
+        "title": "OECD AI",
+        "url": "https://oecd.ai/",
+        "why": "International AI policy",
+        "publisher": "OECD"
+      },
+      {
+        "title": "arXiv",
+        "url": "https://arxiv.org/",
+        "why": "Research preprints",
+        "publisher": "arXiv"
+      }
+    ],
+    "agency": "NIST AI",
+    "agencyUrl": "https://www.nist.gov/artificial-intelligence",
+    "tags": [
+      "ai",
+      "eval",
+      "nist"
+    ]
+  },
+  {
+    "id": "top-22-biometric-ban",
+    "topic": "tech-governance",
+    "subtopic": "surveillance",
+    "rank": 132,
+    "short": "Biometric ban",
+    "title": "Municipal biometric ban — ordinance text vs vendor marketing",
+    "where": "US city council (training)",
+    "lat": 41.88,
+    "lng": -87.63,
+    "lede": "Ban/moratorium claims live in ordinance numbers. Vendor compliant badges are marketing until mapped to text.",
+    "stakes": "Agencies over-install; activists over-claim bans.",
+    "known": [
+      "Ordinance number and effective date matter.",
+      "Exemptions are common.",
+      "Procurement contracts are separate primaries."
+    ],
+    "open": [
+      "Ordinance ID?",
+      "Exemptions list?",
+      "Active RFP?"
+    ],
+    "claims": [
+      {
+        "plain": "Municipal ordinance text is primary for local biometric restrictions.",
+        "score": 1,
+        "why": "Code primary."
+      },
+      {
+        "plain": "A vendor slide deck proves legal compliance.",
+        "score": -1,
+        "why": "Marketing."
+      },
+      {
+        "plain": "State preemption may limit local bans — check state code.",
+        "score": 0,
+        "why": "Jurisdiction-specific."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Municode patterns",
+        "url": "https://www.municode.com/",
+        "why": "Municipal code",
+        "publisher": "Municode"
+      },
+      {
+        "title": "GAO",
+        "url": "https://www.gao.gov/",
+        "why": "Oversight reports",
+        "publisher": "GAO"
+      },
+      {
+        "title": "NIST biometrics",
+        "url": "https://www.nist.gov/programs-projects/biometrics",
+        "why": "Standards",
+        "publisher": "NIST"
+      },
+      {
+        "title": "FTC privacy",
+        "url": "https://www.ftc.gov/",
+        "why": "Consumer privacy",
+        "publisher": "FTC"
+      }
+    ],
+    "agency": "Municipal code",
+    "agencyUrl": "https://www.municode.com/",
+    "tags": [
+      "biometric",
+      "ordinance",
+      "privacy"
+    ]
+  },
+  {
+    "id": "top-23-open-weights-export",
+    "topic": "tech-governance",
+    "subtopic": "ai-export",
+    "rank": 133,
+    "short": "Open weights export",
+    "title": "Open-weight model export controls — BIS rules vs Discord policy",
+    "where": "US export control (training)",
+    "lat": 38.9,
+    "lng": -77.0,
+    "lede": "Export control claims need Federal Register / BIS rule text. Community myths invent license exceptions.",
+    "stakes": "Developers risk violations; overclaim chills legitimate research.",
+    "known": [
+      "BIS publishes rules.",
+      "Parameter thresholds change — check vintage.",
+      "Open release is not always uncontrolled."
+    ],
+    "open": [
+      "FR citation?",
+      "Model parameter count primary?",
+      "End-use red flags?"
+    ],
+    "claims": [
+      {
+        "plain": "BIS rule text and Federal Register notices are primary for US export controls.",
+        "score": 1,
+        "why": "BIS primary."
+      },
+      {
+        "plain": "A Discord pin is an authoritative license exception.",
+        "score": -1,
+        "why": "Not law."
+      },
+      {
+        "plain": "Model cards stating parameter counts help classification discussions but are not legal advice.",
+        "score": 0,
+        "why": "Input only."
+      }
+    ],
+    "sources": [
+      {
+        "title": "BIS",
+        "url": "https://www.bis.doc.gov/",
+        "why": "Export controls",
+        "publisher": "BIS"
+      },
+      {
+        "title": "Federal Register",
+        "url": "https://www.federalregister.gov/",
+        "why": "Rule text",
+        "publisher": "NARA"
+      },
+      {
+        "title": "NIST AI",
+        "url": "https://www.nist.gov/artificial-intelligence",
+        "why": "Measurement context",
+        "publisher": "NIST"
+      },
+      {
+        "title": "State DDTC",
+        "url": "https://www.pmddtc.state.gov/",
+        "why": "Defense trade context",
+        "publisher": "State"
+      }
+    ],
+    "agency": "BIS",
+    "agencyUrl": "https://www.bis.doc.gov/",
+    "tags": [
+      "export",
+      "bis",
+      "open-weights"
+    ]
+  }
+]

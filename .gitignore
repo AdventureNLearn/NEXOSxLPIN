@@ -1,0 +1,50 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.dev-launch.log
+
+# Dependencies & build
+node_modules
+dist
+dist-ssr
+*.local
+
+# Local share artifacts (regenerate with scripts/build_share_zip.py)
+releases/
+!releases/.gitkeep
+
+# Agent / editor local state
+.hermes/
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Extracted scratch
+docs/_extracted_*
+
+# OS
+Thumbs.db
+Desktop.ini
