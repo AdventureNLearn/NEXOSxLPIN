@@ -133,6 +133,7 @@ function TabBar() {
         {openPanes.map((p, index) => {
           const on = p === active
           const label = storyTabLabel(activeUseCaseId, p, MODULE_META[p].short)
+          const short = MODULE_META[p].short.slice(0, 2).toUpperCase()
           return (
             <div
               key={p}
@@ -153,10 +154,13 @@ function TabBar() {
               <button
                 type="button"
                 onClick={() => setModule(p)}
-                className="nexos-tab-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 rounded-l-md"
+                className="nexos-tab-btn focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 rounded-l-md inline-flex items-center gap-1 px-1.5 py-1"
                 title={`${label} — ${MODULE_META[p].description} · drag to reorder`}
               >
-                {label}
+                <span className="inline-flex h-4 w-4 items-center justify-center rounded text-[8px] font-bold bg-slate-900/80 border border-slate-700">
+                  {short}
+                </span>
+                <span className="hidden sm:inline max-w-[7rem] truncate">{label}</span>
               </button>
               {openPanes.length > 1 && (
                 <button
@@ -179,9 +183,9 @@ function TabBar() {
         type="button"
         onClick={() => expandAllPanes()}
         className="shrink-0 rounded border border-slate-700 px-2 py-1 text-[10px] text-slate-400 hover:text-slate-100 hover:border-slate-500"
-        title="Open all 9 modules as tabs"
+        title="Open all modules as tabs"
       >
-        Expand all
+        All
       </button>
     </div>
   )

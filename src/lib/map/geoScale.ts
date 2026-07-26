@@ -37,50 +37,50 @@ export interface ScaleClassSpec {
 export const SCALE_CLASSES: Record<ScaleClass, ScaleClassSpec> = {
   region: {
     id: 'region',
-    minSelectZoom: 3,
-    autoZoom: 6,
+    minSelectZoom: 2,
+    autoZoom: 4,
     defaultFootprintM: 40_000,
     minVisibleZoom: 2,
     label: 'Region',
   },
   corridor: {
     id: 'corridor',
-    minSelectZoom: 7,
-    autoZoom: 11,
+    minSelectZoom: 5,
+    autoZoom: 9,
     defaultFootprintM: 2_500,
-    minVisibleZoom: 5,
+    minVisibleZoom: 3,
     label: 'Corridor',
   },
   site: {
     id: 'site',
-    minSelectZoom: 10,
-    autoZoom: 14,
+    minSelectZoom: 8,
+    autoZoom: 13,
     defaultFootprintM: 180,
-    minVisibleZoom: 8,
+    minVisibleZoom: 5,
     label: 'Site',
   },
   structure: {
     id: 'structure',
-    minSelectZoom: 12,
-    autoZoom: 16,
+    minSelectZoom: 10,
+    autoZoom: 15,
     defaultFootprintM: 45,
-    minVisibleZoom: 10,
+    minVisibleZoom: 8,
     label: 'Structure',
   },
   vehicle: {
     id: 'vehicle',
-    minSelectZoom: 14,
-    autoZoom: 17,
-    defaultFootprintM: 6,
-    minVisibleZoom: 12,
+    minSelectZoom: 12,
+    autoZoom: 16,
+    defaultFootprintM: 8,
+    minVisibleZoom: 10,
     label: 'Vehicle',
   },
   detail: {
     id: 'detail',
-    minSelectZoom: 15,
-    autoZoom: 18,
-    defaultFootprintM: 1.5,
-    minVisibleZoom: 13,
+    minSelectZoom: 13,
+    autoZoom: 17,
+    defaultFootprintM: 2.5,
+    minVisibleZoom: 11,
     label: 'Detail',
   },
 }
@@ -175,7 +175,7 @@ export function isScaleSelectable(
 /** Plain-language coach line when auto-scale engages */
 export function autoScalePlain(scale: ScaleClass, featureLabel: string): string {
   const s = SCALE_CLASSES[scale]
-  return `Zooming to “${featureLabel}” (${s.label}) so it is large enough to inspect — not a decorative jump.`
+  return `Framing “${featureLabel}” at ${s.label.toLowerCase()} scale (~${Math.round(s.defaultFootprintM)} m ground). Inspect claims — sketch is illustrative only.`
 }
 
 export function isScaleVisible(scale: ScaleClass, zoom: number): boolean {
@@ -186,21 +186,35 @@ export function autoZoomForScale(scale: ScaleClass): number {
   return SCALE_CLASSES[scale].autoZoom
 }
 
-/** Map mesh layout / kind strings → scale class (real-world only). */
+/**
+ * Intelligent class pick from mesh family / claim language.
+ * Prefer site for ambiguous desk pins; vehicles only when explicitly vehicular.
+ */
 export function scaleClassFromKind(kind: string, familyLayout?: string): ScaleClass {
   const k = `${kind} ${familyLayout ?? ''}`.toLowerCase()
-  if (/region|basin|country|theater|province/.test(k)) return 'region'
-  if (/corridor|route|shipping|strait|sea lane|ais|firebreak|path.?km/.test(k)) return 'corridor'
-  if (/site|park|plaza|campus|yard|port|harbor|harbour|scene|incident/.test(k)) return 'site'
-  if (/building|structure|tower|vessel|ship|hangar|bridge|levee|silo|crane/.test(k)) {
-    return 'structure'
+  if (/region|basin|country|theater|province|global/.test(k)) return 'region'
+  if (/corridor|route|shipping|strait|sea.?lane|ais|firebreak|path.?km|pipeline/.test(k)) {
+    return 'corridor'
   }
-  if (/vehicle|car|truck|bus|van|ambulance|drone|aircraft|sedan|rail.?car/.test(k)) {
+  if (/vehicle|car|truck|bus|van|ambulance|sedan|suv|pickup|rail.?car|taxi/.test(k)) {
     return 'vehicle'
   }
-  if (/gauge|sensor|detail|equipment|console|cabinet|rack|module/.test(k)) return 'detail'
-  if (/path|sidewalk|crowd|barrier|cordon|egress/.test(k)) return 'site'
+  if (/drone|uav|quad|rotor/.test(k)) return 'detail'
+  if (/aircraft|airplane|jet|heli/.test(k)) return 'vehicle'
+  if (
+    /building|structure|tower|hangar|bridge|levee|silo|crane|warehouse|terminal|stadium/.test(k)
+  ) {
+    return 'structure'
+  }
+  if (/vessel|ship|freighter|tanker|ferry|boat/.test(k)) return 'structure'
+  if (/gauge|sensor|equipment|console|cabinet|rack|module|camera|antenna|meter/.test(k)) {
+    return 'detail'
+  }
+  if (/path|sidewalk|crowd|barrier|cordon|egress|plaza|park|campus|yard|port|harbor|harbour|scene|incident|site|locus|desk|origin/.test(k)) {
+    return 'site'
+  }
   if (/water|maritime|ocean/.test(k)) return 'corridor'
+  // Default: site-scale desk pin (not detail thrash)
   return 'site'
 }
 
@@ -208,51 +222,52 @@ export function scaleClassFromKind(kind: string, familyLayout?: string): ScaleCl
 export function footprintMetersForLayout(layout: string): number {
   switch (layout) {
     case 'vehicle':
-      return 5.2
+      return 6
     case 'path':
     case 'row':
       return 80
     case 'cluster':
-      return 25
+      return 28
     case 'barrier':
       return 40
     case 'building':
-      return 35
+      return 40
     case 'tower':
-      return 12
+      return 14
     case 'vessel':
-      return 120
+      return 100
     case 'pad':
     case 'platform':
-      return 20
+      return 22
     case 'drone':
-      return 3
+      return 3.5
     case 'locus':
-      return 8
+      return 12
     case 'stack':
     case 'console':
     case 'cabinet':
     case 'rack':
-      return 2
+      return 2.5
     case 'canopy':
-      return 15
+      return 16
+    case 'module':
+      return 10
     default:
-      return 12
+      return 14
   }
 }
 
 /**
  * Target zoom so footprint ≈ targetPx on screen (clamped).
+ * Cap at 17 — avoids “into the dirt” thrash on model inspect.
  */
 export function zoomForFootprint(
   footprintM: number,
   latDeg: number,
-  targetPx = 80,
+  targetPx = 72,
   minZ = 3,
-  maxZ = 20,
+  maxZ = 17,
 ): number {
-  // footprintPx = footprintM / mpp(z) ; mpp(z) = C / 2^z
-  // 2^z = C * targetPx / footprintM
   const C = (Math.cos(degToRad(latDeg)) * 2 * Math.PI * EARTH_R_M) / 256
   if (footprintM <= 0) return minZ
   const z = Math.log2((C * targetPx) / footprintM)

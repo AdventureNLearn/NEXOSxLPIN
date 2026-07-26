@@ -53,11 +53,16 @@ function FlyToFeature({
   const map = useMap()
   useEffect(() => {
     if (!feature || token <= 0) return
-    const z = Math.max(
-      autoZoomForScale(feature.scale),
-      zoomForFootprint(feature.footprintM, feature.lat, 96),
+    // Intelligent frame: class auto-zoom, footprint target, hard cap 17 (no dirt thrash)
+    const z = Math.min(
+      17,
+      Math.max(
+        2,
+        autoZoomForScale(feature.scale),
+        zoomForFootprint(feature.footprintM, feature.lat, 72),
+      ),
     )
-    map.flyTo([feature.lat, feature.lng], Math.min(20, z), { duration: 0.65 })
+    map.flyTo([feature.lat, feature.lng], z, { duration: 0.55 })
   }, [feature, token, map])
   return null
 }
@@ -68,7 +73,8 @@ function FitOrigin({ lat, lng, zoom }: { lat: number; lng: number; zoom: number 
   useEffect(() => {
     if (done.current) return
     done.current = true
-    map.setView([lat, lng], zoom, { animate: false })
+    map.setMinZoom(2)
+    map.setView([lat, lng], Math.max(2, Math.min(17, zoom)), { animate: false })
   }, [map, lat, lng, zoom])
   return null
 }
@@ -95,7 +101,7 @@ export function ScaleAccurateMapStage({
   onBasemapChange: (id: BasemapId) => void
   className?: string
 }) {
-  const [zoom, setZoom] = useState(15)
+  const [zoom, setZoom] = useState(13)
   const [flyToken, setFlyToken] = useState(0)
   const selected = features.find((f) => f.id === selectedId) ?? null
   const basemap = BASEMAPS[basemapId]
@@ -161,24 +167,31 @@ export function ScaleAccurateMapStage({
             </span>
           )
         })}
-        <span className="text-slate-600">· Circles = meters · click eases zoom if needed</span>
+        <span className="text-slate-600">· Circles = ground meters · click frames intelligently</span>
       </div>
       <div className="relative flex-1 min-h-0">
         <MapContainer
           center={[originLat, originLng]}
-          zoom={15}
+          zoom={13}
+          minZoom={2}
+          maxZoom={18}
           className="h-full w-full absolute inset-0"
           style={{ height: '100%', width: '100%', background: '#0a0f18' }}
           scrollWheelZoom
-          maxZoom={20}
+          maxBounds={[
+            [-85, -180],
+            [85, 180],
+          ]}
+          maxBoundsViscosity={1}
         >
           <TileLayer
             key={basemap.id}
             url={basemap.url}
             attribution={basemap.attribution}
             maxZoom={basemap.maxZoom}
+            minZoom={2}
           />
-          <FitOrigin lat={originLat} lng={originLng} zoom={15} />
+          <FitOrigin lat={originLat} lng={originLng} zoom={13} />
           <ZoomWatcher onZoom={setZoom} />
           <FlyToFeature feature={selected} token={flyToken} />
 

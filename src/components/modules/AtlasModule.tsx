@@ -51,16 +51,25 @@ function FitPoints({
 }) {
   const map = useMap()
   useEffect(() => {
-    if (!pts.length) return
+    // Never zoom out past full-world tile coverage (grey void)
+    map.setMinZoom(2)
+    if (!pts.length) {
+      map.setView([20, 0], 2, { animate: false })
+      return
+    }
     const b = L.latLngBounds(pts.map((p) => [p.lat, p.lng] as [number, number]))
     map.fitBounds(b.pad(focusMode ? 0.18 : 0.35), {
       animate: false,
-      maxZoom: focusMode ? 5 : 4,
+      // World overview max out — full globe is zoom 2, not 0–1 grey tiles
+      maxZoom: focusMode ? 6 : 3,
+      minZoom: 2,
     })
+    if (map.getZoom() < 2) map.setZoom(2)
     const active = pts.find((p) => p.id === activeId)
     if (active && focusMode) {
       window.setTimeout(() => {
-        map.flyTo([active.lat, active.lng], Math.max(map.getZoom(), 4), { duration: 0.4 })
+        const z = Math.max(map.getZoom(), 4)
+        map.flyTo([active.lat, active.lng], Math.min(z, 8), { duration: 0.4 })
       }, 100)
     } else if (active) {
       map.panTo([active.lat, active.lng], { animate: true })
@@ -92,7 +101,10 @@ function MapResizeGuard({ focusMode }: { focusMode?: boolean }) {
   return null
 }
 
-export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
+export function AtlasModule({
+  embedded,
+  mapSurface,
+}: { embedded?: boolean; mapSurface?: boolean } = {}) {
   const pack = usePlatformStore((s) => s.dataPack)
   const activeUseCaseId = usePlatformStore((s) => s.activeUseCaseId)
   const workspace = usePlatformStore((s) => s.workspace)
@@ -106,7 +118,7 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
   const restoreLayout = usePlatformStore((s) => s.restoreLayout)
   const [graphOpen, setGraphOpen] = useState(false)
   const [showScene, setShowScene] = useState(true)
-  const [briefOpen, setBriefOpen] = useState(true)
+  const [briefOpen, setBriefOpen] = useState(!mapSurface)
   const [basemapId, setBasemapId] = useState<BasemapId>('dark')
   const [basemapLocked, setBasemapLocked] = useState(false)
 
@@ -142,9 +154,10 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
 
   /**
    * Full-stage map: not a crushed tile.
-   * true when parent passes full height (embedded=false), solo, maximized, or tabs on atlas.
+   * mapSurface = immersive base layer (always full, no chrome).
    */
   const focusMode =
+    Boolean(mapSurface) ||
     !embedded ||
     isMaxed ||
     isSolo ||
@@ -238,19 +251,29 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
   return (
     <div
       className={`h-full min-h-0 w-full flex overflow-hidden ${
-        focusMode ? 'flex-col xl:flex-row gap-1.5' : 'flex-col gap-1'
+        mapSurface
+          ? 'flex-col'
+          : focusMode
+            ? 'flex-col xl:flex-row gap-1.5'
+            : 'flex-col gap-1'
       }`}
     >
       {/* —— Map stage (fills available height — no tiny globe) —— */}
       <div
-        className={`min-h-0 min-w-0 flex flex-col rounded-md border border-slate-800 bg-black/40 overflow-hidden ${
-          focusMode
-            ? briefOpen
-              ? 'flex-1 xl:flex-[2] xl:min-w-0'
-              : 'flex-1'
-            : 'flex-1'
+        className={`min-h-0 min-w-0 flex flex-col overflow-hidden ${
+          mapSurface
+            ? 'flex-1 border-0 rounded-none bg-black'
+            : `rounded-md border border-slate-800 bg-black/40 ${
+                focusMode
+                  ? briefOpen
+                    ? 'flex-1 xl:flex-[2] xl:min-w-0'
+                    : 'flex-1'
+                  : 'flex-1'
+              }`
         }`}
       >
+        {!mapSurface && (
+        <>
         <div className="shrink-0 flex flex-wrap items-center justify-between gap-2 px-2 py-1.5 border-b border-slate-800/80 bg-slate-950/90">
           <div className="min-w-0">
             <span className="text-[12px] font-semibold tracking-wide text-slate-100">
@@ -394,13 +417,17 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
             </span>
           </div>
         </div>
+        </>
+        )}
 
         {/* Absolute fill — map always uses full pane, never a 280px postage stamp */}
         <div className="relative flex-1 min-h-0 w-full">
           <div className="absolute inset-0">
             <MapContainer
               center={[20, 0]}
-              zoom={focusMode ? 3 : 2}
+              zoom={2}
+              minZoom={2}
+              maxZoom={basemap.maxZoom}
               className="h-full w-full"
               style={{ height: '100%', width: '100%' }}
               scrollWheelZoom
@@ -409,14 +436,19 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
                 [-85, -180],
                 [85, 180],
               ]}
-              maxBoundsViscosity={0.85}
+              maxBoundsViscosity={1.0}
             >
               <TileLayer
                 key={basemap.id}
                 attribution={basemap.attribution}
                 url={basemap.url}
                 maxZoom={basemap.maxZoom}
+                minZoom={2}
                 noWrap
+                bounds={[
+                  [-85, -180],
+                  [85, 180],
+                ]}
               />
               <MapResizeGuard focusMode={focusMode} />
               <FitPoints pts={fitTargets} activeId={activeUseCaseId} focusMode={focusMode} />
@@ -527,7 +559,7 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
           )}
         </div>
 
-        {!focusMode && (
+        {!mapSurface && !focusMode && (
           <div className="shrink-0 px-2 py-1 border-t border-slate-800/80 text-[10px] text-slate-500 flex flex-wrap gap-x-3 gap-y-0.5">
             <span>
               <span className="inline-block w-2 h-2 rounded-full bg-slate-500 mr-1" />
@@ -545,8 +577,8 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
         )}
       </div>
 
-      {/* —— High-level brief dock (only when map owns the stage) —— */}
-      {focusMode && briefOpen && (
+      {/* —— High-level brief dock (only when map owns the stage; never on mapSurface base) —— */}
+      {!mapSurface && focusMode && briefOpen && (
         <div className="min-h-0 min-w-0 flex flex-col gap-1.5 overflow-hidden xl:w-[min(400px,34%)] xl:max-w-md shrink-0 max-h-[42%] xl:max-h-none">
           <Panel
             title="High-level brief"
@@ -702,7 +734,7 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
         </div>
       )}
 
-      {graphOpen && !focusMode && (
+      {graphOpen && !focusMode && !mapSurface && (
         <div
           className={`shrink-0 flex flex-col rounded-md border border-slate-800 bg-slate-950/70 overflow-hidden ${
             embedded ? 'h-[120px]' : 'h-[160px]'
@@ -757,7 +789,7 @@ export function AtlasModule({ embedded }: { embedded?: boolean } = {}) {
         </div>
       )}
 
-      {graphOpen && focusMode && (
+      {graphOpen && focusMode && !mapSurface && (
         <div className="w-full basis-full shrink-0 h-[140px] flex flex-col rounded-md border border-slate-800 bg-slate-950/70 overflow-hidden order-last">
           <div className="shrink-0 flex items-center justify-between px-2 py-0.5 border-b border-slate-800/80">
             <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">

@@ -88,7 +88,7 @@ export function PaneFrame({
       }}
     >
       <header
-        className={`shrink-0 flex items-center justify-between gap-1 px-2 py-1 border-b border-slate-800/80 bg-[#070b14] ${
+        className={`shrink-0 flex items-center justify-between gap-1 px-1.5 py-1 border-b border-slate-800/80 bg-[#070b14] ${
           draggableTile ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'
         }`}
         draggable={Boolean(draggableTile)}
@@ -104,40 +104,40 @@ export function PaneFrame({
         }}
         title={
           draggableTile
-            ? 'Drag header to move tile · double-click to maximize'
-            : 'Double-click header to maximize / restore'
+            ? `${title} — drag to move · double-click maximize`
+            : `${title} — double-click maximize`
         }
       >
-        <div className="flex items-center gap-1.5 min-w-0">
+        <div className="flex items-center gap-1 min-w-0">
           {draggableTile && (
-            <span
-              className="text-slate-600 shrink-0 cursor-grab active:cursor-grabbing"
-              title="Drag to move this tile"
-              aria-hidden
-            >
+            <span className="text-slate-600 shrink-0" aria-hidden>
               <GripVertical size={12} />
             </span>
           )}
-          <div className="min-w-0">
-            <h2 className="nexos-pane-title font-semibold tracking-wide text-slate-200 truncate">
-              {title}
-            </h2>
-            {surfaceHint && (
-              <p className="text-[9px] text-slate-500 truncate max-w-[min(420px,50vw)]" title={surfaceHint}>
-                {surfaceHint}
-              </p>
-            )}
-          </div>
-          {locked && (
-            <Lock size={10} className="text-slate-600 shrink-0" aria-label="Layout locked" />
+          {/* Icon-first chrome — full title in tooltip; tables own the body */}
+          <span
+            className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded border border-slate-700 bg-slate-900 text-[9px] font-bold uppercase text-cyan-400/90"
+            title={title}
+          >
+            {meta.short.slice(0, 2)}
+          </span>
+          {!dense && (
+            <div className="min-w-0">
+              <h2 className="nexos-pane-title font-semibold tracking-wide text-slate-200 truncate text-[11px]">
+                {title}
+              </h2>
+              {surfaceHint && (
+                <p className="text-[9px] text-slate-500 truncate max-w-[min(420px,40vw)]" title={surfaceHint}>
+                  {surfaceHint}
+                </p>
+              )}
+            </div>
           )}
-          {pinned && (
-            <span className="text-[9px] text-cyan-700/90 uppercase tracking-wide">pinned</span>
-          )}
+          {locked && <Lock size={10} className="text-slate-600 shrink-0" aria-label="Layout locked" />}
           {openNegatives != null && openNegatives > 0 && pane === 'research-hub' && (
             <span className="inline-flex items-center gap-0.5">
               <EvidenceBadge score={-1} />
-              <span className="text-[9px] text-rose-300/90">{openNegatives} disputed</span>
+              <span className="text-[9px] text-rose-300/90">{openNegatives}</span>
             </span>
           )}
         </div>
@@ -148,13 +148,7 @@ export function PaneFrame({
           <Btn
             variant="ghost"
             className="!p-1 !text-[10px]"
-            title={
-              maximized
-                ? 'Restore multi-pane layout'
-                : isAtlas
-                  ? 'Fullscreen desk map + high-level brief'
-                  : 'Fullscreen this tile with full details'
-            }
+            title={maximized ? 'Restore' : isAtlas ? 'Fullscreen map' : 'Fullscreen'}
             onClick={onMaximize}
           >
             {maximized ? <Minimize2 size={12} /> : <Maximize2 size={12} />}
@@ -168,10 +162,9 @@ export function PaneFrame({
       </header>
       <div
         className={`flex-1 min-h-0 flex flex-col ${
-          isAtlas ? 'overflow-hidden p-1' : `overflow-auto ${dense ? 'p-1.5' : 'p-2'}`
+          isAtlas ? 'overflow-hidden p-0.5' : `overflow-auto ${dense ? 'p-1' : 'p-2'}`
         }`}
       >
-        {/* Atlas must stretch to full pane height so the map is not a tiny box */}
         <div className={isAtlas ? 'flex-1 min-h-0 h-full w-full' : 'contents'}>{children}</div>
       </div>
     </section>
