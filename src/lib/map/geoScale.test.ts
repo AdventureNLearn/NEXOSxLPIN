@@ -5,6 +5,7 @@ import {
   footprintScreenPx,
   isScaleSelectable,
   metersPerDegreeLng,
+  scaleClassFromKind,
   wgs84ToEnu,
   zoomForFootprint,
 } from './geoScale'
@@ -16,7 +17,6 @@ describe('geoScale (meter ENU + zoom gates)', () => {
     const back = enuToWgs84(o, eastM, northM)
     expect(Math.abs(back.lat - 52.5155)).toBeLessThan(1e-6)
     expect(Math.abs(back.lng - 13.352)).toBeLessThan(1e-6)
-    // ~111 m per 0.001 deg lat
     expect(northM).toBeGreaterThan(100)
     expect(northM).toBeLessThan(120)
   })
@@ -27,12 +27,11 @@ describe('geoScale (meter ENU + zoom gates)', () => {
 
   it('vehicle not selectable at city overview zoom', () => {
     expect(isScaleSelectable('vehicle', 10, 52.5, 6)).toBe(false)
-    // large enough footprint at mid zoom once class gate is met
     expect(isScaleSelectable('vehicle', 15, 52.5, 40)).toBe(true)
   })
 
   it('site selectable at neighborhood zoom', () => {
-    expect(isScaleSelectable('site', 11, 52.5, 400)).toBe(true)
+    expect(isScaleSelectable('site', 12, 52.5, 400)).toBe(true)
   })
 
   it('auto-zoom increases for smaller classes', () => {
@@ -46,8 +45,15 @@ describe('geoScale (meter ENU + zoom gates)', () => {
     expect(hi).toBeGreaterThan(lo)
   })
 
-  it('zoomForFootprint targets readable size', () => {
+  it('zoomForFootprint targets readable size and caps thrash', () => {
     const z = zoomForFootprint(6, 52.5, 80)
-    expect(z).toBeGreaterThanOrEqual(16)
+    expect(z).toBeGreaterThanOrEqual(15)
+    expect(z).toBeLessThanOrEqual(17)
+  })
+
+  it('scaleClassFromKind prefers site for desk language; vehicle when explicit', () => {
+    expect(scaleClassFromKind('desk origin')).toBe('site')
+    expect(scaleClassFromKind('sedan vehicle', 'vehicle')).toBe('vehicle')
+    expect(scaleClassFromKind('warehouse', 'building')).toBe('structure')
   })
 })

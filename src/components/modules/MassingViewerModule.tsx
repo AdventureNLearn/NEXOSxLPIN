@@ -202,13 +202,21 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
     <div className={`h-full flex flex-col min-h-0 ${embedded ? 'gap-1' : 'gap-2'}`}>
       <Panel
         title="Massing · map foundation + claim potentials"
+        className="flex-1 min-h-0"
         actions={
           <div className="flex gap-1 flex-wrap">
             <Btn
               variant="ghost"
               className="!text-[10px]"
-              onClick={() => seedEvidentiaryModels()}
-              title="Dan pipeline: each Potential as coarse item → optimize → assemble (not a monolith)"
+              onClick={() => {
+                const n = seedEvidentiaryModels()
+                setStatus(
+                  n > 0
+                    ? `Seeded ${n} per-item models. Click a circle to identify + frame at the right scale.`
+                    : 'No potentials to seed — score claims first or open a story with place.',
+                )
+              }}
+              title="Dan pipeline: each Potential as coarse item → optimize → assemble"
             >
               Seed models
             </Btn>
@@ -225,7 +233,6 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
             </Btn>
           </div>
         }
-        className="flex-1 min-h-0"
       >
         <div className="flex flex-col h-full min-h-0 gap-1.5">
           <div className="shrink-0 text-[10px] text-slate-400 leading-snug space-y-0.5">
@@ -249,9 +256,9 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
                   }`}
                   title={
                     id === 'mapping'
-                      ? 'Location foundation only (basemap / pins) — ignores claim scores'
+                      ? 'Location foundation only — ignores claim scores'
                       : id === 'rendering'
-                        ? 'Claim potentials only — context overlay'
+                        ? 'Claim potentials only'
                         : 'Mapping + Rendering'
                   }
                 >
@@ -271,8 +278,7 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
               {potentials.length} potentials
             </div>
             <div className="text-[9px] text-amber-200/80 border border-amber-900/40 rounded px-1.5 py-0.5 bg-amber-950/20">
-              {MODEL_DISCLAIMER} Mapping layer is place only; Rendering shows open potentials until
-              refined. Never forensic.
+              {MODEL_DISCLAIMER} Mapping = place; Rendering = open potentials until refined.
             </div>
             {status && (
               <div className="text-[10px] text-amber-400/90 border border-amber-900/40 rounded px-1.5 py-0.5">
@@ -303,19 +309,32 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
                 onSelect={(f) => {
                   setSelectedFeatureId(f.id)
                   if (f.assetId) setActiveAsset(f.assetId)
-                  setStatus(autoScalePlain(f.scale as ScaleClass, f.label))
+                  const match = potentials.find(
+                    (p) =>
+                      p.assetType === f.kind ||
+                      p.name === f.label ||
+                      f.label.toLowerCase().includes(p.name.toLowerCase().slice(0, 12)),
+                  )
+                  if (match) setSoloPotentialId(match.id)
+                  setStatus(
+                    `${autoScalePlain(f.scale as ScaleClass, f.label)} · identified as ${f.scale}${
+                      match ? ` · potential “${match.name}” (${match.status})` : ''
+                    }`,
+                  )
                 }}
                 onBlockedSelect={(f, needZoom) => {
+                  setSelectedFeatureId(f.id)
                   setStatus(
-                    `${autoScalePlain(f.scale as ScaleClass, f.label)} (needs about zoom ${needZoom}+).`,
+                    `Framing “${f.label}” — needs ~zoom ${needZoom}+ for pick precision. Auto-scale engaged.`,
                   )
                 }}
               />
             )}
+
             {layerMode === 'rendering' && (
               <div className="min-h-[200px] rounded border border-slate-800 bg-slate-950/40 p-2 overflow-auto">
                 <p className="text-[10px] text-slate-500 mb-1">
-                  Rendering layer only — claim potentials (ghost = open). Map foundation hidden.
+                  Rendering layer only — claim potentials (ghost = open).
                 </p>
                 <ul className="space-y-1">
                   {potentials.map((p) => (
@@ -386,15 +405,13 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
             )}
           </div>
 
-          {/* Solo potentials panel */}
           {(layerMode === 'rendering' || layerMode === 'both') && (
             <div className="shrink-0 max-h-[32%] overflow-y-auto rounded border border-slate-800 bg-slate-950/60 p-2 space-y-1.5">
               <div className="text-[9px] uppercase tracking-wide text-cyan-600/90">
                 Solo · Potentials (Rendering)
               </div>
               <p className="text-[9px] text-slate-600">
-                All start open. Speculative stays labeled until you resolve or the ledger refines.
-                Seed models runs Dan per-item optimize (coarse → refine → assemble).
+                Speculative stays labeled until resolved. Seed runs Dan per-item optimize.
               </p>
               <ul className="space-y-1">
                 {potentials.slice(0, 12).map((p) => (
@@ -411,9 +428,7 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
                     >
                       <div className="flex items-center gap-1.5">
                         <EvidenceBadge score={p.score} />
-                        <span className="text-[11px] text-slate-100 font-medium truncate">
-                          {p.name}
-                        </span>
+                        <span className="text-[11px] text-slate-100 font-medium truncate">{p.name}</span>
                         <span className="text-[9px] text-slate-500 ml-auto shrink-0">
                           {potentialStatusLabel(p.status)}
                         </span>

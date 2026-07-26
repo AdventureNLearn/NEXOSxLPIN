@@ -16,14 +16,16 @@ export interface ModuleHostProps {
   embedded?: boolean
   /** Export compact strip */
   compact?: boolean
+  /** Full-bleed location map only (no brief chrome) — immersive base layer */
+  mapSurface?: boolean
 }
 
-export function ModuleHost({ id, embedded, compact }: ModuleHostProps) {
+export function ModuleHost({ id, embedded, compact, mapSurface }: ModuleHostProps) {
   switch (id) {
     case 'information':
       return <InformationModule embedded={embedded} />
     case 'atlas':
-      return <AtlasModule embedded={embedded} />
+      return <AtlasModule embedded={embedded} mapSurface={mapSurface} />
     case 'design-lab':
       return <DesignLabModule embedded={embedded} />
     case 'research-hub':

@@ -5,15 +5,15 @@ cd /d "%~dp0"
 
 echo.
 echo  ============================================================
-echo   NEXOSxLPIN 2.0.0  ^|  Truth desk v2  ^|  desks + SME + Massing
+echo   NEXOSxLPIN 2.0.0  ^|  Truth desk v2
 echo   Product root: %CD%
-echo   http://127.0.0.1:5173
+echo   URL: http://127.0.0.1:5173/
 echo  ============================================================
 echo.
 
 where npm.cmd >nul 2>&1
 if errorlevel 1 (
-  echo [ERROR] npm.cmd not found.
+  echo [ERROR] npm.cmd not found on PATH.
   echo Install Node.js LTS from https://nodejs.org/ then re-run.
   echo.
   pause
@@ -36,14 +36,16 @@ if not exist "node_modules\" (
   )
 )
 
-echo [OK] Starting Vite dev server...
-echo     Browser will open shortly. Leave this window open.
+echo [OK] Starting Vite on 127.0.0.1:5173 ...
+echo     Leave THIS window open while you use the app.
+echo     Browser opens automatically when the server is ready.
 echo.
 
-REM Open browser after a short delay in a separate process (no empty title - avoids START bugs)
-start "NEXOSxLPIN-browser" /min cmd.exe /c "timeout /t 4 /nobreak >nul & start http://127.0.0.1:5173/"
+REM Start waiter first (polls until HTTP 200, then opens Edge) — no fixed 3s race
+start "NEXOSxLPIN-browser" /min cmd.exe /c "call \"%~dp0open-browser.cmd\""
 
-call npm.cmd run dev -- --host 127.0.0.1 --port 5173
+REM Foreground server — package.json already pins host/port
+call npm.cmd run dev
 set ERR=%ERRORLEVEL%
 if not "%ERR%"=="0" (
   echo.

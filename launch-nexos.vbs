@@ -1,9 +1,14 @@
-' NEXOSxLPIN desktop launcher — avoids 0x800700E8 pipe errors from broken cmd /c quoting
+' NEXOSxLPIN launcher ??? always uses this script's folder
 Option Explicit
-Dim sh, root, bat, rc
+Dim sh, fso, root, bat, cmdline
 Set sh = CreateObject("WScript.Shell")
-root = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName)
-sh.CurrentDirectory = root
+Set fso = CreateObject("Scripting.FileSystemObject")
+root = fso.GetParentFolderName(WScript.ScriptFullName)
 bat = root & "\START.bat"
-' 1 = normal window, False = do not wait (parent can exit cleanly)
-rc = sh.Run("cmd.exe /k cd /d """ & root & """ && call """ & bat & """", 1, False)
+If Not fso.FileExists(bat) Then
+  MsgBox "START.bat not found:" & vbCrLf & bat, vbCritical, "NEXOSxLPIN"
+  WScript.Quit 1
+End If
+sh.CurrentDirectory = root
+cmdline = "cmd.exe /k cd /d """ & root & """ && call ""START.bat"""
+sh.Run cmdline, 1, False
