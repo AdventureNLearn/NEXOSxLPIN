@@ -36,20 +36,37 @@ if not exist "node_modules\" (
   )
 )
 
+REM Free port 5173 if a stale Vite/node is holding it
+echo [OK] Ensuring port 5173 is free...
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$ErrorActionPreference='SilentlyContinue';" ^
+  "$pids = @(Get-NetTCPConnection -LocalPort 5173 | Select-Object -ExpandProperty OwningProcess -Unique);" ^
+  "foreach ($p in $pids) { if ($p -and $p -ne 0) { Stop-Process -Id $p -Force; Write-Host ('Freed PID ' + $p) } };" ^
+  "Start-Sleep -Milliseconds 800;" ^
+  "if (Get-NetTCPConnection -LocalPort 5173) { exit 2 } else { exit 0 }"
+if errorlevel 2 (
+  echo [WARN] Port 5173 still busy — trying once more...
+  timeout /t 2 /nobreak >nul
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
+    "$ErrorActionPreference='SilentlyContinue';" ^
+    "Get-NetTCPConnection -LocalPort 5173 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force };" ^
+    "Start-Sleep -Seconds 1"
+)
+
 echo [OK] Starting Vite on 127.0.0.1:5173 ...
 echo     Leave THIS window open while you use the app.
 echo     Browser opens automatically when the server is ready.
 echo.
 
-REM Start waiter first (polls until HTTP 200, then opens Edge) — no fixed 3s race
+REM Waiter polls until HTTP 200 then opens Edge
 start "NEXOSxLPIN-browser" /min cmd.exe /c "call \"%~dp0open-browser.cmd\""
 
-REM Foreground server — package.json already pins host/port
 call npm.cmd run dev
 set ERR=%ERRORLEVEL%
 if not "%ERR%"=="0" (
   echo.
   echo [ERROR] Dev server exited with code %ERR%
+  echo If you see "Port 5173 is already in use", close other NEXOSxLPIN windows and retry.
   pause
 )
 endlocal & exit /b %ERR%
