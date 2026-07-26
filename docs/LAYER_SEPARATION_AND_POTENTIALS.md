@@ -104,10 +104,12 @@ layer: "rendering"  // claim-driven objects never enter Mapping Layer
 | Concern | Path |
 |---------|------|
 | Potentials model + activity expand | `src/lib/forge/potentials.ts` |
+| Dan per-item optimize | `src/lib/forge/itemOptimize.ts` · `docs/PROCEDURAL_ITEM_OPTIMIZATION.md` |
 | Evidentiary reasoning | `src/lib/forge/objectReasoning.ts` |
 | Mapping fingerprint pure | `src/lib/map/mappingLayer.ts` |
 | Massing UI layers | `MassingViewerModule.tsx` |
 | Ghost materials | `MassingCanvas.tsx` |
+| Seed models | `seedEvidentiaryModels` → assembleSceneFromPotentials |
 | Contract | `docs/3D_ILLUSTRATIVE_CONTRACT.md` |
 
 ---

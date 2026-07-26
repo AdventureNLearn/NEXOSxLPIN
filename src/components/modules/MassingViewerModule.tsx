@@ -208,7 +208,7 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
               variant="ghost"
               className="!text-[10px]"
               onClick={() => seedEvidentiaryModels()}
-              title="Seed claim objects as meter-scale features at scene points"
+              title="Dan pipeline: each Potential as coarse item → optimize → assemble (not a monolith)"
             >
               Seed models
             </Btn>
@@ -394,6 +394,7 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
               </div>
               <p className="text-[9px] text-slate-600">
                 All start open. Speculative stays labeled until you resolve or the ledger refines.
+                Seed models runs Dan per-item optimize (coarse → refine → assemble).
               </p>
               <ul className="space-y-1">
                 {potentials.slice(0, 12).map((p) => (

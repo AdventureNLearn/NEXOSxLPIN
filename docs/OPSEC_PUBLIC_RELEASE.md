@@ -49,15 +49,19 @@ docs/_extracted_*
 ## 4. Pre-push checklist
 
 ```bash
-# From product root
-rg -n "C:\\\\Users|C:/Users" --glob '!node_modules' --glob '!dist' --glob '!releases' --glob '!.git'
-rg -n "ghp_|sk-[a-zA-Z0-9]{10,}|xox[baprs]-" --glob '!node_modules' --glob '!package-lock.json'
-rg -n "LocalDesktop|AppData\\\\|OneDrive\\\\" --glob '!node_modules' --glob '!docs/archive-local' --glob '!releases'
+# From product root (relative paths only in commands below)
+rg -n "C:\\\\Users|C:/Users" --glob '!node_modules' --glob '!dist' --glob '!releases' --glob '!.git' --glob '!docs/archive-local'
+rg -n "ghp_|sk-[a-zA-Z0-9]{10,}|xox[baprs]-" --glob '!node_modules' --glob '!package-lock.json' --glob '!.git'
+rg -n "LocalDesktop|AppData\\\\|OneDrive\\\\" --glob '!node_modules' --glob '!docs/archive-local' --glob '!releases' --glob '!.git' --glob '!scripts/create-desktop-shortcut.ps1' --glob '!packaging/**'
 npm test && npm run lint && npm run build
 node scripts/smoke-sme-congress.mjs
 ```
 
 **Pass criteria:** no personal home paths in tracked public set; no secret patterns; gates green.
+
+### Packaging scripts note
+
+`scripts/create-desktop-shortcut.ps1` may *detect* `$env:USERPROFILE` / `LocalDesktop` at **runtime** for install convenience. That is allowed. It must not hard-code a named user path into committed product UI or sample packs.
 
 ---
 
