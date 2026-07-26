@@ -50,6 +50,11 @@ export interface SceneObjectMeta {
   familyId: string
   familyName: string
   accent?: string
+  /** Rendering-layer potential status (ghost when open) */
+  potentialStatus?: string
+  /** true → dashed/ghost material in MassingCanvas */
+  ghost?: boolean
+  layer?: 'mapping' | 'rendering'
 }
 
 function lensesForDomains(domains: SmeDomain[], limit = 4): SmeLens[] {

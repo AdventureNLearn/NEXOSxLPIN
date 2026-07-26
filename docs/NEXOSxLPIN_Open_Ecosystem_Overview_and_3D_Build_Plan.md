@@ -283,6 +283,18 @@ Solo view **always** shows:
 5. `reasoning[]` bullets (“why this object”)  
 6. Fixed disclaimer strip  
 
+
+#### **M3.5 — Mapping vs Rendering layers + Potentials (P0 · shipped experimental)**
+
+**Files:** `potentials.ts`, `mappingLayer.ts`, `MassingViewerModule.tsx`, `MassingCanvas.tsx`, `objectReasoning.ts`  
+**Docs:** `docs/LAYER_SEPARATION_AND_POTENTIALS.md`
+
+- Mapping Layer = basemap / terrain / origin pins only (stable when claims change)
+- Rendering Layer = PotentialObject candidates from ledger + activity parallel expand
+- Status: potential · refined-supported · refined-disputed · speculative · resolved
+- Ghost materials for open potentials; layer toggle Mapping | Rendering | Both
+- Solo panel lists reasoning; operator may mark resolved (open loop)
+
 #### **M4 — Contested-locus & light temporal (P1 · 3–5 days)**
 
 | Task | Done when |

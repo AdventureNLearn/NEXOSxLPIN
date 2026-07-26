@@ -1,10 +1,6 @@
 /**
- * Massing — scale-accurate public map stage (not a decorative 3D diorama).
- *
- * - Features only from desk WGS84 + scene points + meter ENU offsets
- * - Circle radii in true meters
- * - Selectable only when zoom scale matches feature class (or auto-scale engages)
- * - Optional 3D detail: selected object only, 1 unit = 1 meter, no fake terrain
+ * Massing — Mapping Layer (public place) + Rendering Layer (claim potentials).
+ * 3D remains illustrative only — not forensic.
  */
 
 import { useEffect, useMemo, useState } from 'react'
@@ -15,15 +11,20 @@ import { ScaleAccurateMapStage } from './ScaleAccurateMapStage'
 import { MODEL_DISCLAIMER } from '../../types/core'
 import { resolveStory } from '../../data/useCases/stories'
 import { getSimulation } from '../../data/useCases/simulations'
-import { reasonSceneObjects } from '../../lib/forge/objectReasoning'
+import { reasonSceneObjects, reasonScenePotentials } from '../../lib/forge/objectReasoning'
+import {
+  isGhostPotential,
+  potentialStatusLabel,
+  type LayerVisibilityMode,
+  type PotentialObject,
+} from '../../lib/forge/potentials'
+import { buildMappingLayerState } from '../../lib/map/mappingLayer'
 import { buildScaleAccurateFeatures } from '../../lib/map/scaleAccurateFeatures'
 import { autoScalePlain, type ScaleClass, footprintMetersForLayout } from '../../lib/map/geoScale'
 import type { BasemapId } from '../../lib/map/mapFilters'
 import { openSafeExternal } from '../../lib/security/urlSafety'
-import type { SceneHoverLink } from '../../lib/forge/sceneObjectMeta'
 import { getMeshFamily, resolveMeshFamilyId } from '../../data/forge/meshCatalog'
 
-/** Normalize mesh parts so bounding footprint ≈ real meters (1 unit = 1 m). */
 function scalePartsToMeters(
   parts: import('../../types/core').MeshPartSpec[],
   targetFootprintM: number,
@@ -54,7 +55,6 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
   const activeId = usePlatformStore((s) => s.activeAssetId)
   const setActiveAsset = usePlatformStore((s) => s.setActiveAsset)
   const setModule = usePlatformStore((s) => s.setModule)
-  const setActiveSmeLens = usePlatformStore((s) => s.setActiveSmeLens)
   const seedEvidentiaryModels = usePlatformStore((s) => s.seedEvidentiaryModels)
   const activeUseCaseId = usePlatformStore((s) => s.activeUseCaseId)
   const evidence = usePlatformStore((s) => s.evidence)
@@ -65,6 +65,9 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
   const [basemapId, setBasemapId] = useState<BasemapId>('satellite')
   const [status, setStatus] = useState<string | null>(null)
   const [showDetail3d, setShowDetail3d] = useState(true)
+  const [layerMode, setLayerMode] = useState<LayerVisibilityMode>('both')
+  const [soloPotentialId, setSoloPotentialId] = useState<string | null>(null)
+  const [resolvedIds, setResolvedIds] = useState<string[]>([])
 
   const story = resolveStory(activeUseCaseId)
   const sim = getSimulation(activeUseCaseId)
@@ -77,6 +80,17 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
         evidence,
       }),
     [activeUseCaseId, story?.claims, evidence],
+  )
+
+  const potentials = useMemo(
+    () =>
+      reasonScenePotentials({
+        deskId: activeUseCaseId,
+        claims: story?.claims,
+        evidence,
+        resolvedIds,
+      }),
+    [activeUseCaseId, story?.claims, evidence, resolvedIds],
   )
 
   const origin = useMemo(
@@ -96,28 +110,59 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
   const scenePoints = useMemo(() => {
     const fromSim = sim?.scenePoints ?? []
     const fromPack = pack?.spatialPoints ?? []
-    // Prefer sim; fall back to pack points for this desk
     return fromSim.length ? fromSim : fromPack
   }, [sim, pack])
 
-  const features = useMemo(
+  /** Mapping Layer state — location only; stable if claims flip. */
+  const mappingState = useMemo(
     () =>
-      buildScaleAccurateFeatures({
-        origin,
-        scenePoints,
-        assets,
-        evidentiary: report.objects,
-        activeSources,
-      }),
-    [origin, scenePoints, assets, report.objects, activeSources],
+      buildMappingLayerState(
+        {
+          useCaseId: origin.useCaseId,
+          lat: origin.lat,
+          lng: origin.lng,
+          label: origin.label,
+          shortLabel: origin.shortLabel,
+          cityHint: origin.cityHint,
+          kind: origin.kind,
+        },
+        scenePoints.map((p) => ({
+          id: p.id,
+          lat: p.lat,
+          lng: p.lng,
+          label: p.label,
+        })),
+      ),
+    [origin, scenePoints],
   )
 
-  // Default basemap from geography when desk changes
+  const features = useMemo(() => {
+    if (layerMode === 'mapping') {
+      // Origin + scene points only — no claim-driven assets
+      return buildScaleAccurateFeatures({
+        origin,
+        scenePoints,
+        assets: [],
+        evidentiary: [],
+        activeSources: [],
+      })
+    }
+    const evObjs =
+      layerMode === 'rendering' || layerMode === 'both' ? report.objects : []
+    return buildScaleAccurateFeatures({
+      origin,
+      scenePoints: layerMode === 'rendering' ? [] : scenePoints,
+      assets: layerMode === 'mapping' ? [] : assets,
+      evidentiary: evObjs,
+      activeSources,
+    })
+  }, [layerMode, origin, scenePoints, assets, report.objects, activeSources])
+
   useEffect(() => {
-    // Satellite for site work; ocean handled by user if maritime
     setBasemapId('satellite')
     setSelectedFeatureId(`pin:${origin.useCaseId}`)
     setStatus(null)
+    setSoloPotentialId(null)
   }, [activeUseCaseId, origin.useCaseId])
 
   const selectedFeature = features.find((f) => f.id === selectedFeatureId) ?? null
@@ -126,14 +171,20 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
       ? assets.find((a) => a.id === selectedFeature.assetId)
       : assets.find((a) => a.id === activeId) ?? null
 
+  const soloPotential: PotentialObject | null =
+    potentials.find((p) => p.id === soloPotentialId) ??
+    potentials.find((p) => p.assetType === selectedAsset?.assetType) ??
+    null
+
   const detailParts = useMemo(() => {
-    if (!selectedAsset || !showDetail3d) return []
+    if (!selectedAsset || !showDetail3d || layerMode === 'mapping') return []
     const fam = getMeshFamily(resolveMeshFamilyId(selectedAsset.assetType))
     const fp =
-      selectedFeature?.footprintM ??
-      footprintMetersForLayout(fam?.layout ?? 'module')
+      selectedFeature?.footprintM ?? footprintMetersForLayout(fam?.layout ?? 'module')
     return scalePartsToMeters(selectedAsset.parts, fp)
-  }, [selectedAsset, selectedFeature, showDetail3d])
+  }, [selectedAsset, selectedFeature, showDetail3d, layerMode])
+
+  const detailGhost = soloPotential ? isGhostPotential(soloPotential.status) : false
 
   const detailCam = useMemo(() => {
     const r = (selectedFeature?.footprintM ?? 10) * 0.9
@@ -143,20 +194,14 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
     }
   }, [selectedFeature])
 
-  const openSme = (smeId: string) => {
-    setActiveSmeLens(smeId)
-    setModule('sme-lenses')
-  }
-
-  const handleLink = (link: SceneHoverLink) => {
-    if (link.url) openSafeExternal(link.url)
-    else if (link.smeId) openSme(link.smeId)
+  const markResolved = (id: string) => {
+    setResolvedIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
   }
 
   return (
     <div className={`h-full flex flex-col min-h-0 ${embedded ? 'gap-1' : 'gap-2'}`}>
       <Panel
-        title="Massing · scale-accurate public map"
+        title="Massing · map foundation + claim potentials"
         actions={
           <div className="flex gap-1 flex-wrap">
             <Btn
@@ -178,27 +223,56 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
             <Btn variant="ghost" className="!text-[10px]" onClick={() => setModule('atlas')}>
               Atlas
             </Btn>
-            <Btn variant="ghost" className="!text-[10px]" onClick={() => setModule('sme-lenses')}>
-              SME
-            </Btn>
           </div>
         }
         className="flex-1 min-h-0"
       >
         <div className="flex flex-col h-full min-h-0 gap-1.5">
           <div className="shrink-0 text-[10px] text-slate-400 leading-snug space-y-0.5">
+            <div className="flex flex-wrap items-center gap-1">
+              <span className="text-[9px] uppercase tracking-wide text-slate-600 mr-1">Layers</span>
+              {(
+                [
+                  ['both', 'Both'],
+                  ['mapping', 'Mapping'],
+                  ['rendering', 'Rendering'],
+                ] as const
+              ).map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setLayerMode(id)}
+                  className={`rounded px-1.5 py-0.5 text-[9px] border ${
+                    layerMode === id
+                      ? 'border-cyan-500 bg-cyan-950/40 text-cyan-100'
+                      : 'border-slate-800 text-slate-500 hover:text-slate-300'
+                  }`}
+                  title={
+                    id === 'mapping'
+                      ? 'Location foundation only (basemap / pins) — ignores claim scores'
+                      : id === 'rendering'
+                        ? 'Claim potentials only — context overlay'
+                        : 'Mapping + Rendering'
+                  }
+                >
+                  {label}
+                </button>
+              ))}
+              <span className="text-[9px] text-slate-600 ml-1 font-mono">
+                map·{mappingState.fingerprint.slice(0, 18)}…
+              </span>
+            </div>
             <div>
               <span className="text-cyan-400 font-mono">
                 {origin.lat.toFixed(5)}°, {origin.lng.toFixed(5)}°
               </span>
               <span className="text-slate-600"> · </span>
-              {origin.cityHint ?? story?.where ?? 'desk origin'} · {features.length} geo features
-              · no decorative stage
+              {origin.cityHint ?? story?.where ?? 'desk origin'} · {features.length} geo features ·{' '}
+              {potentials.length} potentials
             </div>
-            <div className="text-[9px] text-slate-500">
-              Click a feature to inspect it. If it is too small on screen, the map gently zooms in
-              so you can work — not a random jump. Circles use true meters on public basemaps.{' '}
-              {MODEL_DISCLAIMER}
+            <div className="text-[9px] text-amber-200/80 border border-amber-900/40 rounded px-1.5 py-0.5 bg-amber-950/20">
+              {MODEL_DISCLAIMER} Mapping layer is place only; Rendering shows open potentials until
+              refined. Never forensic.
             </div>
             {status && (
               <div className="text-[10px] text-amber-400/90 border border-amber-900/40 rounded px-1.5 py-0.5">
@@ -209,48 +283,99 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
 
           <div
             className={`flex-1 min-h-0 grid gap-1.5 ${
-              showDetail3d && selectedAsset
+              showDetail3d && selectedAsset && layerMode !== 'mapping'
                 ? embedded
                   ? 'grid-rows-[1fr_120px]'
                   : 'grid-rows-[1fr_160px]'
                 : 'grid-rows-1'
             }`}
           >
-            <ScaleAccurateMapStage
-              key={activeUseCaseId}
-              className="min-h-[200px]"
-              features={features}
-              originLat={origin.lat}
-              originLng={origin.lng}
-              selectedId={selectedFeatureId}
-              basemapId={basemapId}
-              onBasemapChange={setBasemapId}
-              onSelect={(f) => {
-                setSelectedFeatureId(f.id)
-                if (f.assetId) setActiveAsset(f.assetId)
-                setStatus(autoScalePlain(f.scale as ScaleClass, f.label))
-              }}
-              onBlockedSelect={(f, needZoom) => {
-                setStatus(
-                  `${autoScalePlain(f.scale as ScaleClass, f.label)} (needs about zoom ${needZoom}+).`,
-                )
-              }}
-            />
+            {(layerMode === 'mapping' || layerMode === 'both') && (
+              <ScaleAccurateMapStage
+                key={`${activeUseCaseId}-${layerMode}`}
+                className="min-h-[200px]"
+                features={features}
+                originLat={origin.lat}
+                originLng={origin.lng}
+                selectedId={selectedFeatureId}
+                basemapId={basemapId}
+                onBasemapChange={setBasemapId}
+                onSelect={(f) => {
+                  setSelectedFeatureId(f.id)
+                  if (f.assetId) setActiveAsset(f.assetId)
+                  setStatus(autoScalePlain(f.scale as ScaleClass, f.label))
+                }}
+                onBlockedSelect={(f, needZoom) => {
+                  setStatus(
+                    `${autoScalePlain(f.scale as ScaleClass, f.label)} (needs about zoom ${needZoom}+).`,
+                  )
+                }}
+              />
+            )}
+            {layerMode === 'rendering' && (
+              <div className="min-h-[200px] rounded border border-slate-800 bg-slate-950/40 p-2 overflow-auto">
+                <p className="text-[10px] text-slate-500 mb-1">
+                  Rendering layer only — claim potentials (ghost = open). Map foundation hidden.
+                </p>
+                <ul className="space-y-1">
+                  {potentials.map((p) => (
+                    <li key={p.id}>
+                      <button
+                        type="button"
+                        onClick={() => setSoloPotentialId(p.id)}
+                        className={`w-full text-left rounded border px-2 py-1 text-[10px] ${
+                          soloPotentialId === p.id
+                            ? 'border-cyan-600 bg-cyan-950/30'
+                            : 'border-slate-800 hover:border-slate-600'
+                        }`}
+                      >
+                        <span className="text-slate-200">{p.name}</span>
+                        <span className="text-slate-500"> · {potentialStatusLabel(p.status)}</span>
+                        {isGhostPotential(p.status) && (
+                          <span className="text-slate-600"> · ghost</span>
+                        )}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            {showDetail3d && selectedAsset && detailParts.length > 0 && (
+            {showDetail3d && selectedAsset && detailParts.length > 0 && layerMode !== 'mapping' && (
               <div className="min-h-0 flex flex-col rounded border border-slate-800 overflow-hidden">
                 <div className="shrink-0 px-2 py-0.5 text-[9px] text-slate-500 border-b border-slate-800 bg-slate-950/80 flex justify-between">
                   <span>
                     3D detail · 1 unit = 1 m · {selectedAsset.name}
-                    {selectedFeature
-                      ? ` · ⌀${selectedFeature.footprintM}m`
-                      : ''}
+                    {soloPotential ? ` · ${potentialStatusLabel(soloPotential.status)}` : ''}
+                    {detailGhost ? ' · ghost' : ''}
                   </span>
-                  <span className="text-slate-600">no terrain diorama</span>
+                  <span className="text-slate-600">illustrative only</span>
                 </div>
                 <MassingCanvas
                   parts={detailParts}
-                  objects={[]}
+                  objects={[
+                    {
+                      id: selectedAsset.id,
+                      parts: detailParts,
+                      meta: {
+                        objectId: selectedAsset.id,
+                        name: selectedAsset.name,
+                        what: selectedAsset.assetType,
+                        score: (soloPotential?.score ?? 0) as 1 | 0 | -1,
+                        notes: soloPotential?.reasoningBullets ?? [MODEL_DISCLAIMER],
+                        flags: soloPotential?.flags ?? [],
+                        smeDomains: [],
+                        smeTopics: [],
+                        links: [],
+                        industries: [],
+                        familyId: selectedAsset.assetType,
+                        familyName: selectedAsset.name,
+                        ghost: detailGhost,
+                        potentialStatus: soloPotential?.status,
+                        layer: 'rendering',
+                      },
+                    },
+                  ]}
                   className="flex-1 min-h-0 border-0 rounded-none"
                   cameraPosition={detailCam.position}
                   cameraTarget={detailCam.target}
@@ -261,9 +386,68 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
             )}
           </div>
 
-          {/* Selected identity — notes + public map links + SME (no export) */}
-          {selectedFeature && (
-            <div className="shrink-0 max-h-[28%] overflow-y-auto rounded border border-slate-800 bg-slate-950/50 p-2 space-y-1">
+          {/* Solo potentials panel */}
+          {(layerMode === 'rendering' || layerMode === 'both') && (
+            <div className="shrink-0 max-h-[32%] overflow-y-auto rounded border border-slate-800 bg-slate-950/60 p-2 space-y-1.5">
+              <div className="text-[9px] uppercase tracking-wide text-cyan-600/90">
+                Solo · Potentials (Rendering)
+              </div>
+              <p className="text-[9px] text-slate-600">
+                All start open. Speculative stays labeled until you resolve or the ledger refines.
+              </p>
+              <ul className="space-y-1">
+                {potentials.slice(0, 12).map((p) => (
+                  <li
+                    key={p.id}
+                    className={`rounded border px-2 py-1 ${
+                      soloPotentialId === p.id ? 'border-cyan-700 bg-cyan-950/20' : 'border-slate-800'
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      className="w-full text-left"
+                      onClick={() => setSoloPotentialId(p.id)}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <EvidenceBadge score={p.score} />
+                        <span className="text-[11px] text-slate-100 font-medium truncate">
+                          {p.name}
+                        </span>
+                        <span className="text-[9px] text-slate-500 ml-auto shrink-0">
+                          {potentialStatusLabel(p.status)}
+                        </span>
+                      </div>
+                      <div className="text-[9px] text-slate-500 mt-0.5">
+                        {p.spatialRole} · {p.importanceBand}
+                        {isGhostPotential(p.status) ? ' · ghost material' : ''}
+                      </div>
+                    </button>
+                    {soloPotentialId === p.id && (
+                      <div className="mt-1 space-y-0.5">
+                        {p.reasoningBullets.slice(0, 5).map((b) => (
+                          <p key={b} className="text-[9px] text-slate-400 border-l border-slate-700 pl-1.5">
+                            {b}
+                          </p>
+                        ))}
+                        {p.status !== 'resolved' && (
+                          <Btn
+                            variant="ghost"
+                            className="!text-[9px] mt-1"
+                            onClick={() => markResolved(p.id)}
+                          >
+                            Mark resolved (operator)
+                          </Btn>
+                        )}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {selectedFeature && layerMode !== 'rendering' && (
+            <div className="shrink-0 max-h-[22%] overflow-y-auto rounded border border-slate-800 bg-slate-950/50 p-2 space-y-1">
               <div className="flex items-start gap-2">
                 {selectedFeature.score !== undefined && (
                   <EvidenceBadge score={selectedFeature.score} />
@@ -294,38 +478,18 @@ export function MassingViewerModule({ embedded }: { embedded?: boolean } = {}) {
                     {l.label}
                   </button>
                 ))}
-                {selectedFeature.meta?.smeTopics.slice(0, 4).map((t) => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    className="rounded border border-cyan-900/50 px-1.5 py-0.5 text-[9px] text-cyan-200 hover:border-cyan-500"
-                    onClick={() => openSme(t.id)}
-                  >
-                    SME · {t.short}
-                  </button>
-                ))}
-                {selectedFeature.meta?.links
-                  .filter((l) => l.url)
-                  .slice(0, 4)
-                  .map((l) => (
-                    <button
-                      key={l.id}
-                      type="button"
-                      className="rounded border border-slate-700 px-1.5 py-0.5 text-[9px] text-slate-300 hover:border-slate-500"
-                      onClick={() => handleLink(l)}
-                    >
-                      {l.label}
-                    </button>
-                  ))}
               </div>
             </div>
           )}
 
-          {!assets.length && (
+          {!assets.length && layerMode !== 'mapping' && (
             <div className="shrink-0 text-center text-[10px] text-slate-500 py-1">
-              Map shows public desk + scene coordinates. Seed models to add meter-scale claim
-              objects at those locations.
-              <Btn variant="primary" className="!text-[10px] ml-2" onClick={() => seedEvidentiaryModels()}>
+              Seed models to place meter-scale claim objects on the map foundation.
+              <Btn
+                variant="primary"
+                className="!text-[10px] ml-2"
+                onClick={() => seedEvidentiaryModels()}
+              >
                 Seed models
               </Btn>
             </div>

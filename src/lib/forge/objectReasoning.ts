@@ -25,6 +25,7 @@ import {
   scoreFamilyWithOverlap,
   type OperationalOverlap,
 } from '../sme/tagOverlap'
+import { buildPotentialSet, type PotentialObject } from './potentials'
 
 export type VerifiabilityFlag =
   | 'verified_supported'
@@ -492,4 +493,30 @@ export function getDynamicStoryModels(
   evidence?: EvidenceItem[],
 ): StoryModelPack {
   return reportToModelPack(reasonSceneObjects({ deskId, claims, evidence }))
+}
+
+/** Rendering-layer potentials (claim/context). Mapping layer never uses this. */
+export function reasonScenePotentials(input: {
+  deskId: string
+  claims?: StoryClaimCard[]
+  evidence?: EvidenceItem[]
+  resolvedIds?: string[]
+}): PotentialObject[] {
+  const report = reasonSceneObjects(input)
+  const story = resolveStory(input.deskId)
+  const text = [
+    story?.title,
+    story?.lede,
+    story?.stakes,
+    ...(input.claims ?? story?.claims ?? []).map((c) => c.plain),
+    ...(input.evidence ?? []).map((e) => `${e.title} ${e.summary}`),
+  ]
+    .filter(Boolean)
+    .join(' ')
+  return buildPotentialSet(
+    report.objects,
+    text,
+    input.deskId,
+    input.resolvedIds ? new Set(input.resolvedIds) : undefined,
+  )
 }
