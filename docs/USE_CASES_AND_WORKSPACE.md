@@ -5,7 +5,7 @@
 **Core job:** Separate **signal** from **noise** — classify claims as **+1 / 0 / −1**, hold conjecture as 0, escalate contradictions as −1, package only what survives Layer-0.
 
 This document is strategy. Implementation lives in the Grok Build brief:
-`C:\Nexus\dev\.hermes\briefs\GROK_BUILD_USECASE_WORKSPACE.md`
+`REPO_ROOT/.hermes/briefs/GROK_BUILD_USECASE_WORKSPACE.md`
 
 ---
 
@@ -190,7 +190,7 @@ Information tab section: **“For independent researchers”** — short, practi
 Implement via Grok Build brief:
 
 ```bat
-grok -p --prompt-file "C:\Nexus\dev\.hermes\briefs\GROK_BUILD_USECASE_WORKSPACE.md" --always-approve --max-turns 50 --output-format plain --cwd "C:\Nexus\dev"
+grok -p --prompt-file "%REPO_ROOT%\.hermes\briefs\GROK_BUILD_USECASE_WORKSPACE.md" --always-approve --max-turns 50 --output-format plain --cwd "%REPO_ROOT%"
 ```
 
 Hermes verifies after: layout behavior, agnostic scrub, build/lint, citizen-journo smoke path.

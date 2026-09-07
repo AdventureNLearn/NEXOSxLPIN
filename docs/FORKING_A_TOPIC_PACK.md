@@ -62,7 +62,7 @@ Write in working document:
 ### Gate 3 — Quality gates
 
 ```bat
-cd /d C:\NEXOSxLPIN
+cd /d %REPO_ROOT%
 npm.cmd run test
 npm.cmd run lint
 npm.cmd run build

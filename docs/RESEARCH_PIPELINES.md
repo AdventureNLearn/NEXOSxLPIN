@@ -131,7 +131,7 @@ Minimal proof:
 ## Pipeline G — Quality gate / release check (maintainer)
 
 ```bat
-cd /d C:\NEXOSxLPIN
+cd /d %REPO_ROOT%
 npm.cmd run test
 npm.cmd run lint
 npm.cmd run build

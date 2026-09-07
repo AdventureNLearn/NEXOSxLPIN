@@ -1,5 +1,6 @@
 """Generate Open Ecosystem Development Plan v2.0 experimental overview PDF."""
 from pathlib import Path
+import os
 import shutil
 
 from reportlab.lib.pagesizes import letter
@@ -15,7 +16,8 @@ from reportlab.platypus import (
     PageBreak,
 )
 
-OUT = Path("docs/NEXOSxLPIN_Open_Ecosystem_Development_Plan_v2.pdf")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+OUT = REPO_ROOT / "docs" / "NEXOSxLPIN_Open_Ecosystem_Development_Plan_v2.pdf"
 SLATE = HexColor("#0f172a")
 MUTED = HexColor("#64748b")
 
@@ -466,13 +468,12 @@ def main() -> None:
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
     print("WROTE", OUT, OUT.stat().st_size)
 
+    env_desk = os.environ.get("DESKTOP_DIR")
     for d in [
-        Path(r"C:\LocalDesktop"),
-        Path.home() / "LocalDesktop",
+        Path(env_desk) if env_desk else None,
         Path.home() / "Desktop",
-        Path.home() / "OneDrive" / "Desktop",
     ]:
-        if d.is_dir():
+        if d is not None and d.is_dir():
             dest = d / "NEXOSxLPIN_Open_Ecosystem_Development_Plan_v2.pdf"
             try:
                 shutil.copy2(OUT, dest)

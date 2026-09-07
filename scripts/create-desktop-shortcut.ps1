@@ -21,24 +21,17 @@ foreach ($name in @('nexos-lpin-v140.ico', 'nexos-lpin.ico', 'nexos-lpin-v111.ic
   if (Test-Path $c) { $icon = $c; break }
 }
 
-$localDeskCandidates = @(
-  (Join-Path $env:SystemDrive 'LocalDesktop'),
-  (Join-Path $env:USERPROFILE 'LocalDesktop')
-)
-$localDesk = $null
-foreach ($d in $localDeskCandidates) {
-  try {
-    New-Item -ItemType Directory -Force -Path $d | Out-Null
-    $localDesk = $d
-    break
-  } catch { }
-}
-
 $targets = New-Object System.Collections.Generic.List[string]
-if ($localDesk) { [void]$targets.Add($localDesk) }
+if ($env:DESKTOP_DIR -and (Test-Path $env:DESKTOP_DIR) -and -not $targets.Contains($env:DESKTOP_DIR)) {
+  [void]$targets.Add($env:DESKTOP_DIR)
+}
 $userDesk = [Environment]::GetFolderPath('Desktop')
 if ($userDesk -and (Test-Path $userDesk) -and -not $targets.Contains($userDesk)) {
   [void]$targets.Add($userDesk)
+}
+$homeDesk = Join-Path $env:USERPROFILE 'Desktop'
+if ($homeDesk -and (Test-Path $homeDesk) -and -not $targets.Contains($homeDesk)) {
+  [void]$targets.Add($homeDesk)
 }
 # Public desktop is optional; skip if not writable
 $publicDesk = Join-Path $env:PUBLIC 'Desktop'
@@ -112,7 +105,8 @@ if ($ok -lt 1) {
   throw 'No desktop shortcuts could be written.'
 }
 
-if ($localDesk) {
+$primaryDesk = $targets[0]
+if ($primaryDesk) {
   $localOnly = @(
     @{
       Name = 'Grok Build.lnk'
@@ -129,7 +123,7 @@ if ($localDesk) {
   )
   foreach ($item in $localOnly) {
     if (Test-Path $item.Target) {
-      $lnk = Join-Path $localDesk $item.Name
+      $lnk = Join-Path $primaryDesk $item.Name
       $s = $sh.CreateShortcut($lnk)
       $s.TargetPath = $item.Target
       $s.WorkingDirectory = $item.Work
@@ -151,7 +145,7 @@ if ($localDesk) {
     '',
     'PII: do not put personal data, client names, or secrets into sample packs.'
   )
-  Set-Content -Path (Join-Path $localDesk 'NEXOSxLPIN-README.txt') -Value $readmeLines -Encoding UTF8
+  Set-Content -Path (Join-Path $primaryDesk 'NEXOSxLPIN-README.txt') -Value $readmeLines -Encoding UTF8
 }
 
 Write-Host ("Product: " + $repoRoot)

@@ -1,9 +1,16 @@
 # Fix NEXOSxLPIN desktop shortcuts → current product root
+# Resolves REPO_ROOT from this script location (.../scripts -> parent).
+# Optional DESKTOP_DIR env overrides the shortcut destination.
 $ErrorActionPreference = 'Stop'
 
-$nexos = 'C:\Dev\products\NEXOSxLPIN'
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$nexos = Split-Path -Parent $scriptDir
 if (-not (Test-Path (Join-Path $nexos 'START.bat'))) {
-  throw "START.bat missing at $nexos"
+  if (Test-Path (Join-Path (Get-Location) 'START.bat')) {
+    $nexos = (Get-Location).Path
+  } else {
+    throw 'NEXOSxLPIN product root not found (expected START.bat next to scripts/).'
+  }
 }
 if (-not (Test-Path (Join-Path $nexos 'package.json'))) {
   throw "package.json missing at $nexos"
@@ -38,17 +45,25 @@ sh.Run cmdline, 1, False
 '@
 Set-Content -Path $vbs -Value $vbsBody -Encoding ASCII
 
-$desks = New-Object System.Collections.Generic.List[string]
-foreach ($d in @(
-    'C:\LocalDesktop',
-    'C:\Dev\Desktop',
-    [Environment]::GetFolderPath('Desktop'),
-    (Join-Path $env:USERPROFILE 'OneDrive\Desktop'),
-    (Join-Path $env:USERPROFILE 'Desktop')
-  )) {
-  if ($d -and (Test-Path $d) -and -not $desks.Contains($d)) {
-    [void]$desks.Add($d)
+function Get-DesktopPaths {
+  $paths = New-Object System.Collections.Generic.List[string]
+  if ($env:DESKTOP_DIR -and (Test-Path $env:DESKTOP_DIR)) {
+    [void]$paths.Add($env:DESKTOP_DIR)
   }
+  foreach ($d in @(
+      [Environment]::GetFolderPath('Desktop'),
+      (Join-Path $env:USERPROFILE 'Desktop')
+    )) {
+    if ($d -and (Test-Path $d) -and -not $paths.Contains($d)) {
+      [void]$paths.Add($d)
+    }
+  }
+  return $paths
+}
+
+$desks = @(Get-DesktopPaths)
+if ($desks.Count -eq 0) {
+  throw 'No writable Desktop folder found (set DESKTOP_DIR or use Path.home()/Desktop).'
 }
 
 $sh = New-Object -ComObject WScript.Shell
@@ -76,7 +91,7 @@ foreach ($desk in $desks) {
   $s.Arguments = $argsLine
   $s.WorkingDirectory = $nexos
   $s.WindowStyle = 1
-  $s.Description = 'NEXOSxLPIN 2.0.0-experimental | C:\Dev\products\NEXOSxLPIN'
+  $s.Description = 'NEXOSxLPIN 2.0.0-experimental | REPO_ROOT'
   if ($icon) { $s.IconLocation = "$icon,0" }
   $s.Save()
   Write-Host "OK $lnk"
@@ -87,15 +102,13 @@ foreach ($desk in $desks) {
 
 $readme = @"
 NEXOSxLPIN 2.0.0-experimental
-Product: C:\Dev\products\NEXOSxLPIN
+Product: $nexos
 Shortcut: cmd.exe -> START.bat
 URL: http://127.0.0.1:5173
 Requires: Node.js LTS (npm.cmd on PATH)
 "@
-foreach ($desk in @('C:\LocalDesktop', 'C:\Dev\Desktop', (Join-Path $env:USERPROFILE 'OneDrive\Desktop'))) {
-  if ($desk -and (Test-Path $desk)) {
-    Set-Content -Path (Join-Path $desk 'NEXOSxLPIN-README.txt') -Value $readme -Encoding UTF8
-  }
+foreach ($desk in $desks) {
+  Set-Content -Path (Join-Path $desk 'NEXOSxLPIN-README.txt') -Value $readme -Encoding UTF8
 }
 
 Write-Host '--- verify ---'

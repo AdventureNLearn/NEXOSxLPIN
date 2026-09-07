@@ -3,7 +3,7 @@
 **Product:** AOS Nexus LPIN v2.1  
 **Platform:** Nexus modular intelligence workbench  
 **Version:** 2.1.0  
-**Root:** `C:\Nexus\v2.1`  
+**Root:** `REPO_ROOT` (unzip / clone directory)  
 
 One zip. Install and run on **Windows**, **Linux**, and **macOS**.  
 **iOS / iPadOS:** open the production build in Safari (see below) — Node cannot install natively on iOS.
@@ -24,7 +24,7 @@ One zip. Install and run on **Windows**, **Linux**, and **macOS**.
 
 ## Windows — one shot
 
-1. Unzip anywhere (example: `C:\Tools\AOS-Nexus-LPIN-v2`)
+1. Unzip anywhere (example: `<unzip-directory>`)
 2. Double-click **`INSTALL.bat`**
 3. Desktop shortcut **AOS Nexus LPIN v2** is created
 4. Launch from Desktop or **`START.bat`**

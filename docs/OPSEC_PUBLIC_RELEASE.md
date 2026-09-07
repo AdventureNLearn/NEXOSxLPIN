@@ -52,7 +52,7 @@ docs/_extracted_*
 # From product root (relative paths only in commands below)
 rg -n "C:\\\\Users|C:/Users" --glob '!node_modules' --glob '!dist' --glob '!releases' --glob '!.git' --glob '!docs/archive-local'
 rg -n "ghp_|sk-[a-zA-Z0-9]{10,}|xox[baprs]-" --glob '!node_modules' --glob '!package-lock.json' --glob '!.git'
-rg -n "LocalDesktop|AppData\\\\|OneDrive\\\\" --glob '!node_modules' --glob '!docs/archive-local' --glob '!releases' --glob '!.git' --glob '!scripts/create-desktop-shortcut.ps1' --glob '!packaging/**'
+rg -n "LocalDesktop|AppData\\\\|OneDrive\\\\Desktop|C:\\\\AOS|C:/AOS" --glob '!node_modules' --glob '!docs/archive-local' --glob '!releases' --glob '!.git'
 npm test && npm run lint && npm run build
 node scripts/smoke-sme-congress.mjs
 ```
@@ -61,7 +61,7 @@ node scripts/smoke-sme-congress.mjs
 
 ### Packaging scripts note
 
-`scripts/create-desktop-shortcut.ps1` may *detect* `$env:USERPROFILE` / `LocalDesktop` at **runtime** for install convenience. That is allowed. It must not hard-code a named user path into committed product UI or sample packs.
+Shortcut scripts may *detect* `$env:DESKTOP_DIR`, `[Environment]::GetFolderPath('Desktop')`, or `$env:USERPROFILE\Desktop` at **runtime**. That is allowed. They must not hard-code `OneDrive\Desktop`, a named user home, or a single-host product path (`C:\AOS`, `C:\Nexus\…`, `C:\Users\<name>`).
 
 ---
 

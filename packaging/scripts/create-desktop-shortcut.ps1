@@ -1,20 +1,10 @@
 # Creates Desktop shortcut: AOS Nexus LPIN v2.1 (Windows)
 $ErrorActionPreference = 'Stop'
 
-$repoRoot = $null
-foreach ($candidate in @('C:\Nexus\v2.1', 'C:\Nexus\dev')) {
-  if (Test-Path (Join-Path $candidate 'package.json')) {
-    $repoRoot = $candidate
-    break
-  }
-}
-
-if (-not $repoRoot) {
-  $pkgDir = Split-Path -Parent $PSScriptRoot
-  $repoRoot = $pkgDir
-  if (-not (Test-Path (Join-Path $repoRoot 'package.json'))) {
-    $repoRoot = Split-Path -Parent $pkgDir
-  }
+$pkgDir = Split-Path -Parent $PSScriptRoot
+$repoRoot = $pkgDir
+if (-not (Test-Path (Join-Path $repoRoot 'package.json'))) {
+  $repoRoot = Split-Path -Parent $pkgDir
 }
 
 $startCmd = Join-Path $repoRoot 'START.bat'
@@ -32,8 +22,8 @@ if (-not (Test-Path $icon)) {
 
 function Get-DesktopPaths {
   @(
+    $(if ($env:DESKTOP_DIR) { $env:DESKTOP_DIR }),
     [Environment]::GetFolderPath('Desktop'),
-    (Join-Path $env:USERPROFILE 'OneDrive\Desktop'),
     (Join-Path $env:USERPROFILE 'Desktop')
   ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -Unique
 }
