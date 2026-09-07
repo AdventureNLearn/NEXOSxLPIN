@@ -3,8 +3,8 @@ $ErrorActionPreference = 'Continue'
 
 function Get-DesktopPaths {
   @(
+    $(if ($env:DESKTOP_DIR) { $env:DESKTOP_DIR }),
     [Environment]::GetFolderPath('Desktop'),
-    (Join-Path $env:USERPROFILE 'OneDrive\Desktop'),
     (Join-Path $env:USERPROFILE 'Desktop')
   ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -Unique
 }

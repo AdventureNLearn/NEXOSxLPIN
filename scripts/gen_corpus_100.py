@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-ROOT = Path(r"C:\NEXOSxLPIN")
+ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "src" / "data" / "useCases" / "storyCorpus100.ts"
 
 def C(plain, score, why):

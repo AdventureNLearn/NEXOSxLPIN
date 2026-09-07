@@ -211,6 +211,7 @@ lines += [
 f'// Generated: {n} cities across 50 states',
 '',
 ]
-path = Path(r'C:\Nexus\dev\src\data\usJurisdiction.ts')
+REPO_ROOT = Path(__file__).resolve().parents[1]
+path = REPO_ROOT / 'src' / 'data' / 'usJurisdiction.ts'
 path.write_text('\n'.join(lines), encoding='utf-8')
 print('wrote', path, 'cities', n)

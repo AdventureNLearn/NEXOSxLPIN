@@ -4,7 +4,7 @@
 
 ---
 
-You are working on the existing NEXOSxLPIN codebase at `C:\NEXOSxLPIN`.
+You are working on the existing NEXOSxLPIN codebase at `REPO_ROOT`.
 
 ## Source of Truth
 Read and obey `NEXOSxLPIN_UI_Supercharge_Spec_v1.0.md` (or the copy of that document present in the workspace). It is the locked visual and interaction reference.
@@ -54,7 +54,7 @@ Every claim row must show status through at least:
 - Make the status system reusable so Massing can later consume the same status → color / treatment mapping.
 
 ## Verification (required after changes)
-From `C:\NEXOSxLPIN` run:
+From `REPO_ROOT` run:
 
 ```bat
 npm.cmd run test

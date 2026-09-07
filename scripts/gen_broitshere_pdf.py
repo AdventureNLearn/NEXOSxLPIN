@@ -5,6 +5,7 @@ Clean typography (Segoe UI / Calibri), high contrast, navigable structure.
 """
 from __future__ import annotations
 
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -28,7 +29,7 @@ from reportlab.platypus import (
     TableStyle,
 )
 
-ROOT = Path(r"C:\NEXOSxLPIN")
+ROOT = Path(__file__).resolve().parents[1]
 PDF_NAME = "BROITSHERE!.pdf"
 PRODUCT_VER = "1.6.1"
 PAGE_W, PAGE_H = letter
@@ -232,13 +233,12 @@ def styles() -> dict[str, ParagraphStyle]:
 
 
 DESKTOPS: list[Path] = []
+_env_desk = os.environ.get("DESKTOP_DIR")
 for p in (
-    Path.home() / "OneDrive" / "Desktop",
+    Path(_env_desk) if _env_desk else None,
     Path.home() / "Desktop",
-    Path(r"C:\Users\Chris\OneDrive\Desktop"),
-    Path(r"C:\LocalDesktop"),
 ):
-    if p.exists() and p not in DESKTOPS:
+    if p is not None and p.exists() and p not in DESKTOPS:
         DESKTOPS.append(p)
 
 LOGO = next(
@@ -388,7 +388,7 @@ def header_footer(canvas, doc):
     canvas.line(0, 26, PAGE_W, 26)
     canvas.setFillColor(MUTED)
     canvas.setFont(F["Body"], 7.5)
-    canvas.drawString(MARGIN, 10, "C:\\NEXOSxLPIN")
+    canvas.drawString(MARGIN, 10, "REPO_ROOT")
     canvas.drawRightString(PAGE_W - MARGIN, 10, f"{doc.page}")
     canvas.restoreState()
 
@@ -458,7 +458,7 @@ def build(st):
                         P(
                             f"<b>Lily Pad Intelligence Network</b><br/>"
                             f"Confidential product brief  ·  {stamp}<br/>"
-                            f"Root: C:\\NEXOSxLPIN  ·  {PRODUCT_VER}  ·  100 desks",
+                            f"Root: REPO_ROOT  ·  {PRODUCT_VER}  ·  100 desks",
                             st["sub_cover"],
                         ),
                     ]
@@ -714,12 +714,12 @@ def build(st):
     story.append(P("8. Install and quality gates", st["h1"]))
     story.append(P("Launch", st["h2"]))
     story.append(P("Desktop shortcut: NEXOSxLPIN.lnk", st["bullet"]))
-    story.append(P("Or: START.bat in C:\\NEXOSxLPIN  →  http://127.0.0.1:5173", st["bullet"]))
+    story.append(P("Or: START.bat in REPO_ROOT  →  http://127.0.0.1:5173", st["bullet"]))
     story.append(P("Fresh machine: INSTALL.bat (Node LTS, install, build, shortcuts)", st["bullet"]))
 
     story.append(P("Quality gates (must pass)", st["h2"]))
     for cmd in [
-        "cd /d C:\\NEXOSxLPIN",
+        "cd /d %REPO_ROOT%",
         "npm.cmd run test",
         "npm.cmd run lint",
         "npm.cmd run build",
@@ -740,9 +740,9 @@ def build(st):
         table(
             ["Artifact", "Path"],
             [
-                ["Product root", "C:\\NEXOSxLPIN"],
+                ["Product root", "REPO_ROOT"],
                 ["Share zip", f"releases\\NEXOSxLPIN-{PRODUCT_VER}-*.zip"],
-                ["This brief", "LocalDesktop\\BROITSHERE!.pdf · docs\\BROITSHERE!.pdf"],
+                ["This brief", "DESKTOP_DIR\\BROITSHERE!.pdf · docs\\BROITSHERE!.pdf"],
                 ["Desktop launch", "NEXOSxLPIN.lnk → launch-nexos.vbs → START.bat"],
                 ["Imagine refs", "docs\\NEXOSxLPIN_Imagine_15_Prompt_Sequence.md (no code change)"],
                 ["Shortcut", "NEXOSxLPIN.lnk"],

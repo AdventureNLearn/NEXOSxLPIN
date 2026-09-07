@@ -5,6 +5,7 @@ Human-readable + machine-executable. Tables wrap via Paragraph cells.
 from __future__ import annotations
 
 from pathlib import Path
+import os
 import shutil
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -27,8 +28,19 @@ from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_JUSTIFY
 from reportlab.pdfgen import canvas as pdfcanvas
 from pypdf import PdfReader
 
-OUT = Path(r"C:\Nexus\releases\Nexus-RSD-Grok-Rebuild-Brief-v0.4.1.pdf")
-DESK = Path(r"C:\Users\Chris\OneDrive\Desktop") / OUT.name
+REPO_ROOT = Path(__file__).resolve().parents[1]
+OUT = REPO_ROOT / "docs" / "Nexus-RSD-Grok-Rebuild-Brief-v0.4.1.pdf"
+
+
+def _desktop_copy_dest(name: str) -> Path | None:
+    env = os.environ.get("DESKTOP_DIR")
+    desk = Path(env) if env else Path.home() / "Desktop"
+    if desk.is_dir():
+        return desk / name
+    return None
+
+
+DESK = _desktop_copy_dest(OUT.name)
 
 # ── palette ──────────────────────────────────────────────────────────
 INK = HexColor("#0f172a")
@@ -960,9 +972,10 @@ def build():
         "usJurisdiction": "usJurisdiction" in text,
         "selectDrawing": "selectDrawing" in text,
     }
-    shutil.copy2(OUT, DESK)
+    if DESK is not None:
+        shutil.copy2(OUT, DESK)
+        print("DESK", DESK)
     print("OUT", OUT, OUT.stat().st_size)
-    print("DESK", DESK)
     for k, v in checks.items():
         print(k, v)
 

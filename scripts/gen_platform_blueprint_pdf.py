@@ -319,7 +319,7 @@ def build():
     story.append(table(
         [
             ["Field", "Value"],
-            ["Product root", "C:\\NEXOSxLPIN (local disk)"],
+            ["Product root", "REPO_ROOT (local disk)"],
             ["Stack", "React 19 · TypeScript · Vite · Tailwind · Zustand · Leaflet · R3F"],
             ["SME lenses", "252 (specialized LENS_RULES each)"],
             ["Congressional desks", "56 full-depth training desks"],
@@ -354,7 +354,7 @@ def build():
         "Confirm before Apply SME scores to the evidence ledger (two-click).",
         "Explicit user-triggered export only — never auto-download.",
         "Prefer primary public records over social; no invented statutes or vote tallies.",
-        "Product path on local disk (C:\\), not OneDrive; npm.cmd on Windows.",
+        "Product path on local disk (clone directory), not a cloud-sync folder; npm.cmd on Windows.",
     ]:
         story.append(Paragraph(f"• {b}", S["bullet"]))
     story.append(Paragraph("Evidence language", S["h2"]))
@@ -408,7 +408,7 @@ def build():
         "Styling: Tailwind v4. Lint: oxlint. Test: vitest. Package manager: npm.cmd on Windows.",
         S["body"],
     ))
-    story.append(Paragraph("Directory map (product root C:\\NEXOSxLPIN)", S["h2"]))
+    story.append(Paragraph("Directory map (product root REPO_ROOT)", S["h2"]))
     story.append(Paragraph(
         "<font face='Courier' size='7.5'>"
         "src/App.tsx — shell Web|Mobile<br/>"
@@ -574,7 +574,7 @@ def build():
     story.append(Paragraph("9. Install &amp; verify", S["h1"]))
     story.append(Paragraph(
         "<font face='Courier' size='8'>"
-        "cd /d C:\\NEXOSxLPIN<br/>"
+        "cd /d %REPO_ROOT%<br/>"
         "INSTALL.bat          :: npm.cmd install &amp;&amp; npm.cmd run build<br/>"
         "START.bat            :: npm.cmd run dev → http://localhost:5173<br/>"
         "npm.cmd run test<br/>"

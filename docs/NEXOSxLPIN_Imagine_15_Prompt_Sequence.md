@@ -7,7 +7,7 @@
 *(Read this first. Any build agent or Grok Build instance must respect these bindings.)*
 
 **Product**  
-NEXOSxLPIN (verification workbench) — root expected at `C:\NEXOSxLPIN`
+NEXOSxLPIN (verification workbench) — root expected at `REPO_ROOT`
 
 **This document is**  
 A controlled sequence of 15 Imagine prompts that produce the canonical visual reference set for the Claim Status system, scene language, and key workbench states.

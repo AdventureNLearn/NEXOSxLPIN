@@ -1,6 +1,6 @@
 # NEXOSxLPIN 1.5.0 — Verification Pipeline
 
-**Root:** `C:\NEXOSxLPIN`  
+**Root:** `REPO_ROOT`  
 **Archive:** `releases\archive-1.4.1-*`  
 **Ship zip:** `releases\NEXOSxLPIN-1.5.0-*.zip`
 
@@ -55,7 +55,7 @@ Run from Research Hub → **Multi-loop verify**.
 ## Gates
 
 ```bat
-cd /d C:\NEXOSxLPIN
+cd /d %REPO_ROOT%
 npm.cmd run test
 npm.cmd run lint
 npm.cmd run build

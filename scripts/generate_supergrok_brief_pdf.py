@@ -20,7 +20,8 @@ from reportlab.platypus import (
     TableStyle,
 )
 
-OUT = Path(r"C:\Nexus\dev\docs\Nexus_v3_SuperGrok_Project_Brief.pdf")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+OUT = REPO_ROOT / "docs" / "Nexus_v3_SuperGrok_Project_Brief.pdf"
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 NAVY = HexColor("#0a0e18")
@@ -57,7 +58,7 @@ def header_footer(canvas, doc):
     canvas.line(0, 32, PAGE_W, 32)
     canvas.setFillColor(MUTED)
     canvas.setFont("Helvetica", 8)
-    canvas.drawString(MARGIN, 14, "C:\\Nexus\\dev  ·  Working brief for iteration")
+    canvas.drawString(MARGIN, 14, "REPO_ROOT  ·  Working brief for iteration")
     canvas.drawRightString(PAGE_W - MARGIN, 14, f"Page {doc.page}")
     canvas.restoreState()
 
@@ -253,7 +254,7 @@ def main() -> None:
     story.append(
         P(
             "Purpose: give SuperGrok (or any coding agent) a complete, portable picture of what "
-            "Nexus is, what is already built at <font face='Courier'>C:\\Nexus\\dev</font>, "
+            "Nexus is, what is already built at <font face='Courier'>REPO_ROOT</font>, "
             "citizen-journalist utility, cross-industry use cases, workspace rules, constraints, "
             "file map, Grok Build handoffs, and next iteration targets — without dumping the repo.",
             "BodyN",
@@ -266,7 +267,7 @@ def main() -> None:
             [
                 ["Product", "Nexus (name only — no other branding)"],
                 ["Version", "3.0.0"],
-                ["Root", "C:\\Nexus\\dev"],
+                ["Root", "REPO_ROOT"],
                 [
                     "Stack",
                     "TypeScript · React 19 · Vite 8 · Tailwind 4 · Zustand · Leaflet · R3F/Three",
@@ -291,7 +292,7 @@ def main() -> None:
             "<b>How to use with SuperGrok:</b> Attach this PDF and say: "
             "“This is the current Nexus project brief. Iterate from this state. "
             "Respect KEEP publicApi, agnostic rules, and the tiled workspace plan. "
-            "Repo is at C:\\Nexus\\dev.”",
+            "Repo is at REPO_ROOT.”",
             "Callout",
         )
     )
@@ -337,7 +338,7 @@ def main() -> None:
     )
     story.append(
         P(
-            "The active product at <font face='Courier'>C:\\Nexus\\dev</font> is a runnable React shell "
+            "The active product at <font face='Courier'>REPO_ROOT</font> is a runnable React shell "
             "with nine modules, Sample Pack Alpha, Layer-0 gating, working-document persistence, "
             "Procedural Forge dual export (Unity C# + Three/R3F), and an Export Kit. "
             "Legacy domain-specific UI is archived under <font face='Courier'>src/legacy/</font> "
@@ -805,11 +806,11 @@ docs/USE_CASES_AND_WORKSPACE.md
     )
     story.append(P("Primary command (use-case workspace)", "H2N"))
     cmd = (
-        "cd /d C:\\Nexus\\dev &amp;&amp; set PATH=%USERPROFILE%\\.grok\\bin;%PATH% &amp;&amp; "
+        "cd /d %REPO_ROOT% &amp;&amp; set PATH=%USERPROFILE%\\.grok\\bin;%PATH% &amp;&amp; "
         "grok -p --prompt-file "
-        '"C:\\Nexus\\dev\\.hermes\\briefs\\GROK_BUILD_USECASE_WORKSPACE.md" '
+        '"%REPO_ROOT%\\.hermes\\briefs\\GROK_BUILD_USECASE_WORKSPACE.md" '
         "--always-approve --max-turns 50 --output-format plain --cwd "
-        '"C:\\Nexus\\dev"'
+        '"%REPO_ROOT%"'
     )
     story.append(P(cmd, "CodeN"))
     story.append(P("Prerequisites: grok login (grok.com pool), npm.cmd install in repo.", "Small"))
@@ -916,7 +917,7 @@ docs/USE_CASES_AND_WORKSPACE.md
     story.append(hr())
     story.append(P("Copy-paste opener when attaching this PDF:", "BodyN"))
     seed = (
-        "You are helping iterate Nexus v3 at C:\\Nexus\\dev. Read this project brief PDF as source of truth "
+        "You are helping iterate Nexus v3 at REPO_ROOT. Read this project brief PDF as source of truth "
         "for goals and constraints. Nexus is an agnostic evidence workbench for citizen journalists and "
         "cross-industry research: tri-state +1/0/−1, Layer-0, working document, explicit export, data packs, "
         "nine modules. KEEP src/lib/publicApi/*. Do not reattach src/legacy into the shell. Next build: "
@@ -931,7 +932,7 @@ docs/USE_CASES_AND_WORKSPACE.md
     story.append(hr())
     story.append(
         P(
-            "End of brief. Repo path: C:\\Nexus\\dev · Product: Nexus · Version: 3.0.0 · "
+            "End of brief. Repo path: REPO_ROOT · Product: Nexus · Version: 3.0.0 · "
             "Strategy: docs/USE_CASES_AND_WORKSPACE.md · This file: docs/Nexus_v3_SuperGrok_Project_Brief.pdf",
             "FooterNote",
         )
